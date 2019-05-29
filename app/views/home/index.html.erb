@@ -10,9 +10,12 @@
         <% if list["Item Subsets"].split("|").any?{|item| item.include?("8") || item.include?("9")}%>
             <% if !list["Section Name"].eql?(@currentSection) %> <%# Prints current section %>
                 <% @currentSection = list["Section Name"] %>
-                <h4> <%= @currentSection %> </h4>
+                <h4> <%= @currentSection.tr("\"", "") %> </h4>
             <% end %>
-
+            <div class="form-group">
+                <label><%= list["Question Text"].tr("\"", "") %></label>
+                <input type="text" class="form-control" placeholder="placeholder for the placeholder">
+            </div>
         <% end %>
     <% end %>
     <button type="submit" class="btn btn-primary">Submit</button>
