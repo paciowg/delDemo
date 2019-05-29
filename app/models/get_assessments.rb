@@ -33,7 +33,13 @@ class GetAssessments #< Sequel::Model
         assessments = CSV.read("storage/Data_Elements.csv")
         keys = assessments[0]
         assessments = assessments.drop(1)
-        assessments.map{ |values| Hash[ keys.zip(values)]}
+        return sanitizeQuestions(assessments.map{ |values| Hash[ keys.zip(values)]})
+    end
+
+    # TODO
+    # While this may be necessary, the questions' formats are inconsistent so currently on back-burner
+    def self.sanitizeQuestions(assessments)
+        return assessments
     end
 
 end

@@ -4,19 +4,34 @@
     Patient Transfer Assessment
 </div>
 
-<form class="form">
+<form class="form needs-validation">
     <% @assessments.each do |list| %>
-        <%# The condition below excludes all assessments not mapped to patient transfers %>
-        <% if list["Item Subsets"].split("|").any?{|item| item.include?("8") || item.include?("9")}%>
-            <% if !list["Section Name"].eql?(@currentSection) %> <%# Prints current section %>
+        
+        <%# Excludes all assessments not mapped to patient transfers %>
+        <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9")%>
+            
+            <%# Prints current section %>
+            <% if !list["Section Name"].eql?(@currentSection) %>
                 <% @currentSection = list["Section Name"] %>
                 <h4> <%= @currentSection.tr("\"", "") %> </h4>
             <% end %>
-            <div class="form-group">
+            
+            <div class="form-group">    
                 <label><%= list["Question Text"].tr("\"", "") %></label>
-                <input type="text" class="form-control" placeholder="placeholder for the placeholder">
+                <% if list["Assessment Response Codes"].nil?%> <%# Determines response type %>
+                    <%= text_field_tag :text, nil, class: "form-control", placeholder:"placeholder for the placeholder"%>
+                <% elsif list["Assessment Response Codes"].include?("Text")%>
+                    <%# This is (hypothetically) where all mixed (options or text) response types are %>
+                    <%# TODO, improve condition for edge cases %>
+                <% else %>
+                    <%# This is where all purely multiple choice response types are %>
+                <% end %>
+                <small class="form-text"><%= list["Item ID"] %></small>
             </div>
+
         <% end %>
+
     <% end %>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
