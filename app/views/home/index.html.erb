@@ -1,5 +1,19 @@
-<div class="banner" id="banner">Transfer Patient</div>
+<div class="banner" id="banner">
+    <%= @assessments.first["Assessment Instrument"] %> 
+    (v.<%= @assessments.first["Assessment Instrument Version"] %>)
+    Patient Transfer Assessment
+</div>
 
 <form class="form">
+    <% @assessments.each do |list| %>
+        <%# The condition below excludes all assessments not mapped to patient transfers %>
+        <% if list["Item Subsets"].split("|").any?{|item| item.include?("8") || item.include?("9")}%>
+            <% if !list["Section Name"].eql?(@currentSection) %> <%# Prints current section %>
+                <% @currentSection = list["Section Name"] %>
+                <h4> <%= @currentSection %> </h4>
+            <% end %>
+
+        <% end %>
+    <% end %>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

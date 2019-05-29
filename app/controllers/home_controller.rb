@@ -4,6 +4,6 @@ class HomeController < ApplicationController
     @client = FHIR::Client.new(@url)
     FHIR::Model.client = @client
     @assessments = GetAssessments.getAssessments()
-    puts @assessments
+    @currentSection = nil
   end
 end
