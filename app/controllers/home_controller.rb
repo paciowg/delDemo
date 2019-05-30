@@ -8,6 +8,6 @@ class HomeController < ApplicationController
     FHIR::Model.client = @client
     allQuestionnaires = @client.read_feed(FHIR::Questionnaire) # fetch Bundle of Questionnaires
     json = allQuestionnaires.response.values[2]
-    questionnaireHash = JSON.parse(json)
+    @questionnaireHash = JSON.parse(json)
   end
 end
