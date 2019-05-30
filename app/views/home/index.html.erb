@@ -5,7 +5,7 @@
 </div>
 
 <form class="form needs-validation">
-    <% @assessments.each do |list| %>
+    <% @assessments.each do |list, listIndex| %>
         
         <%# Excludes all assessments not mapped to patient transfers %>
         <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9")%>
@@ -13,18 +13,22 @@
             <%# Prints current section %>
             <% if !list["Section Name"].eql?(@currentSection) %>
                 <% @currentSection = list["Section Name"] %>
-                <h4> <%= @currentSection.tr("\"", "") %> </h4>
+                <% if !@currentSection.include?("Section GG") %>
+                    <hr>
+                <% end %>
+                <h4 class="m-2 mt-4"> <%= @currentSection.tr("\"", "") %> </h4>
             <% end %>
             
-            <div class="form-group">    
+            <div class="form-group m-3 mb-4">    
                 <label><%= list["Question Text"].tr("\"", "") %></label>
-                <% if list["Assessment Response Codes"].nil?%> <%# Determines response type %>
+                <% if list["Assessment Response Codes"].nil? %> <%# Response type = Text %>
                     <%= text_field_tag :text, nil, class: "form-control", placeholder:"placeholder for the placeholder"%>
-                <% elsif list["Assessment Response Codes"].include?("Text")%>
-                    <%# This is (hypothetically) where all mixed (options or text) response types are %>
-                    <%# TODO, improve condition for edge cases %>
-                <% else %>
-                    <%# This is where all purely multiple choice response types are %>
+                <% elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
+
+                <% else %> <%# Purely multiple choice %>
+                    <%= select_tag "select".concat(listIndex.to_s), options_for_select(list["Assessment Response Codes"].split("|").each_with_index.collect{ 
+                        |code, index| [list["Response Text"].split("|")[index].tr("\"", ""), code] 
+                        }), class: "form-control" %>
                 <% end %>
                 <small class="form-text"><%= list["Item ID"] %></small>
             </div>
