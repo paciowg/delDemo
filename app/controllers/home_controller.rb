@@ -1,9 +1,13 @@
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+require 'json'
+
 class HomeController < ApplicationController
   def index
-    @url = "impact-fhir.mitre.org"
+    @url = "https://impact-fhir.mitre.org/r4/"
     @client = FHIR::Client.new(@url)
     FHIR::Model.client = @client
-    @assessments = GetAssessments.getAssessments()
-    @currentSection = nil
+    allQuestionnaires = @client.read_feed(FHIR::Questionnaire) # fetch Bundle of Questionnaires
+    json = allQuestionnaires.response.values[2]
+    questionnaireHash = JSON.parse(json)
   end
 end
