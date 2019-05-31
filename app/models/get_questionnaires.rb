@@ -8,7 +8,7 @@ class GetQuestionnaires
         questionnaires = CSV.read("storage/Data_Elements.csv")
         keys = questionnaires[0]
         questionnaires = questionnaires.drop(1)
-        return questionnaires.map{ |values| Hash[ keys.zip(values)]}
+        return questionnaires.map{ |values| Hash[keys.zip(values)] }
     end
 
     def self.getAllQuestionnaires
@@ -21,8 +21,12 @@ class GetQuestionnaires
     end
 
     def self.getQuestionnaire(version)
+        if @questionnaireHash.nil?
+            getAllQuestionnaires()
+        end
         @questionnaireHash["entry"].each do |questionnaire|
             if questionnaire["resource"]["id"].eql?(version)
+                puts questionnaire["resource"]["name"]
                 return questionnaire
             end
         end 

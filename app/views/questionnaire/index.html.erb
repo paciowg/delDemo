@@ -1,8 +1,8 @@
 <div class="banner" id="banner">
-    <%= @oldQuestionnaire.first["Assessment Instrument"] %> 
-    (v.<%= @oldQuestionnaire.first["Assessment Instrument Version"] %>)
-    Patient Transfer Assessment
+    <%= @questionnaire["resource"]["title"] + " (v." + @questionnaire["resource"]["version"] + ")" %>
+    <br>
 </div>
+<small><%= @questionnaire["resource"]["description"] %></small>
 
 <form class="form needs-validation">
     <% @oldQuestionnaire.each_with_index do |list, listIndex| %>

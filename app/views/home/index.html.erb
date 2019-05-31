@@ -1,7 +1,8 @@
 <div class="banner" id="banner">
     Choose Patient Transfer Questionnaire
 </div>
-<% @questionnaireHash["entry"].each do |entries| %>
-    <% id = entries["resource"]["id"] %>
-    <%= link_to id, {controller: "questionnaire", version: id}, {class: "btn btn-primary questionnaire-option", id: id} %>
+<% @questionnaireHash["entry"].each do |entry| %>
+    <% id = entry["resource"]["id"] %>
+    <% displayName = entry["resource"]["name"] + " (v." + entry["resource"]["version"] + ")"%>
+    <%= link_to displayName, {controller: "questionnaire", version: id}, {class: "btn btn-primary questionnaire-option", id: id} %>
 <% end %>
