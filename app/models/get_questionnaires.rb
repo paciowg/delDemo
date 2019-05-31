@@ -1,4 +1,4 @@
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE #TODO, fix hackish ssl certification workaround
 require 'json'
 require 'csv'
 
@@ -26,7 +26,6 @@ class GetQuestionnaires
         end
         @questionnaireHash["entry"].each do |questionnaire|
             if questionnaire["resource"]["id"].eql?(version)
-                puts questionnaire["resource"]["name"]
                 return questionnaire
             end
         end 
