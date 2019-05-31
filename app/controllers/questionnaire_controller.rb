@@ -1,6 +1,7 @@
 class QuestionnaireController < ApplicationController
-  def questionnaire
-    @assessments = GetAssessments.getAssessments()
+  def index
+    @oldQuestionnaire = GetQuestionnaires.getOldQuestionnaire()
+    @questionnaire = GetQuestionnaires.getQuestionnaire(params[:version])
     @currentSection = nil
   end
 end

@@ -2,5 +2,6 @@
     Choose Patient Transfer Questionnaire
 </div>
 <% @questionnaireHash["entry"].each do |entries| %>
-<%= entries["resource"]["id"] %>
+    <% id = entries["resource"]["id"] %>
+    <%= link_to id, {controller: "questionnaire", version: id}, {class: "btn btn-primary questionnaire-option", id: id} %>
 <% end %>

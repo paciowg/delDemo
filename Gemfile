@@ -42,7 +42,7 @@ gem 'fhir_client', git: 'https://github.com/fhir-crucible/fhir_client.git'
 # Bootstrap gem
 gem 'bootstrap'
 
-# jQuery gem
+# jQuery gems
 gem 'jquery-rails'
 
 # Sequel gem
