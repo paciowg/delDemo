@@ -1,7 +1,7 @@
 <% isRetired = !@questionnaire["resource"]["status"].eql?("active")%>
 <div class="banner <%= (isRetired ? 'retired-banner' : '') %>" id="banner"> 
     <a class="float-right <%= (isRetired ? "banner-btn-blue" : "banner-btn-gray" ) %>" href="/">
-        <div class="banner-btn-content">Back</div>
+        <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
         <%= @questionnaire["resource"]["title"] %>
@@ -26,7 +26,7 @@
     <form class="form needs-validation">
         <% @oldQuestionnaire.each_with_index do |list, listIndex| %>
             
-            <%# Excludes all oldQuestionnaire not mapped to patient transfers %>
+            <%# Excludes all questions not mapped to patient transfers %>
             <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9") %>
                 
                 <%# Prints current section %>
