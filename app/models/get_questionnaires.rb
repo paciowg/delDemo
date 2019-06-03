@@ -30,7 +30,7 @@ class GetQuestionnaires
             nextLink = ''
             break if hashes[i]["link"].nil?
             hashes[i]["link"].each do |link|
-                if !link["url"].nil? && link["relation"].eql?("next") && !link["url"].empty?
+                if !link["url"].nil? && !link["url"].empty? && link["relation"].eql?("next")
                     shouldBreak = false
                     nextLink = link["url"] + "?_format=json"
                 end

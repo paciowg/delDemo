@@ -1,19 +1,22 @@
 <div class="banner" id="banner">
-    Choose Patient Transfer Questionnaire
+    <div class="banner-content">Choose Patient Transfer Questionnaire</div>
 </div>
-<h1> Active </h1>
+<h3 style="margin: 5pt"> Active </h3>
 <% retiredVersions = Array.new %>
 <% @questionnaireHash["entry"].each do |entry| %>
     <% id = entry["resource"]["id"] %>
     <% displayName = entry["resource"]["name"] + " (v." + entry["resource"]["version"] + ")"%>
     <% if entry["resource"]["status"].eql?("active") %>
-        <%= link_to displayName, {controller: "questionnaire", version: id}, {class: "btn btn-primary", id: id} %>
+        <%= link_to displayName, {controller: "questionnaire", version: id},
+            {class: "btn btn-primary questionnaire-option", id: id} %>
     <% else %>
         <% retiredVersions.append({"id"=>id, "dn"=>displayName})%>
     <% end %>
 <% end %>
-<hr>
-<h3> Retired </h3>
-<% retiredVersions.each do |entry| %>
-    <%= link_to entry["dn"], {controller: "questionnaire", version: entry["id"]}, {class: "btn btn-primary retired", id: entry["id"]} %>
-<% end %>
+<div class="retired-section">
+    <h3 style="margin: 5pt"> Retired </h3>
+    <% retiredVersions.each do |entry| %>
+        <%= link_to entry["dn"], {controller: "questionnaire", version: entry["id"]},
+            {class: "btn btn-secondary questionnaire-option", id: entry["id"]} %>
+    <% end %>
+</div>

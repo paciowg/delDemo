@@ -1,51 +1,71 @@
-<div class="banner" id="banner">
-    <%= @questionnaire["resource"]["title"] + " (v." + @questionnaire["resource"]["version"] + ")" %>
-    <br>
+<% isRetired = !@questionnaire["resource"]["status"].eql?("active")%>
+<div class="banner <%= (isRetired ? 'retired-banner' : '') %>" id="banner"> 
+    <a class="float-right <%= (isRetired ? "banner-btn-blue" : "banner-btn-gray" ) %>" href="/">
+        <div class="banner-btn-content">Back</div>
+    </a>
+    <div class="banner-content">
+        <%= @questionnaire["resource"]["title"] %>
+        <% if isRetired %>
+            <del>
+        <% end %>
+        <%= "(v." + @questionnaire["resource"]["version"] + ")" %>
+        <% if isRetired %>
+            </del> (RETIRED)
+        <% end %>
+    </div>
 </div>
-<small><%= @questionnaire["resource"]["description"] %></small>
+<div class="<%= (isRetired ? "retired-section" : "")%>">
+    <small class="description"><%= @questionnaire["resource"]["description"] %></small>
 
-<form class="form needs-validation">
-    <% @oldQuestionnaire.each_with_index do |list, listIndex| %>
-        
-        <%# Excludes all oldQuestionnaire not mapped to patient transfers %>
-        <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9") %>
-            
-            <%# Prints current section %>
-            <% if !list["Section Name"].eql?(@currentSection) %>
-                <% @currentSection = list["Section Name"] %>
-                <% if !@currentSection.include?("Section GG") %>
-                    <hr style="background-color: black">
-                <% end %>
-                <h4 class="m-2 mt-4"> <%= @currentSection.tr("\"", "") %> </h4>
-            <% end %>
-            
-            <% if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# This indicates the "Question" is actually instructional %>
-                <hr>
-                <% @currentQuestionGroup = list["Item ID"] %>
-                <%= list["Question Text"].tr("\"", "") %>
-            <% else %>
-                <% if !@currentQuestionGroup.nil? && !list["Item ID"].include?(@currentQuestionGroup) %>
-                    <% @currentQuestionGroup = nil %>
-                    <hr>
-                <% end %>
-                <div class="form-group m-3 mb-4">    
-                    <label><%= list["Question Text"].tr("\"", "") %></label>
-                    <% if list["Assessment Response Codes"].nil? %> <%# Exclusively text response %>
-                        <%= text_field_tag :text, nil, class: "form-control", placeholder:"(Your input here)"%>
-                    <% elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
+    <!-- <form class="form needs-validation">
+        <%# @questionnaire["item"].each do |question| %>
+            <%#= question["text"] %>
+        <%# end %>
+    </form> -->
 
-                    <% else %> <%# Purely multiple choice %>
-                        <%= select_tag "select".concat(listIndex.to_s), 
-                            options_for_select(list["Assessment Response Codes"].split("|").each_with_index.collect{ 
-                            |code, index| [list["Response Text"].split("|")[index].tr("\"", ""), code] }),
-                            class: "form-control" %>
+    <form class="form needs-validation">
+        <% @oldQuestionnaire.each_with_index do |list, listIndex| %>
+            
+            <%# Excludes all oldQuestionnaire not mapped to patient transfers %>
+            <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9") %>
+                
+                <%# Prints current section %>
+                <% if !list["Section Name"].eql?(@currentSection) %>
+                    <% @currentSection = list["Section Name"] %>
+                    <% if !@currentSection.include?("Section GG") %>
+                        <hr style="background-color: black">
                     <% end %>
-                    <small class="form-text"><%= list["Item ID"] %></small>
-                </div>
+                    <h4 class="m-2 mt-4"> <%= @currentSection.tr("\"", "") %> </h4>
+                <% end %>
+                
+                <% if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# This indicates the "Question" is instructional %>
+                    <hr>
+                    <% @currentQuestionGroup = list["Item ID"] %>
+                    <%= list["Question Text"].tr("\"", "") %>
+                <% else %>
+                    <% if !@currentQuestionGroup.nil? && !list["Item ID"].include?(@currentQuestionGroup) %>
+                        <% @currentQuestionGroup = nil %>
+                        <hr>
+                    <% end %>
+                    <div class="form-group m-3 mb-4">    
+                        <label><%= list["Question Text"].tr("\"", "") %></label>
+                        <% if list["Assessment Response Codes"].nil? %> <%# Exclusively text response %>
+                            <%= text_field_tag :text, nil, class: "form-control", placeholder:"(Your input here)"%>
+                        <% elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
+
+                        <% else %> <%# Purely multiple choice %>
+                            <%= select_tag "select".concat(listIndex.to_s), 
+                                options_for_select(list["Assessment Response Codes"].split("|").each_with_index.collect{ 
+                                |code, index| [list["Response Text"].split("|")[index].tr("\"", ""), code] }),
+                                class: "form-control" %>
+                        <% end %>
+                        <small class="form-text"><%= list["Item ID"] %></small>
+                    </div>
+                <% end %>
             <% end %>
+
         <% end %>
 
-    <% end %>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+</div>

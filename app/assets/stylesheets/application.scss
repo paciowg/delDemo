@@ -14,14 +14,78 @@
  * require_self
  */
 
- @import 'bootstrap';
+@import 'bootstrap';
 
- .banner {
-     padding: 3pt 5pt;
-     background-color: var(--blue);
-     font-size: 20pt;
- }
+:root{
+    --retired-color: #DDDDDD;
+}
 
- .retired {
-     background-color: var(--gray);
- }
+.questionnaire-option {
+    margin: 5pt 0pt 5pt 5pt;
+}
+
+.retired-section {
+    background-color: var(--retired-color);
+}
+
+.retired-banner {
+    background-color: var(--gray) !important;
+}
+
+.banner {
+    padding: 0pt;
+    background-color: var(--blue);
+    color: white;
+    font-size: 24pt;
+    height: auto;
+    overflow: auto;
+}
+
+.banner-content {
+    padding: 5pt;
+}
+
+.banner-btn-content {
+    padding: 5pt;
+}
+
+.banner-btn-blue,
+.banner-btn-blue:hover,
+.banner-btn-blue:active,
+.banner-btn-gray,
+.banner-btn-gray:hover,
+.banner-btn-gray:active {
+    margin: 0pt;
+    padding: 0pt;
+    text-decoration: none;
+    color: white;
+    border-bottom-left-radius: 5pt;
+}
+
+.banner-btn-blue {
+    background-color: var(--blue);
+}
+
+.banner-btn-blue:hover {
+    background-color: darken($blue, 5%);
+}
+
+.banner-btn-blue:active {
+    background-color: darken($blue, 10%);
+}
+
+.banner-btn-gray {
+    background-color: var(--gray);
+}
+
+.banner-btn-gray:hover {
+    background-color: darken(gray, 7.5%);
+}
+
+.banner-btn-gray:active {
+    background-color: darken(gray, 15%);
+}
+
+.description {
+    margin: 3pt;
+}
