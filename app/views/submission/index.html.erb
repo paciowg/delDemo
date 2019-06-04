@@ -1,3 +1,11 @@
 <div class="banner" id="banner">
-    <div class="banner-content">Submission Successful!</div>
+    <a class="float-right banner-btn-gray" href="/">
+        <div class="banner-btn-content">Home</div>
+    </a>
+    <div class="banner-content">Assessment Submitted!</div>
 </div>
+
+<% params.each do |param| %>
+    <%= param.to_s %>
+    <br>
+<% end %>

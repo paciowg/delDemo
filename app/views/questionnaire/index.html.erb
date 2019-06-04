@@ -17,13 +17,13 @@
 <div class="<%= (isRetired ? "retired-section" : "")%>">
     <small class="description"><%= @questionnaire["resource"]["description"] %></small>
 
-    <!-- <form class="form needs-validation">
+    <!-- <%#= form_tag('/submission', method: :get) %>
         <%# @questionnaire["item"].each do |question| %>
             <%#= question["text"] %>
         <%# end %>
     </form> -->
 
-    <form class="form needs-validation">
+    <%= form_tag('/submission', method: :get) %>
         <% @oldQuestionnaire.each_with_index do |list, listIndex| %>
             
             <%# Excludes all questions not mapped to patient transfers %>
@@ -38,7 +38,7 @@
                     <h4 class="m-2 mt-4"> <%= @currentSection.tr("\"", "") %> </h4>
                 <% end %>
                 
-                <% if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# This indicates the "Question" is instructional %>
+                <% if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# Indicates "Question" is instructional %>
                     <hr>
                     <% @currentQuestionGroup = list["Item ID"] %>
                     <%= list["Question Text"].tr("\"", "") %>
@@ -50,9 +50,17 @@
                     <div class="form-group m-3 mb-4">    
                         <label><%= list["Question Text"].tr("\"", "") %></label>
                         <% if list["Assessment Response Codes"].nil? %> <%# Exclusively text response %>
-                            <%= text_field_tag :text, nil, class: "form-control", placeholder:"(Your input here)"%>
+                            <%= text_field_tag "text".concat(listIndex.to_s), nil,
+                                class: "form-control", placeholder: "(Your input here)"%>
                         <% elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
-
+                            <%= text_field_tag "options".concat(listIndex.to_s), nil, 
+                                list: "list".concat(listIndex.to_s), class: "form-control", 
+                                placeholder: "Enter custom answer or choose preset option from dropdown"%>
+                            <datalist id="list<%= listIndex.to_s %>">
+                                <% list["Response Text"].split("|").each do |text| %>
+                                    <option value="<%=text.tr("\"", "")%>"></option>
+                                <% end %>
+                            </datalist>
                         <% else %> <%# Purely multiple choice %>
                             <%= select_tag "select".concat(listIndex.to_s), 
                                 options_for_select(list["Assessment Response Codes"].split("|").each_with_index.collect{ 
@@ -66,6 +74,6 @@
 
         <% end %>
 
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <button type="submit" class="btn btn-block btn-<%=(isRetired ? "secondary" : "primary")%>">Submit</button>
     </form>
 </div>
