@@ -10,7 +10,7 @@ module QuestionnaireHelper
     end
 
     def flattenQuestionnaire(q)
-        qFlat = [].append(getItem(q["item"]))
+        qFlat = [].append(getItem(q["resource"]["item"]))
         qFlat.flatten()
     end
 
@@ -18,9 +18,9 @@ module QuestionnaireHelper
         items = []
         return nil if itemArray.nil?
         itemArray.each do |item|
-            items.append(QItem(item, level))
-            if item.any?{ |child| child.has_key?("item")}
-                items.append(getItem(child["item"], level + 1))
+            items.append(QItem.new(item, level))
+            if item.has_key?("item")
+                items.append(getItem(item["item"], level + 1))
             end
         end
         items

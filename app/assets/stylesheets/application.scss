@@ -24,6 +24,12 @@
     margin: 5pt 0pt 5pt 5pt;
 }
 
+.retired-section,
+.active-section {
+    padding-bottom: 20pt;
+    padding-top: 7.5pt;
+}
+
 .retired-section {
     background-color: var(--retired-color);
 }
@@ -87,7 +93,7 @@
 }
 
 .description {
-    margin: 3pt;
+    margin: 5pt 3pt 3pt 3pt;
 }
 
 .error-go-home-container {
@@ -118,4 +124,15 @@
 .no-questions {
     padding: 50pt 0;
     text-align: center;
+}
+
+.submit-btn-container {
+    text-align: center;
+    margin-bottom: 20pt;
+}
+
+.submit-btn {
+    width: 50%;
+    padding: 10pt;
+    margin-bottom: auto;
 }

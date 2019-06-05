@@ -14,26 +14,49 @@
         <% end %>
     </div>
 </div>
-<div class="<%= (isRetired ? "retired-section" : "")%>">
+
+<div class="<%= (isRetired ? "retired-section" : "active-section")%>">
     <small class="description"><%= @questionnaire["resource"]["description"] %></small>
 
     <%= form_tag('/submission', method: :get) %>
-        <% if @questionnaire["item"].nil? %>
+
+        <% if @questionnaire["resource"]["item"].nil? %>
             <h3 class="no-questions">
                 <%= @questionnaire["resource"]["name"] %> (v.<%= @questionnaire["resource"]["version"] %>) 
                 currently has no questions.
             </h3>
         <% else %>
-            <%= flattenQuestionnaire(@questionnaire).each do |qItem| %>
-                <h1><%= qItem.nil? ? "nil" : qItem.level %></h1>
+
+            <% flattenQuestionnaire(@questionnaire).each_with_index do |qItem, index| %>
+                <% leftMargin = "margin-left: " + (qItem.level * 15 + 5).to_s + "pt" %>
+                <% item = qItem.item %>
+                <% if item["type"].eql?("group") %>
+                    <% hrColor = "rgba(0, 0, 0, " + (0.75**qItem.level).to_s %>
+                    <hr style="background-color: <%= hrColor %>">
+                    <h4 class="mt-4" style="<%= leftMargin %>"><%= item["text"] %></h4>
+                <% elsif item["type"].eql?("display") %>
+                    <p style="<%= leftMargin %>"><%= item["text"] %></p>
+                <% end %>
             <% end %>
+
         <% end %>
+
+        <hr style="background-color: black">
+        <% if isRetired %>
+            <p style="text-align: center"> WARNING: You are about to submit a retired form! </p>
+        <% else %>
+            <p style="text-align: center"> All done? Go ahead and submit! </p>
+        <% end %>
+
+        <div class="submit-btn-container">
+            <button type="submit" class="btn btn-<%=(isRetired ? "secondary" : "primary")%> submit-btn">Submit</button>
+        </div>
     </form>
 </div>
 
 
 
-<!-- Below is the first pass at a form using the DEL CSV -->
+<!-- Below is the first pass at a form using the DEL CSV (kept for reference while writing the real form) -->
 
 <!--
     <%#= form_tag('/submission', method: :get) %>
