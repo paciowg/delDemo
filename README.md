@@ -1,4 +1,4 @@
 # DEL Demo
-This is a simple (and currently unfinished) web app meant to demonstrate the
-concept of filling out DEL questionnaires and having that patient data 
-automatically upload to a FHIR server.
+This is a simple (and currently unfinished) web app meant to demonstrate
+what it might look like to fill out a DEL questionnaire provided online
+through a FHIR server.
