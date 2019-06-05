@@ -1,15 +1,7 @@
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE #TODO, fix hackish ssl certification workaround
 require 'json'
-require 'csv'
 
 class GetQuestionnaires
-
-    def self.getOldQuestionnaire
-        questionnaires = CSV.read("storage/Data_Elements.csv")
-        keys = questionnaires[0]
-        questionnaires = questionnaires.drop(1)
-        questionnaires.map{ |values| Hash[keys.zip(values)] }
-    end
 
     def self.setClientConnection
         @url = "https://impact-fhir.mitre.org/r4/"

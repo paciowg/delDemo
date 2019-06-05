@@ -11,14 +11,15 @@
         <% end %>
         <%= "(v." + @questionnaire["resource"]["version"] + ")" %>
         <% if isInactive %>
-            </del> (<%= status.eql?("other") ? "INACTIVE" : status.upcase %>)
+            </del> (<%= status.eql?("unknown") ? "INACTIVE" : status.upcase %>)
         <% end %>
     </div>
 </div>
 
 <div class="<%= (isInactive ? "inactive" : "active")%>-section">
-    <small class="description"><%= @questionnaire["resource"]["description"] %></small>
-
+    <div class="description">
+        <small><%= @questionnaire["resource"]["description"] %></small>
+    </div>
     <%= form_tag('/submission', method: :get) %>
 
         <% if @questionnaire["resource"]["item"].nil? %>
