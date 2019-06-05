@@ -1,21 +1,22 @@
-<% isRetired = !@questionnaire["resource"]["status"].eql?("active")%>
-<div class="banner <%= (isRetired ? 'retired-banner' : '') %>" id="banner"> 
-    <a class="float-right banner-btn-<%= (isRetired ? "blue" : "gray" ) %>" href="/">
+<% status = @questionnaire["resource"]["status"] %>
+<% isInactive = !status.eql?("active")%>
+<div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
+    <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" href="/">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
         <%= @questionnaire["resource"]["title"] %>
-        <% if isRetired %>
+        <% if isInactive %>
             <del>
         <% end %>
         <%= "(v." + @questionnaire["resource"]["version"] + ")" %>
-        <% if isRetired %>
-            </del> (RETIRED)
+        <% if isInactive %>
+            </del> (<%= status.eql?("other") ? "INACTIVE" : status.upcase %>)
         <% end %>
     </div>
 </div>
 
-<div class="<%= (isRetired ? "retired-section" : "active-section")%>">
+<div class="<%= (isInactive ? "inactive" : "active")%>-section">
     <small class="description"><%= @questionnaire["resource"]["description"] %></small>
 
     <%= form_tag('/submission', method: :get) %>
@@ -41,15 +42,17 @@
 
         <% end %>
 
-        <hr style="background-color: black">
-        <% if isRetired %>
-            <p style="text-align: center"> WARNING: You are about to submit a retired form! </p>
+        <hr style="background-color: black"> 
+        <% if isInactive %>
+            <p style="text-align: center"> WARNING: You are about to submit
+            <%= status.eql?("retired") ? "a retired" : "an inactive" %>
+            form! </p>
         <% else %>
             <p style="text-align: center"> All done? Go ahead and submit! </p>
         <% end %>
 
         <div class="submit-btn-container">
-            <button type="submit" class="btn btn-<%=(isRetired ? "secondary" : "primary")%> submit-btn">Submit</button>
+            <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn">Submit</button>
         </div>
     </form>
 </div>
@@ -110,6 +113,6 @@
 
         <%# end %>
 
-        <button type="submit" class="btn btn-block btn-<%#=(isRetired ? "secondary" : "primary")%>">Submit</button>
+        <button type="submit" class="btn btn-block btn-<%#=(isInactive ? "secondary" : "primary")%>">Submit</button>
     </form> 
 -->

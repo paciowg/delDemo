@@ -17,24 +17,30 @@
 @import 'bootstrap';
 
 :root{
-    --retired-color: #DDDDDD;
+    --inactive-color: #DDDDDD;
 }
 
 .questionnaire-option {
     margin: 5pt 0pt 5pt 5pt;
 }
 
-.retired-section,
+.inactive-section,
 .active-section {
     padding-bottom: 20pt;
     padding-top: 7.5pt;
 }
 
-.retired-section {
-    background-color: var(--retired-color);
+.home-inactive-section {
+    padding: 1pt 2pt 2pt 2pt;
+    margin-top: 5pt;
 }
 
-.retired-banner {
+.inactive-section,
+.home-inactive-section {
+    background-color: var(--inactive-color);
+}
+
+.inactive-banner {
     background-color: var(--gray) !important;
 }
 
@@ -93,7 +99,7 @@
 }
 
 .description {
-    margin: 5pt 3pt 3pt 3pt;
+    margin: 5pt 5pt 3pt 5pt;
 }
 
 .error-go-home-container {

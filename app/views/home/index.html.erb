@@ -2,7 +2,7 @@
     <div class="banner-content">Choose Patient Transfer Questionnaire</div>
 </div>
 <h3 style="margin: 5pt"> Active </h3>
-<% retiredVersions = Array.new %>
+<% inactiveVersions = Array.new %>
 <% @questionnaireHash["entry"].each do |entry| %>
     <% id = entry["resource"]["id"] %>
     <% displayName = entry["resource"]["name"] + " (v." + entry["resource"]["version"] + ")"%>
@@ -10,12 +10,12 @@
         <%= link_to displayName, {controller: "questionnaire", version: id},
             {class: "btn btn-primary questionnaire-option", id: id} %>
     <% else %>
-        <% retiredVersions.append({"id"=>id, "dn"=>displayName})%>
+        <% inactiveVersions.append({"id"=>id, "dn"=>displayName})%>
     <% end %>
 <% end %>
-<div class="retired-section">
-    <h3 style="margin: 5pt"> Retired </h3>
-    <% retiredVersions.each do |entry| %>
+<div class="home-inactive-section">
+    <h3 style="margin: 5pt"> Inactive (Draft, Retired, etc.) </h3>
+    <% inactiveVersions.each do |entry| %>
         <%= link_to entry["dn"], {controller: "questionnaire", version: entry["id"]},
             {class: "btn btn-secondary questionnaire-option", id: entry["id"]} %>
     <% end %>
