@@ -32,12 +32,15 @@
             <% flattenQuestionnaire(@questionnaire).each_with_index do |qItem, index| %>
                 <% leftMargin = "margin-left: " + (qItem.level * 15 + 5).to_s + "pt" %>
                 <% item = qItem.item %>
+
                 <% if item["type"].eql?("group") %>
                     <% hrColor = "rgba(0, 0, 0, " + (0.75**qItem.level).to_s %>
                     <hr style="background-color: <%= hrColor %>">
                     <h4 class="mt-4" style="<%= leftMargin %>"><%= item["text"] %></h4>
+
                 <% elsif item["type"].eql?("display") %>
                     <p style="<%= leftMargin %>"><%= item["text"] %></p>
+                    
                 <% end %>
             <% end %>
 

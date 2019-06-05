@@ -11,7 +11,11 @@ class GetQuestionnaires
 
     def self.getAllQuestionnaires
         setClientConnection()
-        initialQuestionnaires = @client.read_feed(FHIR::Questionnaire)
+        begin
+            initialQuestionnaires = @client.read_feed(FHIR::Questionnaire)
+        rescue
+            return nil
+        end
         json = initialQuestionnaires.response.values[2]
         @questionnaireHash = JSON.parse(json)
 
@@ -40,7 +44,7 @@ class GetQuestionnaires
     def self.combineQuestionnaires(hashes)
         finalEntry = Array.new
         hashes.each do |hash|
-            return nil if hash["entry"].nil?
+            return "no_entry" if hash["entry"].nil?
             finalEntry.append(hash["entry"])
         end
         hashes[0]["entry"] = finalEntry.flatten
