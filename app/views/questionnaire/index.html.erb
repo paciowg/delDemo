@@ -1,6 +1,6 @@
 <% isRetired = !@questionnaire["resource"]["status"].eql?("active")%>
 <div class="banner <%= (isRetired ? 'retired-banner' : '') %>" id="banner"> 
-    <a class="float-right <%= (isRetired ? "banner-btn-blue" : "banner-btn-gray" ) %>" href="/">
+    <a class="float-right banner-btn-<%= (isRetired ? "blue" : "gray" ) %>" href="/">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
@@ -17,63 +17,76 @@
 <div class="<%= (isRetired ? "retired-section" : "")%>">
     <small class="description"><%= @questionnaire["resource"]["description"] %></small>
 
-    <!-- <%#= form_tag('/submission', method: :get) %>
-        <%# @questionnaire["item"].each do |question| %>
-            <%#= question["text"] %>
-        <%# end %>
-    </form> -->
-
     <%= form_tag('/submission', method: :get) %>
-        <% @oldQuestionnaire.each_with_index do |list, listIndex| %>
+        <% if @questionnaire["item"].nil? %>
+            <h3 class="no-questions">
+                <%= @questionnaire["resource"]["name"] %> (v.<%= @questionnaire["resource"]["version"] %>) 
+                currently has no questions.
+            </h3>
+        <% else %>
+            <%= flattenQuestionnaire(@questionnaire).each do |qItem| %>
+                <h1><%= qItem.nil? ? "nil" : qItem.level %></h1>
+            <% end %>
+        <% end %>
+    </form>
+</div>
+
+
+
+<!-- Below is the first pass at a form using the DEL CSV -->
+
+<!--
+    <%#= form_tag('/submission', method: :get) %>
+        <%# @oldQuestionnaire.each_with_index do |list, listIndex| %>
             
             <%# Excludes all questions not mapped to patient transfers %>
-            <% if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9") %>
+            <%# if list["Item Subsets"].include?("8") || list["Item Subsets"].include?("9") %>
                 
                 <%# Prints current section %>
-                <% if !list["Section Name"].eql?(@currentSection) %>
-                    <% @currentSection = list["Section Name"] %>
-                    <% if !@currentSection.include?("Section GG") %>
+                <%# if !list["Section Name"].eql?(@currentSection) %>
+                    <%# @currentSection = list["Section Name"] %>
+                    <%# if !@currentSection.include?("Section GG") %>
                         <hr style="background-color: black">
-                    <% end %>
-                    <h4 class="m-2 mt-4"> <%= @currentSection.tr("\"", "") %> </h4>
-                <% end %>
+                    <%# end %>
+                    <h4 class="m-2 mt-4"> <%#= @currentSection.tr("\"", "") %> </h4>
+                <%# end %>
                 
-                <% if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# Indicates "Question" is instructional %>
+                <%# if isQuestionActuallyLabel?(@oldQuestionnaire, listIndex) %> <%# Indicates "Question" is instructional %>
                     <hr>
-                    <% @currentQuestionGroup = list["Item ID"] %>
-                    <%= list["Question Text"].tr("\"", "") %>
-                <% else %>
-                    <% if !@currentQuestionGroup.nil? && !list["Item ID"].include?(@currentQuestionGroup) %>
-                        <% @currentQuestionGroup = nil %>
+                    <%# @currentQuestionGroup = list["Item ID"] %>
+                    <%#= list["Question Text"].tr("\"", "") %>
+                <%# else %>
+                    <%# if !@currentQuestionGroup.nil? && !list["Item ID"].include?(@currentQuestionGroup) %>
+                        <%# @currentQuestionGroup = nil %>
                         <hr>
-                    <% end %>
+                    <%# end %>
                     <div class="form-group m-3 mb-4">    
-                        <label><%= list["Question Text"].tr("\"", "") %></label>
-                        <% if list["Assessment Response Codes"].nil? %> <%# Exclusively text response %>
-                            <%= text_field_tag "text".concat(listIndex.to_s), nil,
+                        <label><%#= list["Question Text"].tr("\"", "") %></label>
+                        <%# if list["Assessment Response Codes"].nil? %> <%# Exclusively text response %>
+                            <%#= text_field_tag "text".concat(listIndex.to_s), nil,
                                 class: "form-control", placeholder: "(Your input here)"%>
-                        <% elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
-                            <%= text_field_tag "options".concat(listIndex.to_s), nil, 
+                        <%# elsif list["Assessment Response Codes"].include?("Text")%> <%# Multiple choice including text %>
+                            <%#= text_field_tag "options".concat(listIndex.to_s), nil, 
                                 list: "list".concat(listIndex.to_s), class: "form-control", 
                                 placeholder: "Enter custom answer or choose preset option from dropdown"%>
-                            <datalist id="list<%= listIndex.to_s %>">
-                                <% list["Response Text"].split("|").each do |text| %>
-                                    <option value="<%=text.tr("\"", "")%>"></option>
-                                <% end %>
+                            <datalist id="list<%#= listIndex.to_s %>">
+                                <%# list["Response Text"].split("|").each do |text| %>
+                                    <option value="<%#=text.tr("\"", "")%>"></option>
+                                <%# end %>
                             </datalist>
-                        <% else %> <%# Purely multiple choice %>
-                            <%= select_tag "select".concat(listIndex.to_s), 
+                        <%# else %> <%# Purely multiple choice %>
+                            <%#= select_tag "select".concat(listIndex.to_s), 
                                 options_for_select(list["Assessment Response Codes"].split("|").each_with_index.collect{ 
                                 |code, index| [list["Response Text"].split("|")[index].tr("\"", ""), code] }),
                                 class: "form-control" %>
-                        <% end %>
-                        <small class="form-text"><%= list["Item ID"] %></small>
+                        <%# end %>
+                        <small class="form-text"><%#= list["Item ID"] %></small>
                     </div>
-                <% end %>
-            <% end %>
+                <%# end %>
+            <%# end %>
 
-        <% end %>
+        <%# end %>
 
-        <button type="submit" class="btn btn-block btn-<%=(isRetired ? "secondary" : "primary")%>">Submit</button>
-    </form>
-</div>
+        <button type="submit" class="btn btn-block btn-<%#=(isRetired ? "secondary" : "primary")%>">Submit</button>
+    </form> 
+-->
