@@ -30,17 +30,19 @@
 
         <% else %>
             <% flattenQuestionnaire(@questionnaire).each_with_index do |qItem, index| %>
-                <% leftMargin = "margin-left: " + (qItem.level * 15 + 5).to_s + "pt" %>
-                <% fontSize = "font-size: " + (20 * (0.80**qItem.level)).to_s + "pt" %>
-                <% dynamicStyle = leftMargin + "; " + fontSize %>
+                <% leftMargin = "margin-left: " + (qItem.level * 4 + 2).to_s + "%" %>
+                <% fontSize = "font-size: " + (qItem.level == 0 ? 20 : 13).to_s + "pt" %>
+                <% width = "width: " + (100 - (qItem.level * 4 + 2)).to_s + "%" %>
+                <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
                 <% item = qItem.item %>
                 <% type = item["type"] %>
                 <% text = item["text"] %>
                 <% id = item["linkId"] %>
 
                 <% if type.eql?("group") %>
-                    <% hrColor = "rgba(0, 0, 0, " + (0.75**qItem.level).to_s %>
-                    <hr style="background-color: <%= hrColor %>">
+                    <% if qItem.level == 0 %>
+                        <hr style="background-color: black">
+                    <% end %>
                     <h4 class="mt-4" style="<%= dynamicStyle %>"><%= text %></h4>
 
                 <% elsif type.eql?("display") %>
@@ -49,9 +51,14 @@
                 <% else %>
                     <div class="form-group m-3 mb-4">    
                         <label style="<%= dynamicStyle %>"><%= text %></label>
-                        <% if type.eql?("string") %>
+                        <% if type.eql?("text") %>
                             <%= text_field_tag id, nil, class: "form-control",
                                 style: dynamicStyle, placeholder: "(Your input here)"%>
+                        <% elsif type.eql?("date") %>
+                            <input type="date" id="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
+
+                        <% elsif type.eql?("integer") %>
+                            <input type="number" step="1" id="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
 
                         <% else %>
                             <% options = getOptions(item) %>
@@ -71,6 +78,7 @@
                             <% end %>
                         <% end %>
                         <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
+                    </div>
                 <% end %>
             <% end %>
         <% end %>
