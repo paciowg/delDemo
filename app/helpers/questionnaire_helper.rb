@@ -15,4 +15,17 @@ module QuestionnaireHelper
         end
         items
     end
+
+    def getOptions(item) #Returns array of 2 element arrays, like [[display, code], [display, code]]
+        incArr = item["answerValueSet"]["compose"]["include"]
+        concepts = []
+        options= []
+        incArr.each { |inc|
+            concepts.append(inc["concept"])
+        }
+        concepts.each { |concept|
+            options.append([concept["display"], concept["code"]])
+        }
+        options
+    end
 end

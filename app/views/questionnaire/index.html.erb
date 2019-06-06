@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div class="<%= (isInactive ? "inactive" : "active")%>-section">
+<div class="<%= (isInactive ? "inactive" : "active") %>-section">
     <div class="description">
         <small><%= @questionnaire["resource"]["description"] %></small>
     </div>
@@ -27,23 +27,50 @@
                 <%= @questionnaire["resource"]["name"] %> (v.<%= @questionnaire["resource"]["version"] %>) 
                 currently has no questions.
             </h3>
-        <% else %>
 
+        <% else %>
             <% flattenQuestionnaire(@questionnaire).each_with_index do |qItem, index| %>
                 <% leftMargin = "margin-left: " + (qItem.level * 15 + 5).to_s + "pt" %>
                 <% item = qItem.item %>
+                <% type = item["type"] %>
+                <% text = item["text"] %>
+                <% id = item["linkId"]%>
 
-                <% if item["type"].eql?("group") %>
+                <% if type.eql?("group") %>
                     <% hrColor = "rgba(0, 0, 0, " + (0.75**qItem.level).to_s %>
                     <hr style="background-color: <%= hrColor %>">
-                    <h4 class="mt-4" style="<%= leftMargin %>"><%= item["text"] %></h4>
+                    <h4 class="mt-4" style="<%= leftMargin %>"><%= text %></h4>
 
-                <% elsif item["type"].eql?("display") %>
-                    <p style="<%= leftMargin %>"><%= item["text"] %></p>
+                <% elsif type.eql?("display") %>
+                    <p style="<%= leftMargin %>"><%= text %></p>
                     
+                <% else %>
+                    <div class="form-group m-3 mb-4">    
+                        <label><%= text %></label>
+                        <% if type.eql?("string") %>
+                            <%= text_field_tag id, nil, class: "form-control",
+                                style: leftMargin, placeholder: "(Your input here)"%>
+
+                        <% else %>
+                            <% options = getOptions(item) %>
+                            <% if type.eql?("open-choice")%>
+                            
+                                <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: leftMargin,
+                                    placeholder: "Choose a preset option from the dropdown or enter a custom answer"%>
+                                <datalist id="<%= id %>-list">
+                                    <% options.each do |option| %>
+                                        <option value="<%= option[1] %>"><%= option[0] %></option>
+                                    <% end %>
+                                </datalist>
+
+                            <% elsif type.eql?("choice") %>
+                                <%= select_tag id, options_for_select(options), class: "form-control" %>
+
+                            <% end %>
+                        <% end %>
+                        <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
                 <% end %>
             <% end %>
-
         <% end %>
 
         <hr style="background-color: black"> 

@@ -5,7 +5,7 @@
 <h3 style="margin: 5pt"> Active </h3>
 <% inactiveVersions = Array.new %>
 
-<% @questionnaireHash["entry"].each do |entry| %>
+<% @questionnaireHash["entry"].sort_by{ |entry| entry["resource"]["name"] }.each do |entry| %>
     <% id = entry["resource"]["id"] %>
     <% displayName = entry["resource"]["name"] + " (v." + entry["resource"]["version"] + ")"%>
     
@@ -20,7 +20,7 @@
 
 <div class="home-inactive-section">
     <h3 style="margin: 5pt"> Inactive (Draft, Retired, etc.) </h3>
-    <% inactiveVersions.each do |entry| %>
+    <% inactiveVersions.sort_by{ |entry| entry["dn"] }.each do |entry| %>
         <%= link_to entry["dn"], {controller: "questionnaire", version: entry["id"]},
             {class: "btn btn-secondary questionnaire-option", id: entry["id"]} %>
     <% end %>

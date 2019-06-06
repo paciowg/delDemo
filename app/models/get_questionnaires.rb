@@ -3,14 +3,14 @@ require 'json'
 
 class GetQuestionnaires
 
-    def self.setClientConnection
+    def self.setConnection
         @url = "https://impact-fhir.mitre.org/r4/"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
     end
 
     def self.getAllQuestionnaires
-        setClientConnection()
+        setConnection()
         begin
             initialQuestionnaires = @client.read_feed(FHIR::Questionnaire)
         rescue
@@ -60,6 +60,6 @@ class GetQuestionnaires
                 return questionnaire
             end
         end 
-        return nil
+        nil
     end
 end
