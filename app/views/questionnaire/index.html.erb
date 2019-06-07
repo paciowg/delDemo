@@ -20,7 +20,7 @@
     <div class="description">
         <small><%= @questionnaire["resource"]["description"] %></small>
     </div>
-    <%= form_tag('/submission', method: :get) %>
+    <%= form_tag('/submission', method: :get, id: "form") %>
 
         <% if @questionnaire["resource"]["item"].nil? %>
             <h3 class="no-questions">
