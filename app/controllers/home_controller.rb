@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    reset_session
     @questionnaireHash = GetQuestionnaires.getAllQuestionnaires()
     if @questionnaireHash.nil?
       render 'home/error'
