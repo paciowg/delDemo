@@ -5,12 +5,11 @@
     <div class="banner-content">Whoops! Questionnaire not found.</div>
 </div>
 
-<% if params[:attempt].nil? || params[:attempt].to_i < 10 %>
+<% if params[:attempt].nil? || params[:attempt].to_i < 5 %>
         <small>Automatically trying again (retry attempts thus far: <%= params[:attempt].nil? ? "0" : params[:attempt]%>)</small>
         <div class="questionnaire-error-container">
-            <%= link_to "Try Again",
-                {controller: "questionnaire", version: params[:version], 
-                attempt: (params[:attempt].nil? ? "1" : (params[:attempt].to_i + 1).to_s)},
+            <%= link_to "Try Again", {controller: "questionnaire", 
+                params: request.query_parameters.merge({attempt: (params[:attempt].nil? ? 1 : params[:attempt].to_i + 1)})},
                 {class: "btn btn-primary questionnaire-error-option",  id: "try-again"} %>
             <a class="btn btn-primary questionnaire-error-option" href='/'>Home</a>
         </div>
