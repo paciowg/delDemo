@@ -11,6 +11,11 @@ class SessionStack
     end
 
     def self.push(id, input)
+        @@sessionHash[id].each do |section|
+            if section.keys.include?(input.keys[1]) #banks on there being an initial "version" key-value pair
+                @@sessionHash[id].delete(section)
+            end
+        end
         @@sessionHash[id].push(input)
     end
 
