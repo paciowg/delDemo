@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def index
     @questionnaireHash = GetQuestionnaires.getAllQuestionnaires()
 
-    SessionStack.create(session.id)
+    SessionStack.delete(session.id)
 
     if @questionnaireHash.nil?
       render 'home/error'

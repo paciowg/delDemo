@@ -5,6 +5,7 @@ class QuestionnaireController < ApplicationController
     @currentSection = nil
     if params[:page].nil?
       @currentSection = 1
+      SessionStack.create(session.id)
     elsif params[:page][0..3].eql?("back")
       @currentSection = params[:page].split(",").last.to_i
       SessionStack.pop(session.id)
