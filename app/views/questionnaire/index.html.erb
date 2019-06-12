@@ -94,9 +94,11 @@
             <hr style="background-color: black"> 
             <% if @currentSection == totalPages %>
                 <% if isInactive %>
-                    <p style="text-align: center"> WARNING: You are about to submit 
+                    <p style="text-align: center">
+                        WARNING: You are about to submit 
                         <%= status.eql?("retired") ? "a retired" : "an inactive" %>
-                        form! </p>
+                        form! 
+                    </p>
                 <% else %>
                     <p style="text-align: center"> All done? Go ahead and submit! </p>
                 <% end %>

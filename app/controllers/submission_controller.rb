@@ -3,7 +3,7 @@ class SubmissionController < ApplicationController
     @assessment = Submission.submitAssessment(SessionStack.read(session.id))
     SessionStack.delete(session.id)
     if @assessment.nil?
-      render 'submission/error'
+      render '/submission/error'
     end
   end
 end
