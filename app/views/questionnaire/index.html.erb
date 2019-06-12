@@ -65,10 +65,10 @@
                                 style: dynamicStyle, placeholder: "(Your input here)"%>
 
                         <% elsif type.eql?("date") %>
-                            <input type="date" id="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
+                            <input type="date" name="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
 
                         <% elsif type.eql?("integer") %>
-                            <input type="number" step="1" id="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
+                            <input type="number" step="1" name="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
 
                         <% else %>
                             <% options = getOptions(item) %>
