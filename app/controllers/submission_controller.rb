@@ -1,7 +1,6 @@
 class SubmissionController < ApplicationController
   def index
-    @params = params
-    @assessment = Submission.submitAssessment(@params)
+    @assessment = Submission.submitAssessment(SessionStack.read(session.id))
     if @assessment.nil?
       render 'submission/error'
     end

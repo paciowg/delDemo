@@ -5,7 +5,7 @@
     <div class="banner-content">Assessment Submitted!</div>
 </div>
 
-<% params.each do |param| %>
-    <%= param.to_s %>
+<% @assessment.each do |section| %>
+    <%= section %>
     <br>
 <% end %>

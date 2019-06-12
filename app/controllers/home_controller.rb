@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   def index
-    reset_session
     @questionnaireHash = GetQuestionnaires.getAllQuestionnaires()
+
+    SessionStack.create(session.id)
+
     if @questionnaireHash.nil?
       render 'home/error'
     elsif @questionnaireHash.eql?('no_entry')

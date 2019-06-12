@@ -1,6 +1,5 @@
 class Submission
-    def self.submitAssessment(questionnaire)
-        puts "Reached submission class in model"
-        true
+    def self.submitAssessment(session)
+        session
     end
 end

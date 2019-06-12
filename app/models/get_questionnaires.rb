@@ -10,6 +10,10 @@ class GetQuestionnaires
     end
 
     def self.getAllQuestionnaires
+        if !@questionnaireHash.nil?
+            return @questionnaireHash
+        end
+
         setConnection()
         begin
             initialQuestionnaires = @client.read_feed(FHIR::Questionnaire)
