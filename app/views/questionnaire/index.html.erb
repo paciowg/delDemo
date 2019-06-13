@@ -44,7 +44,7 @@
                 <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
                 <% item = qItem.item %>
                 <% type = item["type"] %>
-                <% text = item["text"] %>
+                <% text = cleanLabel(item["text"]) %>
                 <% id = item["linkId"] %>
 
                 <% if type.eql?("group") %>

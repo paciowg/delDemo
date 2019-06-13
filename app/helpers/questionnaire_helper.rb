@@ -63,4 +63,8 @@ module QuestionnaireHelper
     def questionnaireError()
         ApplicationController.render 'questionnaire/error'
     end
+
+    def cleanLabel(label)
+        label.gsub(/\{(P|p)atient\/(R|r)esident\}/, "\\1atient")
+    end
 end
