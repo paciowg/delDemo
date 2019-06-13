@@ -36,8 +36,8 @@
             <%= hidden_field_tag "version", params[:version] %>
             <% pageArr = getPage(@questionnaire, @currentSection) %>
             <% qSect = pageArr[0] %>
-                <% totalPages = pageArr[1] %>
-                <% qSect.each do |qItem| %>
+            <% totalPages = pageArr[1] %>
+            <% qSect.each do |qItem| %>
                 <% leftMargin = "margin-left: " + (qItem.level * 4 + 2).to_s + "%" %>
                 <% fontSize = "font-size: " + (qItem.level == 0 ? 20 : 13).to_s + "pt" %>
                 <% width = "width: " + (100 - (qItem.level * 4 + 2)).to_s + "%" %>
@@ -61,20 +61,23 @@
                         <label style="<%= dynamicStyle %>"><%= text %></label>
 
                         <% if type.eql?("text") %>
-                            <%= text_field_tag id, nil, class: "form-control",
+                            <%= text_field_tag id, nil, class: "form-control", value: prepopulate(id),
                                 style: dynamicStyle, placeholder: "(Your input here)"%>
 
                         <% elsif type.eql?("date") %>
-                            <input type="date" name="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
+                            <input type="date" name="<%= id %>" value="<%= prepopulate(id) %>"
+                                class="form-control" style="<%= dynamicStyle %>">
 
                         <% elsif type.eql?("integer") %>
-                            <input type="number" step="1" name="<%= id %>" class="form-control" style="<%= dynamicStyle %>">
+                            <input type="number" step="1" name="<%= id %>" value="<%= prepopulate(id) %>"
+                                class="form-control" style="<%= dynamicStyle %>">
 
                         <% else %>
                             <% options = getOptions(item) %>
 
                             <% if type.eql?("open-choice") %>
                                 <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
+                                    value: prepopulate(id), 
                                     placeholder: "Choose a preset option from the dropdown or enter a custom answer"%>
                                 <datalist id="<%= id %>-list">
                                     <% options.each do |option| %>
@@ -83,7 +86,7 @@
                                 </datalist>
 
                             <% elsif type.eql?("choice") %>
-                                <%= select_tag id, options_for_select(options), class: "form-control" %>
+                                <%= select_tag id, options_for_select(options), value: prepopulate(), class: "form-control" %>
                             <% end %>
                         <% end %>
                         <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
@@ -106,7 +109,7 @@
                 <div class="<%= @currentSection == 1 ? "submit-btn" : "page-change" %>-container">
                     <% if @currentSection != 1 %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="back,<%= @currentSection - 1 %>">Back</button>
+                            name="page" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
                         name="page" value="submit">Submit</button>
@@ -116,10 +119,10 @@
                 <div class="page-change-container">
                     <% if @currentSection == 1 %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="back,<%= @currentSection - 1 %>" disabled>Back</button>
+                            name="page" value="<%= @currentSection - 1 %>" disabled>Back</button>
                     <% else %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="back,<%= @currentSection - 1 %>">Back</button>
+                            name="page" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option"
                         name="page" value="<%= @currentSection + 1 %>">Next</button>

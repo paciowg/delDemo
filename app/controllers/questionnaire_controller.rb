@@ -8,10 +8,6 @@ class QuestionnaireController < ApplicationController
       @currentSection = 1
       SessionStack.create(session.id)
 
-    elsif params[:page][0..3].eql?("back")
-      @currentSection = params[:page].split(",").last.to_i
-      SessionStack.pop(session.id)
-
     elsif params[:page].eql?("submit")
       # submit logic (render submission page, finish )
       SessionStack.push(session.id, helpers.getRelevantParams(params))

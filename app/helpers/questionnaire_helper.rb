@@ -67,4 +67,14 @@ module QuestionnaireHelper
     def cleanLabel(label)
         label.gsub(/\{(P|p)atient\/(R|r)esident\}/, "\\1atient")
     end
+
+    def prepopulate(id)
+        sesh = SessionStack.read(session.id)
+        sesh.each do |page|
+            if page.has_key?(id)
+                return page[id]
+            end
+        end
+        return ""        
+    end
 end
