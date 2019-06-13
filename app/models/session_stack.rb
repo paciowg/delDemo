@@ -27,4 +27,8 @@ class SessionStack
         @@sessionHash.delete(id)
     end
 
+    def self.delete_all()
+        @@sessionHash.clear()
+    end
+
 end
