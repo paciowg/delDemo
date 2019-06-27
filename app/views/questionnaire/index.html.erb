@@ -4,30 +4,30 @@
     <% loadAttempts += 1%>
 <% end %>
 
-<% status = @questionnaire["resource"]["status"] %>
+<% status = @questionnaire.status %>
 <% isInactive = !status.eql?("active")%>
 <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
     <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" href="/">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
-        <%= @questionnaire["resource"]["title"] %>
+        <%= @questionnaire.title %>
         <% if isInactive %>
-            <del><%= "(v." + @questionnaire["resource"]["version"] + ")" -%></del>
+            <del><%= "(v." + @questionnaire.version + ")" -%></del>
             <%= status.eql?("unknown") ? "INACTIVE" : status.upcase %>
         <% else %>
-            <%= "(v." + @questionnaire["resource"]["version"] + ")" %>
+            <%= "(v." + @questionnaire.version + ")" %>
         <% end %>
     </div>
 </div>
 
 <div class="<%= (isInactive ? "inactive" : "active") %>-section">
     <div class="description">
-        <small><%= @questionnaire["resource"]["description"] %></small>
+        <small><%= @questionnaire.description %></small>
     </div>
-    <% if @questionnaire["resource"]["item"].nil? %>
+    <% if @questionnaire.item.nil? %>
         <h3 class="no-questions">
-            <%= @questionnaire["resource"]["name"] %> (v.<%= @questionnaire["resource"]["version"] %>) 
+            <%= @questionnaire.name %> (v.<%= @questionnaire.version %>) 
             currently has no questions.
         </h3>
 
@@ -43,9 +43,9 @@
                 <% width = "width: " + (100 - (qItem.level * 4 + 2)).to_s + "%" %>
                 <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
                 <% item = qItem.item %>
-                <% type = item["type"] %>
-                <% text = cleanLabel(item["text"]) %>
-                <% id = item["linkId"] %>
+                <% type = item.type %>
+                <% text = cleanLabel(item.text) %>
+                <% id = item.linkId %>
 
                 <% if type.eql?("group") %>
                     <% if qItem.level == 0 %>
@@ -86,7 +86,7 @@
                                 </datalist>
 
                             <% elsif type.eql?("choice") %>
-                                <%= select_tag id, options_for_select(options), value: prepopulate(), class: "form-control" %>
+                                <%= select_tag id, options_for_select(options), value: prepopulate(id), class: "form-control" %>
                             <% end %>
                         <% end %>
                         <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
