@@ -5,15 +5,14 @@
 <h3 style="margin: 5pt"> Active </h3>
 <% inactiveVersions = Array.new %>
 
-<% @questionnaireHash["entry"].sort_by{ |entry| entry["resource"]["name"] }.each do |entry| %>
-    <% id = entry["resource"]["id"] %>
-    <% displayName = entry["resource"]["name"] + " (v." + entry["resource"]["version"] + ")"%>
+<% @questionnaires.sort_by{ |questionnaire| questionnaire.name }.each do |q| %>
+    <% displayName = q.name + " (v." + q.version + ")"%>
     
-    <% if entry["resource"]["status"].eql?("active") %>
-        <%= link_to displayName, {controller: "questionnaire", version: id},
-            {class: "btn btn-primary questionnaire-option", id: id} %>
+    <% if q.status.eql?("active") %>
+        <%= link_to displayName, {controller: "questionnaire", version: q.id},
+            {class: "btn btn-primary questionnaire-option", id: q.id} %>
     <% else %>
-        <% inactiveVersions.append({"id"=>id, "dn"=>displayName})%>
+        <% inactiveVersions.append({"id"=>q.id, "dn"=>displayName})%>
     <% end %>
 
 <% end %>
