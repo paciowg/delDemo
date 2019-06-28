@@ -37,8 +37,17 @@ module QuestionnaireHelper
     end
 
     def getOptions(item) #Returns array of 2 element arrays, like [[display, code], [display, code]]
-        options = item.answerOption
-        options.collect{ |i| [i.valueCoding.display, i.valueCoding.code]}
+        options = item.answerOption.collect{ |i| [i.valueCoding.display, i.valueCoding.code] }
+        prepop = getFromSession(item.linkId)
+        return options if prepop.empty?
+
+        i = options.index{ |arr| arr[1].eql?(prepop) }
+        return options unless i
+
+        selected = options.delete_at(i)
+        return options unless selected
+        
+        [selected] + options  
     end
 
     def getRelevantParams(params)
@@ -60,7 +69,7 @@ module QuestionnaireHelper
         label.gsub(/\{(P|p)atient\/(R|r)esident\}/, "\\1atient")
     end
 
-    def prepopulate(id)
+    def getFromSession(id)
         sesh = SessionStack.read(session.id)
         sesh.each do |page|
             if page.has_key?(id)

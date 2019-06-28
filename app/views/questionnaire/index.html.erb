@@ -61,15 +61,15 @@
                         <label style="<%= dynamicStyle %>"><%= text %></label>
 
                         <% if type.eql?("text") %>
-                            <%= text_field_tag id, nil, class: "form-control", value: prepopulate(id),
+                            <%= text_field_tag id, nil, class: "form-control", value: getFromSession(id),
                                 style: dynamicStyle, placeholder: "(Your input here)"%>
 
                         <% elsif type.eql?("date") %>
-                            <input type="date" name="<%= id %>" value="<%= prepopulate(id) %>"
+                            <input type="date" name="<%= id %>" value="<%= getFromSession(id) %>"
                                 class="form-control" style="<%= dynamicStyle %>">
 
                         <% elsif type.eql?("integer") %>
-                            <input type="number" step="1" name="<%= id %>" value="<%= prepopulate(id) %>"
+                            <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) %>"
                                 class="form-control" style="<%= dynamicStyle %>">
 
                         <% else %>
@@ -77,7 +77,6 @@
 
                             <% if type.eql?("open-choice") %>
                                 <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
-                                    value: prepopulate(id), 
                                     placeholder: "Choose a preset option from the dropdown or enter a custom answer"%>
                                 <datalist id="<%= id %>-list">
                                     <% options.each do |option| %>
@@ -86,7 +85,7 @@
                                 </datalist>
 
                             <% elsif type.eql?("choice") %>
-                                <%= select_tag id, options_for_select(options), value: prepopulate(id), class: "form-control" %>
+                                <%= select_tag id, options_for_select(options), class: "form-control", style: dynamicStyle %>
                             <% end %>
                         <% end %>
                         <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
