@@ -36,8 +36,19 @@ module QuestionnaireHelper
         items
     end
 
-    def getOptions(item) #Returns array of 2 element arrays, like [[display, code], [display, code]]
-        options = item.answerOption.collect{ |i| [i.valueCoding.display, i.valueCoding.code] }
+    # returns array of 2 element arrays, like [[display, code], [display, code]]
+    def getRawOptions(item)
+        item.answerOption.collect{ |i| [i.valueCoding.display, i.valueCoding.code] }
+    end
+    # returns pruned array of 2 element arrays, like [[display, code], [display, code]]
+    def pruneOptions(options)
+        unwanted = ["Minimum value", "Maximum value"]
+        options.select{ |option| !unwanted.include?(option[0]) }
+    end
+
+    # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default option
+    def getOrderedOptions(item)
+        options = pruneOptions(getRawOptions(item))
         prepop = getFromSession(item.linkId)
         return options if prepop.empty?
 
@@ -47,14 +58,14 @@ module QuestionnaireHelper
         selected = options.delete_at(i)
         return options unless selected
         
-        [selected] + options  
+        [selected] + options
     end
 
     def getRelevantParams(params)
         revisedParams = Hash.new
         avoidKeys = ["page", "utf8", "attempt", "controller", "action"]
         params.each_pair { |key, value|
-            if !avoidKeys.include?(key)
+            unless avoidKeys.include?(key)
                 revisedParams[key] = value
             end
         }
@@ -78,4 +89,97 @@ module QuestionnaireHelper
         end
         return ""        
     end
+
+    def getValidation(item)
+        item.type.eql?("open-choice") ? validateOpen(item) : validateText()
+    end
+
+    def validateText()
+        {regex: ".*\\S.*", message: "Must have a non-whitespace character"}
+    end
+
+    def validateOpen(item)
+        options = getRawOptions(item)
+
+        boundDisplays = ["Minimum value", "Maximum value"]
+        intBounds = options.select{ |option| boundDisplays.include?(option[0]) }
+        unless intBounds.empty?
+            min = intBounds[0][1] < intBounds[1][1] ? intBounds[0][1] : intBounds[1][1]
+            max = min == intBounds[0][1] ? intBounds[1][1] : intBounds[0][1]
+            rangeReg = rangeRegex(min, max)
+            reg = optionsRegex([rangeReg, options.collect{ |option| option[1] }].flatten.compact)
+            return {regex: reg, message: "Input must be between " + min + " and " + max + " (inclusive)"}
+        end
+
+        
+    end
+
+    def optionsRegex(codes)
+        regex = "("
+        codes.each do |code|
+            regex = regex + code + "|"
+        end
+        regex[0..-2] + ")"
+    end
+    
+    def rangeRegex(min, max) # not ideal, but consistent (all other authentication happens through regex)
+        minMax = pruneMinMax(min, max)
+        return nil unless minMax
+        ranges = getRanges(minMax[:min], minMax[:max]).flatten.compact
+        rangesToRegex(ranges)
+    end
+
+    def pruneMinMax(min, max)
+        min = min.to_i.to_s
+        max = max.to_i.to_s
+        while max[0].eql?('0')
+            max = max[1..-1]
+        end
+        while min.length < max.length
+            min = "0" + min
+        end
+        {min: min, max: max}
+    end
+
+    def getRanges(min, max)
+        return nil unless min.to_i <= max.to_i
+        lastNonZero = min.rindex(/[^0]/)
+        frontMatch = min[0].eql?(max[0])
+        rangeMax = ""
+        if frontMatch
+            min.each_char.with_index do |digit, i|
+                break if !digit.eql?(max[i]) && !min[0..-2].eql?(max[0..-2])
+                rangeMax = rangeMax + max[i]
+            end
+        else
+            if lastNonZero
+                rangeMax = (lastNonZero == 0) ? "" : min[0..(lastNonZero-1)]
+            else
+                rangeMax = min[0..-2]
+            end
+        end
+        frontMatch = frontMatch || rangeMax.empty?
+        while rangeMax.length < min.length
+            rangeMax = rangeMax + (frontMatch ? (max[rangeMax.length].to_i - 1).to_s : "9")
+            frontMatch = false
+        end
+        minMax = pruneMinMax(rangeMax.to_i + 1, max)
+        [{min: min, max: rangeMax}, getRanges(minMax[:min], minMax[:max])]
+    end
+
+    def rangesToRegex(ranges)
+        options = []
+        ranges.each do |range|
+            doneSkipping = false
+            regex = ""
+            range[:min].each_char.with_index do |digit, i|
+                next if digit.eql?(range[:max][i]) && digit.eql?("0") && !doneSkipping
+                regex = regex + ( digit.eql?(range[:max][i]) ? digit : ("[" + digit + "-" + range[:max][i] + "]") )
+                doneSkipping = true
+            end
+            options.push(regex)
+        end
+        "0*" + optionsRegex(options)
+    end
+
 end

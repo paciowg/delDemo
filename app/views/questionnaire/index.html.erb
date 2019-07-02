@@ -61,23 +61,28 @@
                         <label style="<%= dynamicStyle %>"><%= text %></label>
 
                         <% if type.eql?("text") %>
+                            <% val = getValidation(item) %>
                             <%= text_field_tag id, nil, class: "form-control", value: getFromSession(id),
-                                style: dynamicStyle, placeholder: "(Your input here)"%>
+                                style: dynamicStyle, placeholder: "(Your input here)", 
+                                required: true, pattern: val[:regex], title: val[:message]%>
 
                         <% elsif type.eql?("date") %>
                             <input type="date" name="<%= id %>" value="<%= getFromSession(id) %>"
-                                class="form-control" style="<%= dynamicStyle %>">
+                                class="form-control" style="<%= dynamicStyle %>"
+                                required>
 
                         <% elsif type.eql?("integer") %>
                             <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) %>"
-                                class="form-control" style="<%= dynamicStyle %>">
+                                class="form-control" style="<%= dynamicStyle %>" maxLength>
 
                         <% else %>
-                            <% options = getOptions(item) %>
+                            <% options = getOrderedOptions(item) %>
 
                             <% if type.eql?("open-choice") %>
+                                <% val = getValidation(item) %>
                                 <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
-                                    placeholder: "Choose a preset option from the dropdown or enter a custom answer"%>
+                                    placeholder: "Choose a preset option from the dropdown or enter a custom answer", 
+                                    required: true, pattern: val[:regex], title: val[:message]%>
                                 <datalist id="<%= id %>-list">
                                     <% options.each do |option| %>
                                         <option value="<%= option[1] %>"><%= option[0] %></option>

@@ -34,7 +34,7 @@ class GetQuestionnaires
     def self.getAllReplies(klasses = nil)
         klasses = coerce_to_a(klasses)
         replies = []
-        if !blank?(klasses)
+        unless blank?(klasses)
             klasses.each do |klass|
                 replies.push(@client.read_feed(klass))
                 while !replies.last.nil?
