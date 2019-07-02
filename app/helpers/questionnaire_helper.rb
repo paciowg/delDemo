@@ -110,8 +110,6 @@ module QuestionnaireHelper
             reg = optionsRegex([rangeReg, options.collect{ |option| option[1] }].flatten.compact)
             return {regex: reg, message: "Input must be between " + min + " and " + max + " (inclusive)"}
         end
-
-        
     end
 
     def optionsRegex(codes)

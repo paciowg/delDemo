@@ -59,12 +59,13 @@
                 <% else %>
                     <div class="form-group m-3 mb-4">    
                         <label style="<%= dynamicStyle %>"><%= text %></label>
+                        <% maxLength = item.maxLength ? item.maxLength : "" %>
 
                         <% if type.eql?("text") %>
                             <% val = getValidation(item) %>
                             <%= text_field_tag id, nil, class: "form-control", value: getFromSession(id),
                                 style: dynamicStyle, placeholder: "(Your input here)", 
-                                required: true, pattern: val[:regex], title: val[:message]%>
+                                required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
 
                         <% elsif type.eql?("date") %>
                             <input type="date" name="<%= id %>" value="<%= getFromSession(id) %>"
@@ -73,7 +74,7 @@
 
                         <% elsif type.eql?("integer") %>
                             <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) %>"
-                                class="form-control" style="<%= dynamicStyle %>" maxLength>
+                                class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
 
                         <% else %>
                             <% options = getOrderedOptions(item) %>
@@ -82,7 +83,7 @@
                                 <% val = getValidation(item) %>
                                 <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
                                     placeholder: "Choose a preset option from the dropdown or enter a custom answer", 
-                                    required: true, pattern: val[:regex], title: val[:message]%>
+                                    required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
                                 <datalist id="<%= id %>-list">
                                     <% options.each do |option| %>
                                         <option value="<%= option[1] %>"><%= option[0] %></option>
