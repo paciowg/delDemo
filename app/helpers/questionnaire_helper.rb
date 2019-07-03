@@ -87,7 +87,7 @@ module QuestionnaireHelper
                 return page[id]
             end
         end
-        return ""        
+        return ""
     end
 
     def getValidation(item)
@@ -121,7 +121,7 @@ module QuestionnaireHelper
                     dr: day[:regex], dm: day[:message],
                     yr: year[:regex], ym: year[:message]}
         end
-        
+
         validateText()
     end
 
