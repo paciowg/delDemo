@@ -46,7 +46,7 @@ module QuestionnaireHelper
         options.select{ |option| !unwanted.include?(option[0]) }
     end
 
-    # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default option
+    # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default
     def getOrderedOptions(item)
         options = pruneOptions(getRawOptions(item))
         prepop = getFromSession(item.linkId)
@@ -106,10 +106,23 @@ module QuestionnaireHelper
         unless intBounds.empty?
             min = intBounds[0][1] < intBounds[1][1] ? intBounds[0][1] : intBounds[1][1]
             max = min == intBounds[0][1] ? intBounds[1][1] : intBounds[0][1]
-            rangeReg = rangeRegex(min, max)
+            rangeReg = rangeRegex(min, max)[:regex]
             reg = optionsRegex([rangeReg, options.collect{ |option| option[1] }].flatten.compact)
-            return {regex: reg, message: "Input must be between " + min + " and " + max + " (inclusive)"}
+            return {regex: reg, message: rangeReg[:message]}
         end
+
+        dateDisplays = ["MMDDYYYY", "MMYYYY", "YYYY"]
+        dateOptions = options.select{ |option| dateDisplays.include?(option[0]) }
+        unless dateOptions.empty?
+            month = rangeRegex(1, 12)
+            day = rangeRegex(1, 31)
+            year = rangeRegex(1900, Time.now.year)
+            return {mr: month[:regex], mm: month[:message], 
+                    dr: day[:regex], dm: day[:message],
+                    yr: year[:regex], ym: year[:message]}
+        end
+        
+        validateText()
     end
 
     def optionsRegex(codes)
@@ -124,7 +137,8 @@ module QuestionnaireHelper
         minMax = pruneMinMax(min, max)
         return nil unless minMax
         ranges = getRanges(minMax[:min], minMax[:max]).flatten.compact
-        rangesToRegex(ranges)
+        message = "Input must be integer between " + min.to_i.to_s + " and " + max.to_i.to_s + " (inclusive)"
+        {regex: rangesToRegex(ranges), message: message}
     end
 
     def pruneMinMax(min, max)
