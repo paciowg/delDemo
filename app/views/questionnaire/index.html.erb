@@ -44,7 +44,7 @@
                 <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
                 <% item = qItem.item %>
                 <% type = item.type %>
-                <% text = cleanLabel(item.text) %>
+                <% text = cleanText(item.text) %>
                 <% id = item.linkId %>
 
                 <% if type.eql?("group") %>
@@ -99,7 +99,7 @@
                                 <% if item.repeats %>
                                     <% options.each do |option| %>
                                         <div class="form-check" style="<%= dynamicStyle %>">
-                                            <%= check_box_tag(id + "-" + option[1], option[0], 
+                                            <%= check_box_tag(id + "-" + option[1], option[1], 
                                                 !getFromSession(id + "-" + option[1]).empty?(),
                                                 class: "form-check-input") %>
                                             <label class="form-check-label" for="<%= id + "-" + option[1] %>">

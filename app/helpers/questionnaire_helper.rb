@@ -1,5 +1,5 @@
 module QuestionnaireHelper
-    
+
     def getSectionedQuestionnaire(q)
         qFlat = flattenQuestionnaire(q)
         qSections = []
@@ -39,12 +39,13 @@ module QuestionnaireHelper
 
     # returns array of 2 element arrays, like [[display, code], [display, code]]
     def getRawOptions(item)
-        item.answerOption.collect{ |i| [i.valueCoding.display, i.valueCoding.code] }
+        item.answerOption.collect{ |i| [cleanText(i.valueCoding.display), i.valueCoding.code] }
     end
+
     # returns pruned array of 2 element arrays, like [[display, code], [display, code]]
     def pruneOptions(options)
-        unwanted = ["Minimum value", "Maximum value"]
-        options.select{ |option| !unwanted.include?(option[0]) }
+        unwanted = ["Minimum value", "Maximum value", "MMDDYYYY", "MMYYYY", "YYYY"]
+        options.select{ |option| !(unwanted.include?(option[0]) || unwanted.include?(option[1])) }
     end
 
     # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default
@@ -77,8 +78,12 @@ module QuestionnaireHelper
         ApplicationController.render 'questionnaire/error'
     end
 
-    def cleanLabel(label)
-        label.gsub(/\{(P|p)atient\/(R|r)esident\}/, "\\1atient")
+    def cleanText(text)
+        clean = text.gsub(/\{(P|p)atient(|'s)\/(R|r)esident(|'s)\}/, "\\1atient\\2")
+        clean.gsub!(/\{facility\/setting\}/, "facility")
+        #above are specific replacements, below is general cleaning for missed cases
+        clean.gsub!(/\{([^\/]*)\/.*\}/, "\\1") #converts "{how/are/you}" to "how"
+        clean.gsub(/\{(.*)\}/, "\\1") #converts "{hey}" to "hey"
     end
 
     def getFromSession(id)
