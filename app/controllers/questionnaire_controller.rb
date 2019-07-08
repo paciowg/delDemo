@@ -1,4 +1,7 @@
 class QuestionnaireController < ApplicationController
+
+  helper ValidationHelper
+
   def index
     @questionnaire = GetQuestionnaires.getQuestionnaire(params[:version])
 
