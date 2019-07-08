@@ -12,22 +12,22 @@ module ValidationHelper
         options = getRawOptions(item)
 
         boundDisplays = ["Minimum value", "Maximum value"]
-        intBounds = options.select{ |option| boundDisplays.include?(option[0]) }
+        intBounds = options.select{ |option| boundDisplays.any?{ |bound| option[0].include?(bound) } }
         unless intBounds.empty?
             min = intBounds[0][1] < intBounds[1][1] ? intBounds[0][1] : intBounds[1][1]
             max = min == intBounds[0][1] ? intBounds[1][1] : intBounds[0][1]
-            rangeReg = rangeRegex(min, max)[:regex]
-            reg = optionsRegex([rangeReg, options.collect{ |option| option[1] }].flatten.compact)
-            return {regex: reg, message: rangeReg[:message]}
+            rangeReg = rangeRegex(min, max)
+            reg = optionsRegex([rangeReg[:regex], options.collect{ |option| option[1] }].flatten.compact)
+            return {regex: reg, message: (rangeReg[:message] + ", or a preset option")}
         end
 
         dateDisplays = ["MMDDYYYY", "MMYYYY", "YYYY"]
-        dateOptions = options.select{ |option| dateDisplays.include?(option[0]) }
+        dateOptions = options.select{ |option| dateDisplays.any?{ |date| option[0].include?(date) } }
         unless dateOptions.empty?
             month = rangeRegex(1, 12)
             day = rangeRegex(1, 31)
             year = rangeRegex(1900, Time.now.year)
-            return {mr: month[:regex], mm: month[:message], 
+            return {mr: month[:regex], mm: month[:message],
                     dr: day[:regex], dm: day[:message],
                     yr: year[:regex], ym: year[:message]}
         end
@@ -38,17 +38,27 @@ module ValidationHelper
     def optionsRegex(codes)
         regex = "("
         codes.each do |code|
-            regex = regex + code + "|"
+            regex += code + "|"
         end
         regex[0..-2] + ")"
     end
     
     def rangeRegex(min, max) # not ideal, but consistent (all other authentication happens through regex)
+        decLength = nil
+        if min.instance_of?(Float) || max.instance_of?(Float) || min.to_s.include?(".") || max.to_s.include?(".")
+            decLength = min.to_s.split(".")[1].length
+        end
+
         minMax = pruneMinMax(min, max)
         return nil unless minMax
+        
         ranges = getRanges(minMax[:min], minMax[:max]).flatten.compact
-        message = "Input must be an integer between " + min.to_i.to_s + " and " + max.to_i.to_s + " (inclusive)"
-        {regex: rangesToRegex(ranges), message: message}
+        
+        message = "Input must be a" + (decLength ? " decimal" : "n integer") 
+        message += " between " + min.to_s + " and " + max.to_s + " (inclusive)"
+
+        reg = rangesToRegex(ranges) + (decLength ? ("(\\.[0-9]{0," + decLength.to_s + "})?") : "")
+        {regex: reg, message: message}
     end
 
     def pruneMinMax(min, max)
@@ -71,7 +81,7 @@ module ValidationHelper
         if frontMatch
             min.each_char.with_index do |digit, i|
                 break if !digit.eql?(max[i]) && !min[0..-2].eql?(max[0..-2])
-                rangeMax = rangeMax + max[i]
+                rangeMax += max[i]
             end
         else
             if lastNonZero
@@ -96,7 +106,7 @@ module ValidationHelper
             regex = ""
             range[:min].each_char.with_index do |digit, i|
                 next if digit.eql?(range[:max][i]) && digit.eql?("0") && !doneSkipping
-                regex = regex + ( digit.eql?(range[:max][i]) ? digit : ("[" + digit + "-" + range[:max][i] + "]") )
+                regex += ( digit.eql?(range[:max][i]) ? digit : ("[" + digit + "-" + range[:max][i] + "]") )
                 doneSkipping = true
             end
             options.push(regex)
