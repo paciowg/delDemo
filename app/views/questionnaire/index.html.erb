@@ -63,9 +63,9 @@
 
                         <% if type.eql?("text") %>
                             <% val = getValidation(item) %>
-                            <%= text_field_tag id, nil, class: "form-control", value: getFromSession(id),
-                                    style: dynamicStyle, placeholder: "(Your input here)", 
-                                    required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+                            <%= text_field_tag id, getFromSession(id), class: "form-control",
+                                    style: dynamicStyle, placeholder: "(Your input here)", required: true, 
+                                    pattern: val[:regex], title: val[:message], maxlength: maxLength %>
 
                         <% elsif type.eql?("date") %>
                             <input type="date" name="<%= id %>" value="<%= getFromSession(id) -%>"
@@ -97,17 +97,16 @@
                                             style="<%= dynamicStyle %>">
                                         <div class="row">
                                             <label for="<%= id -%>-m">Month</label>
-                                            <input type="text" id="<%= id -%>-m" pattern="<%= val[:mr] %>"
-                                                    title="<%= val[:mm] %>" value="<%= getFromSession(id + "-m") -%>">
+                                            <%= text_field_tag id + "-m", getFromSession(id + "-m"), title: val[:mm],
+                                                    class: "month", disabled: val[:mr].empty? %>
 
                                             <label for="<%= id -%>-d">Day</label>
-                                            <input type="text" id="<%= id -%>-d" pattern="<%= val[:dr] %>"
-                                                    title="<%= val[:dm] %>" value="<%= getFromSession(id + "-d") -%>">
+                                            <%= text_field_tag id + "-d", getFromSession(id + "-d"), title: val[:dm],
+                                                    class: "day", disabled: val[:dr].empty? %>
 
                                             <label for="<%= id -%>-y">Year</label>
-                                            <input type="text" id="<%= id -%>-y" pattern="<%= val[:yr] %>"
-                                                    title="<%= val[:rm] %>" value="<%= getFromSession(id + "-y") -%>">
-
+                                            <%= text_field_tag id + "-y", getFromSession(id + "-y"), title: val[:ym],
+                                                    class: "year", disabled: val[:yr].empty? %>
                                         </div>
                                     </div>
                                 <% else %>
