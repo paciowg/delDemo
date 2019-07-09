@@ -3,8 +3,8 @@ class SessionStack
     @@sessionHash = Hash.new
 
     def self.create(id)
-        @@sessionHash[id] = [{"started" => Time.now}]
         prune()
+        @@sessionHash[id] = [{"started" => Time.now}]
     end
 
     def self.read(id)
@@ -13,7 +13,7 @@ class SessionStack
 
     def self.push(id, input)
         @@sessionHash[id].each do |section|
-            if section.keys.include?(input.keys[1]) #banks on input having an initial "version" key-value pair
+            unless (section.keys & input.keys[1..-1]).empty? #banks on input having an initial "version" key-value pair
                 @@sessionHash[id].delete(section)
             end
         end

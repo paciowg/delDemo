@@ -1,4 +1,4 @@
-<% loadAttempts = 0 %> <%# it takes the backend some time to retrieve questionnaires, this avoids throwing an error %>
+<% loadAttempts = 0 # it takes the backend some time to retrieve questionnaires, this avoids throwing an error %>
 <% while @questionnaire.nil? && loadAttempts < 5 %>
     <% sleep(0.5) %>
     <% loadAttempts += 1%>
@@ -64,29 +64,57 @@
                         <% if type.eql?("text") %>
                             <% val = getValidation(item) %>
                             <%= text_field_tag id, nil, class: "form-control", value: getFromSession(id),
-                                style: dynamicStyle, placeholder: "(Your input here)", 
-                                required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+                                    style: dynamicStyle, placeholder: "(Your input here)", 
+                                    required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
 
                         <% elsif type.eql?("date") %>
-                            <input type="date" name="<%= id %>" value="<%= getFromSession(id) %>"
-                                class="form-control" style="<%= dynamicStyle %>"
-                                required>
+                            <input type="date" name="<%= id %>" value="<%= getFromSession(id) -%>"
+                                    class="form-control" style="<%= dynamicStyle %>" required>
 
                         <% elsif type.eql?("integer") %>
-                            <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) %>"
-                                class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
+                            <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) -%>"
+                                    class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
 
                         <% else %>
                             <% options = getOrderedOptions(item) %>
 
                             <% if type.eql?("open-choice") %>
                                 <% val = getValidation(item) %>
-                                <% if val.has_key?(:yr) %> <%# All open-choice dates will have year regex %>
 
+                                <% if val.has_key?(:yr) # All open-choice dates will have year regex %>
+                                    <% options.each do |option| %>
+                                        <%= radio_button_tag id, option[1], getFromSession(id).eql?(option[1]),
+                                                data: {toggle: "collapse", target: ".date-collapse.in"},
+                                                style: dynamicStyle %>
+                                        <%= option[0] %>
+                                    <% end %>
+                                    <%= radio_button_tag id, "date", getFromSession(id).eql?("date"), 
+                                            style: dynamicStyle, data: {toggle: "collapse", 
+                                            target: ".date-collapse:not(.in)"} %>
+                                    Input Date
+                                    
+                                    <div class="form-group date-collapse <%= getFromSession(id).eql?("date") ? "in" : "" %>"
+                                            style="<%= dynamicStyle %>">
+                                        <div class="row">
+                                            <label for="<%= id -%>-m">Month</label>
+                                            <input type="text" id="<%= id -%>-m" pattern="<%= val[:mr] %>"
+                                                    title="<%= val[:mm] %>" value="<%= getFromSession(id + "-m") -%>">
+
+                                            <label for="<%= id -%>-d">Day</label>
+                                            <input type="text" id="<%= id -%>-d" pattern="<%= val[:dr] %>"
+                                                    title="<%= val[:dm] %>" value="<%= getFromSession(id + "-d") -%>">
+
+                                            <label for="<%= id -%>-y">Year</label>
+                                            <input type="text" id="<%= id -%>-y" pattern="<%= val[:yr] %>"
+                                                    title="<%= val[:rm] %>" value="<%= getFromSession(id + "-y") -%>">
+
+                                        </div>
+                                    </div>
                                 <% else %>
                                     <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
-                                        placeholder: "Choose a preset option from the dropdown or enter a custom answer", 
-                                        required: true, pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+                                            placeholder: "Choose a preset option from the dropdown or enter a custom answer",
+                                            required: true, pattern: val[:regex], title: val[:message],
+                                            maxlength: maxLength %>
                                     <datalist id="<%= id %>-list">
                                         <% options.each do |option| %>
                                             <option value="<%= option[1] %>"><%= option[0] %></option>
@@ -99,9 +127,9 @@
                                 <% if item.repeats %>
                                     <% options.each do |option| %>
                                         <div class="form-check" style="<%= dynamicStyle %>">
-                                            <%= check_box_tag(id + "-" + option[1], option[1], 
-                                                !getFromSession(id + "-" + option[1]).empty?(),
-                                                class: "form-check-input") %>
+                                            <%= check_box_tag(id + "-" + option[1], option[1],
+                                                    !getFromSession(id + "-" + option[1]).empty?(),
+                                                    class: "form-check-input") %>
                                             <label class="form-check-label" for="<%= id + "-" + option[1] %>">
                                                 <%= option[0] %>
                                             </label>
@@ -109,7 +137,8 @@
                                     <% end %>
                                 
                                 <% else %>
-                                    <%= select_tag id, options_for_select(options), class: "form-control", style: dynamicStyle %>
+                                    <%= select_tag id, options_for_select(options), class: "form-control",
+                                            style: dynamicStyle %>
                                 <% end %>
                             <% end %>
                         <% end %>
@@ -133,23 +162,23 @@
                 <div class="<%= @currentSection == 1 ? "submit-btn" : "page-change" %>-container">
                     <% if @currentSection != 1 %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="<%= @currentSection - 1 %>">Back</button>
+                                name="page" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
-                        name="page" value="submit">Submit</button>
+                            name="page" value="submit">Submit</button>
                 </div>
 
             <% else %>
                 <div class="page-change-container">
                     <% if @currentSection == 1 %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="<%= @currentSection - 1 %>" disabled>Back</button>
+                                name="page" value="<%= @currentSection - 1 %>" disabled>Back</button>
                     <% else %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                            name="page" value="<%= @currentSection - 1 %>">Back</button>
+                                name="page" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option"
-                        name="page" value="<%= @currentSection + 1 %>">Next</button>
+                            name="page" value="<%= @currentSection + 1 %>">Next</button>
                 </div>
             <% end %>
         </form>

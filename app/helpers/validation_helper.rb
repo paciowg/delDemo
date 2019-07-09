@@ -21,11 +21,13 @@ module ValidationHelper
             return {regex: reg, message: (rangeReg[:message] + ", or a preset option")}
         end
 
-        dateDisplays = ["MMDDYYYY", "MMYYYY", "YYYY"]
+        dateDisplays = ["MM", "DD", "YYYY"]
         dateOptions = options.select{ |option| dateDisplays.any?{ |date| option[0].include?(date) } }
         unless dateOptions.empty?
-            month = rangeRegex(1, 12)
-            day = rangeRegex(1, 31)
+            month = (dateOptions.any?{ |option| option[0].include?("MM") }) ? rangeRegex(1, 12)
+                    : {regex: "", message: "No Month Input Allowed, Be Less Specific"}
+            day = (dateOptions.any?{ |option| option[0].include?("DD") }) ? rangeRegex(1, 31)
+                    : {regex: "", message: "No Day Input Allowed, Be Less Specific"}
             year = rangeRegex(1900, Time.now.year)
             return {mr: month[:regex], mm: month[:message],
                     dr: day[:regex], dm: day[:message],
@@ -54,7 +56,7 @@ module ValidationHelper
         
         ranges = getRanges(minMax[:min], minMax[:max]).flatten.compact
         
-        message = "Input must be a" + (decLength ? " decimal" : "n integer") 
+        message = "Input must be a" + (decLength ? " number" : "n integer") 
         message += " between " + min.to_s + " and " + max.to_s + " (inclusive)"
 
         reg = rangesToRegex(ranges) + (decLength ? ("(\\.[0-9]{0," + decLength.to_s + "})?") : "")
