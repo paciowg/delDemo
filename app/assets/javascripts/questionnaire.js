@@ -16,7 +16,7 @@
     window.toggle = {
 
         dateShow: function() {
-            $(".date-collapse").on("show.bs.collapse", function() {
+            $(".date-collapse").on("shown.bs.collapse", function() {
                 $(".date-collapse.in input.month").attr("pattern", "0*([1-9]|1[0-2])")
                 $(".date-collapse.in input.month").attr("pattern", "0*([1-9]|[1-2][0-9]|3[0-1])")
                 $(".date-collapse.in input.month").attr("pattern", "0*(19[0-9][0-9]|20[0-1][0-9])")
@@ -24,10 +24,10 @@
         },
 
         dateHide: function() {
-            $(".date-collapse").on("hide.bs.collapse", function() {
-                $(".date-collapse.in input.month").attr("pattern", "")
-                $(".date-collapse.in input.month").attr("pattern", "")
-                $(".date-collapse.in input.month").attr("pattern", "")
+            $(".date-collapse").on("hidden.bs.collapse", function() {
+                $(".date-collapse:not(.in) input.month").attr("pattern", "")
+                $(".date-collapse:not(.in) input.month").attr("pattern", "")
+                $(".date-collapse:not(.in) input.month").attr("pattern", "")
             })
         }
 
