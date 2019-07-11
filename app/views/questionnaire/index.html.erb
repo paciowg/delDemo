@@ -67,10 +67,6 @@
                                     style: dynamicStyle, placeholder: "(Your input here)", required: true, 
                                     pattern: val[:regex], title: val[:message], maxlength: maxLength %>
 
-                        <% elsif type.eql?("date") %>
-                            <input type="date" name="<%= id %>" value="<%= getFromSession(id) -%>"
-                                    class="form-control" style="<%= dynamicStyle %>" required>
-
                         <% elsif type.eql?("integer") %>
                             <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) -%>"
                                     class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
@@ -78,37 +74,56 @@
                         <% else %>
                             <% options = getOrderedOptions(item) %>
 
-                            <% if type.eql?("open-choice") %>
+                            <% if type.eql?("open-choice") || type.eql?("date") %>
                                 <% val = getValidation(item) %>
 
                                 <% if val.has_key?(:yr) # All open-choice dates will have year regex %>
                                     <% options.each do |option| %>
-                                        <%= radio_button_tag id, option[1], getFromSession(id).eql?(option[1]),
-                                                data: {toggle: "collapse", target: ".date-collapse.in"},
-                                                style: dynamicStyle %>
-                                        <%= option[0] %>
+                                        <div style="display: flex">
+                                            <%= radio_button_tag id, option[1], getFromSession(id).eql?(option[1]),
+                                                    style: leftMargin + "; " + fontSize, required: true, 
+                                                    data: {toggle: "collapse",
+                                                    target: ".date-" + item.prefix + ".date-collapse.show"} %>
+                                            <div style="<%= fontSize %>"><%= option[0] %></div>
+                                        </div>
                                     <% end %>
-                                    <%= radio_button_tag id, "date", getFromSession(id).eql?("date"), 
-                                            style: dynamicStyle, data: {toggle: "collapse", 
-                                            target: ".date-collapse:not(.in)"} %>
-                                    Input Date
-                                    
-                                    <div class="form-group date-collapse <%= getFromSession(id).eql?("date") ? "in" : "" %>"
+
+                                    <% unless options.empty? %>
+                                        <div style="display: flex">
+                                            <%= radio_button_tag id, "date", getFromSession(id).eql?("date"), 
+                                                    style: leftMargin + "; " + fontSize, required: true, 
+                                                    data: {toggle: "collapse", 
+                                                    target: ".date-" + item.prefix + ".date-collapse:not(.show)"} %>
+                                            <div style="<%= fontSize %>">Input Date</div>
+                                        </div>
+                                    <% end %>
+
+                                    <div class="form-group collapse date-collapse
+                                            <%= "date-" + item.prefix %>
+                                            <%= options.empty? || getFromSession(id).eql?("date") ? " show" : "" %>"
                                             style="<%= dynamicStyle %>">
                                         <div class="row">
-                                            <label for="<%= id -%>-m">Month</label>
-                                            <%= text_field_tag id + "-m", getFromSession(id + "-m"), title: val[:mm],
-                                                    class: "month", disabled: val[:mr].empty? %>
-
-                                            <label for="<%= id -%>-d">Day</label>
-                                            <%= text_field_tag id + "-d", getFromSession(id + "-d"), title: val[:dm],
-                                                    class: "day", disabled: val[:dr].empty? %>
-
-                                            <label for="<%= id -%>-y">Year</label>
-                                            <%= text_field_tag id + "-y", getFromSession(id + "-y"), title: val[:ym],
-                                                    class: "year", disabled: val[:yr].empty? %>
+                                            <div class="date-input">
+                                                <label for="<%= id -%>-m">Month</label>
+                                                <%= text_field_tag id + "-m", getFromSession(id + "-m"), title: val[:mm],
+                                                        class: "month", disabled: val[:mr].empty?, pattern: val[:mr],
+                                                        required: true, placeholder: "MM" %>
+                                            </div>
+                                            <div class="date-input">
+                                                <label for="<%= id -%>-d">Day</label>
+                                                <%= text_field_tag id + "-d", getFromSession(id + "-d"), title: val[:dm],
+                                                        class: "day", disabled: val[:dr].empty?, pattern: val[:dr], 
+                                                        required: true, placeholder: "DD" %>
+                                            </div>
+                                            <div class="date-input">
+                                                <label for="<%= id -%>-y">Year</label>
+                                                <%= text_field_tag id + "-y", getFromSession(id + "-y"), title: val[:ym],
+                                                        class: "year", disabled: val[:yr].empty?, pattern: val[:yr], 
+                                                        required: true, placeholder: "YYYY" %>
+                                            </div>
                                         </div>
                                     </div>
+
                                 <% else %>
                                     <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
                                             placeholder: "Choose a preset option from the dropdown or enter a custom answer",

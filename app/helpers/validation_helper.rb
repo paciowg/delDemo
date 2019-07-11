@@ -1,7 +1,7 @@
 module ValidationHelper
 
     def getValidation(item)
-        item.type.eql?("open-choice") ? validateOpen(item) : validateText()
+        item.type.eql?("text") ? validateText() : validateOpen(item)
     end
 
     def validateText()
@@ -22,11 +22,11 @@ module ValidationHelper
         end
 
         dateDisplays = ["MM", "DD", "YYYY"]
-        dateOptions = options.select{ |option| dateDisplays.any?{ |date| option[0].include?(date) } }
+        dateOptions = options.select{ |option| dateDisplays.any?{ |date| option[1].include?(date) } }
         unless dateOptions.empty?
-            month = (dateOptions.any?{ |option| option[0].include?("MM") }) ? rangeRegex(1, 12)
+            month = (dateOptions.any?{ |option| option[1].include?("MM") }) ? rangeRegex(1, 12)
                     : {regex: "", message: "No Month Input Allowed, Be Less Specific"}
-            day = (dateOptions.any?{ |option| option[0].include?("DD") }) ? rangeRegex(1, 31)
+            day = (dateOptions.any?{ |option| option[1].include?("DD") }) ? rangeRegex(1, 31)
                     : {regex: "", message: "No Day Input Allowed, Be Less Specific"}
             year = rangeRegex(1900, Time.now.year)
             return {mr: month[:regex], mm: month[:message],
