@@ -107,25 +107,26 @@
                                                 <label for="<%= id -%>-m">Month</label>
                                                 <%= text_field_tag id + "-m", getFromSession(id + "-m"), title: val[:mm],
                                                         class: "month", disabled: val[:mr].empty?, pattern: val[:mr],
-                                                        required: true, placeholder: "MM" %>
+                                                        required: true, placeholder: "MM", maxlength: 2 %>
                                             </div>
                                             <div class="date-input">
                                                 <label for="<%= id -%>-d">Day</label>
                                                 <%= text_field_tag id + "-d", getFromSession(id + "-d"), title: val[:dm],
                                                         class: "day", disabled: val[:dr].empty?, pattern: val[:dr], 
-                                                        required: true, placeholder: "DD" %>
+                                                        required: true, placeholder: "DD", maxlength: 2 %>
                                             </div>
                                             <div class="date-input">
                                                 <label for="<%= id -%>-y">Year</label>
                                                 <%= text_field_tag id + "-y", getFromSession(id + "-y"), title: val[:ym],
                                                         class: "year", disabled: val[:yr].empty?, pattern: val[:yr], 
-                                                        required: true, placeholder: "YYYY" %>
+                                                        required: true, placeholder: "YYYY", maxlength: 4 %>
                                             </div>
                                         </div>
                                     </div>
 
                                 <% else %>
-                                    <%= text_field_tag id, nil, list: id+"-list", class: "form-control", style: dynamicStyle,
+                                    <%= text_field_tag id, getFromSession(id), list: id+"-list", 
+                                            style: dynamicStyle, class: "form-control",
                                             placeholder: "Choose a preset option from the dropdown or enter a custom answer",
                                             required: true, pattern: val[:regex], title: val[:message],
                                             maxlength: maxLength %>
