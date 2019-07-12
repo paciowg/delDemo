@@ -23,7 +23,7 @@
 
 <div class="<%= (isInactive ? "inactive" : "active") %>-section">
     <div class="description">
-        <small><%= @questionnaire.description %></small>
+        <p><%= @questionnaire.description %></p>
     </div>
     <% if @questionnaire.item.nil? %>
         <h3 class="no-questions">
@@ -39,7 +39,7 @@
             <% totalPages = pageArr[1] %>
             <% qSect.each do |qItem| %>
                 <% leftMargin = "margin-left: " + (qItem.level * 4 + 2).to_s + "%" %>
-                <% fontSize = "font-size: " + (qItem.level == 0 ? 20 : 13).to_s + "pt" %>
+                <% fontSize = "font-size: " + (qItem.level == 0 ? 22 : 14).to_s + "pt" %>
                 <% width = "width: " + (100 - (qItem.level * 4 + 2)).to_s + "%" %>
                 <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
                 <% item = qItem.item %>
@@ -84,7 +84,7 @@
                                                     style: leftMargin + "; " + fontSize, required: true, 
                                                     data: {toggle: "collapse",
                                                     target: ".date-" + item.prefix + ".date-collapse.show"} %>
-                                            <div style="<%= fontSize %>"><%= option[0] %></div>
+                                            <div class="radio-label" style="<%= fontSize %>"><%= option[0] %></div>
                                         </div>
                                     <% end %>
 
@@ -94,7 +94,7 @@
                                                     style: leftMargin + "; " + fontSize, required: true, 
                                                     data: {toggle: "collapse", 
                                                     target: ".date-" + item.prefix + ".date-collapse:not(.show)"} %>
-                                            <div style="<%= fontSize %>">Input Date</div>
+                                            <div class="radio-label" style="<%= fontSize %>">Input Date</div>
                                         </div>
                                     <% end %>
 
@@ -102,7 +102,7 @@
                                             <%= "date-" + item.prefix %>
                                             <%= options.empty? || getFromSession(id).eql?("date") ? " show" : "" %>"
                                             style="<%= dynamicStyle %>">
-                                        <div class="row">
+                                        <div class="row" style="padding-left: <%= options.empty? ? "12" : "24" -%>pt">
                                             <div class="date-input">
                                                 <label for="<%= id -%>-m">Month</label>
                                                 <%= text_field_tag id + "-m", getFromSession(id + "-m"), title: val[:mm],
@@ -185,13 +185,9 @@
 
             <% else %>
                 <div class="page-change-container">
-                    <% if @currentSection == 1 %>
-                        <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                                name="page" value="<%= @currentSection - 1 %>" disabled>Back</button>
-                    <% else %>
-                        <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                                name="page" value="<%= @currentSection - 1 %>">Back</button>
-                    <% end %>
+                    <%= button_tag "Back", name: "page", value: @currentSection - 1, disabled: @currentSection == 1,
+                            class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
+
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option"
                             name="page" value="<%= @currentSection + 1 %>">Next</button>
                 </div>

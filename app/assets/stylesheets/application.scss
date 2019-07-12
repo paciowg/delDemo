@@ -22,6 +22,7 @@
 
 .questionnaire-option {
     margin: 5pt 0pt 5pt 5pt;
+    font-size: 14pt;
 }
 
 .inactive-section,
@@ -102,6 +103,10 @@
     padding: 5pt 5pt 3pt 5pt;
 }
 
+.description > p {
+    margin-bottom: 0;
+}
+
 .error-go-home-container {
     width: 100%;
     margin: 50pt 0;
@@ -156,11 +161,25 @@
 
 .date-input {
     width: 30%;
-    margin: 0 1.5%;
+    margin-right: 3.3%;
 }
 
 .day,
 .month,
 .year {
     width: 100%
+}
+
+.radio-label,
+input[type=radio] {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.radio-label {
+    margin-left: 3pt;
+}
+
+.date-input > label {
+    margin-bottom: 0;
 }
