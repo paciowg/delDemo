@@ -64,7 +64,7 @@
                         <% if type.eql?("text") %>
                             <% val = getValidation(item) %>
                             <%= text_field_tag id, getFromSession(id), class: "form-control",
-                                    style: dynamicStyle, placeholder: "(Your input here)", required: true, 
+                                    style: dynamicStyle, placeholder: "Enter a custom answer", required: true, 
                                     pattern: val[:regex], title: val[:message], maxlength: maxLength %>
 
                         <% elsif type.eql?("integer") %>
@@ -125,16 +125,18 @@
                                     </div>
 
                                 <% else %>
-                                    <%= text_field_tag id, getFromSession(id), list: id+"-list", 
-                                            style: dynamicStyle, class: "form-control",
-                                            placeholder: "Choose a preset option from the dropdown or enter a custom answer",
-                                            required: true, pattern: val[:regex], title: val[:message],
-                                            maxlength: maxLength %>
-                                    <datalist id="<%= id %>-list">
-                                        <% options.each do |option| %>
-                                            <option value="<%= option[1] %>"><%= option[0] %></option>
-                                        <% end %>
-                                    </datalist>
+                                    <% ph = options.empty? ? "E" : "Select a preset answer from the dropdown or e" %>
+                                    <% ph += "nter a custom answer" %>
+                                    <%= text_field_tag id, getFromSession(id), list: (options.empty? ? nil : id+"-list"), 
+                                            style: dynamicStyle, class: "form-control", placeholder: ph, required: true,
+                                            pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+                                    <% unless options.empty? %>
+                                        <datalist id="<%= id %>-list">
+                                            <% options.each do |option| %>
+                                                <option value="<%= option[1] %>"><%= option[0] %></option>
+                                            <% end %>
+                                        </datalist>
+                                    <% end %>
                                 <% end %>
 
                             <% elsif type.eql?("choice") %>
