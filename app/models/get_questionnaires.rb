@@ -1,5 +1,3 @@
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE #TODO, fix hackish ssl certification workaround
-
 class GetQuestionnaires
 
     def self.setConnection
