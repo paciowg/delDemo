@@ -1,9 +1,3 @@
-<% loadAttempts = 0 # it takes the backend some time to retrieve questionnaires, this avoids throwing an error %>
-<% while @questionnaire.nil? && loadAttempts < 5 %>
-    <% sleep(0.5) %>
-    <% loadAttempts += 1%>
-<% end %>
-
 <% status = @questionnaire.status %>
 <% isInactive = !status.eql?("active")%>
 <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
