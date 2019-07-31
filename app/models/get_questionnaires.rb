@@ -1,3 +1,5 @@
+require 'json'
+
 class GetQuestionnaires
 
     def self.setConnection
@@ -11,7 +13,6 @@ class GetQuestionnaires
         begin
             setConnection()
             @questionnaires = getAllResources(FHIR::Questionnaire)
-            @questionnaires.select!{ |q| !q.name.eql?("TimTest")} # Ask Tim to remove TimTest
         rescue
             @questionnaires = nil
         end
@@ -35,7 +36,7 @@ class GetQuestionnaires
         unless blank?(klasses)
             klasses.each do |klass|
                 replies.push(@client.read_feed(klass))
-                while !replies.last.nil?
+                while replies.last
                     replies.push(@client.next_page(replies.last))
                 end
             end
@@ -46,6 +47,42 @@ class GetQuestionnaires
         blank?(replies) ? nil : replies
     end
 
+    def self.getQuestionnaireVersions()
+        begin
+            setConnection()
+            replies = [].push(JSON.parse(@client.raw_read(resource: FHIR::Questionnaire, summary: "true").response[:body]))
+            while replies.last
+                nextLink = replies.last["link"].select{ |link| link["relation"].eql?("next") }
+                break if blank?(nextLink)
+                url = nextLink[0]["url"] + "&_summary=true"
+                replies.push(JSON.parse(@client.raw_read_url(url).response[:body]))
+            end
+            replies.compact!
+            @questionnaireVersions = []
+            replies.each do |reply|
+                @questionnaireVersions.push(reply["entry"].collect do |ent| 
+                    {id: ent["resource"]["id"],
+                        name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
+                        status: ent["resource"]["status"]} 
+                end)
+            end
+            @questionnaireVersions.compact!
+            @questionnaireVersions.flatten!(1)
+        rescue
+            @questionnaireVersions = []
+        end
+        @questionnaireVersions
+    end
+
+    def self.getQuestionnaire(id)
+        begin
+            setConnection()
+            return @client.search_existing(FHIR::Questionnaire, id).resource
+        rescue
+            return nil
+        end
+    end
+
     def self.blank?(param)
         param.nil? || param.empty?
     end
@@ -53,11 +90,6 @@ class GetQuestionnaires
     def self.coerce_to_a(param)
         return nil unless param
         param.respond_to?('to_a') ? param.to_a : Array.[](param)
-    end
-
-    def self.getQuestionnaire(version)
-        @questionnaires = getAllQuestionnaires unless @questionnaires
-        @questionnaires.find{ |q| q.id.eql?(version) }
     end
 
 end

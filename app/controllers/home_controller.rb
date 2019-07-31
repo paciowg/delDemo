@@ -1,13 +1,11 @@
 class HomeController < ApplicationController
   def index
-    @questionnaires = GetQuestionnaires.getAllQuestionnaires()
+    @questionnaireVersions = GetQuestionnaires.getQuestionnaireVersions()
 
     SessionStack.delete(session.id)
 
-    if @questionnaires.nil?
+    if @questionnaireVersions.empty?
       render 'home/error'
-    elsif @questionnaires.eql?('no_entry')
-      render 'home/read_error'
     end
   end
 end
