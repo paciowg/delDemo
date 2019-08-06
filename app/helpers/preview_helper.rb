@@ -34,8 +34,8 @@ module PreviewHelper
                 elsif qSect[index].item.type.eql?("decimal")
                     item.answer.push(FHIR::QuestionnaireResponse::Item::Answer.new({valueDecimal: answer.to_f}))
                 else
-                    if qSect[index].item.answerOption
-                        answerCoding = qSect[page].item.answerOption.find{ |code| code.valueCoding.code.eql?(answer) }
+                    if !qSect[index].item.answerOption.empty?
+                        answerCoding = qSect[index].item.answerOption.find{ |code| code.valueCoding.code.eql?(answer) }
                         if answerCoding
                             item.answer.push(answerCoding)
                         else
