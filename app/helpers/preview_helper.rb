@@ -27,7 +27,17 @@ module PreviewHelper
 
         itemSeshKeys = sesh[page].keys.select{ |key| key.include?(qSect[index].item.linkId) }
         if itemSeshKeys.length > 0 && !qSect[index].item.type.end_with?("display", "group")
+
             answers = itemSeshKeys.collect{ |key| sesh[page][key] }
+            if itemSeshKeys.any?{ |k| k.end_with?("--m", "--d", "--y") }
+                metaDate = sesh[page][qSect[index].item.linkId]
+                if metaDate
+                    answers = [metaDate.eql?("date") ? answers[1..-1].collect{ |a| (a.length == 1 ? "0" + a : a) }.join : metaDate]
+                else
+                    answers = [answers.collect{ |a| (a.length == 1 ? "0" + a : a) }.join]
+                end
+            end
+
             answers.each do |answer|
                 if qSect[index].item.type.eql?("integer")
                     item.answer.push(FHIR::QuestionnaireResponse::Item::Answer.new({valueInteger: answer.to_i}))
