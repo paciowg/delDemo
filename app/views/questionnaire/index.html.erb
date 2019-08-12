@@ -21,7 +21,7 @@
     </div>
     <% if @questionnaire.item.nil? %>
         <h3 class="no-questions">
-            <%= @questionnaire.name %> (v.<%= @questionnaire.version %>) 
+            <%= @questionnaire.name %> (v.<%= @questionnaire.version %>)
             currently has no questions.
         </h3>
 
@@ -162,12 +162,12 @@
             <% if @currentSection == totalPages %>
                 <% if isInactive %>
                     <p style="text-align: center">
-                        WARNING: You are about to submit 
+                        WARNING: You are about to preview 
                         <%= status.eql?("retired") ? "a retired" : "an inactive" %>
                         form! 
                     </p>
                 <% else %>
-                    <p style="text-align: center"> All done? Go ahead and submit! </p>
+                    <p style="text-align: center"> All done? Go ahead and preview your submission! </p>
                 <% end %>
 
                 <div class="<%= @currentSection == 1 ? "submit-btn" : "page-change" %>-container">
@@ -176,7 +176,7 @@
                                 name="page" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
-                            name="page" value="submit">Submit</button>
+                            name="page" value="submit">Preview</button>
                 </div>
 
             <% else %>

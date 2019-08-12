@@ -71,4 +71,8 @@ module PreviewHelper
         item
     end
 
+    def qrDisplay(qr)
+        getSectionedQuestionnaire(qr)
+    end
+
 end
