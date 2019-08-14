@@ -5,7 +5,9 @@ on FHIR.
 
 ## Installation
 Installation instructions for development purposes or for site navigation
-before this demo is hosted online
+before this demo is hosted online. These instructions may seem long, but 
+it should go quickly if you have the necessary tools installed and follow 
+the jumps provided!
 
 ### MacOS
 It is most likely the case that these steps are incredibly similar for all 
