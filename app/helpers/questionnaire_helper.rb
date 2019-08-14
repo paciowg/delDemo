@@ -87,7 +87,7 @@ module QuestionnaireHelper
     end
 
     def getFromSession(id)
-        sesh = SessionStack.read(session.id)
+        sesh = SessionStack.qRead(session.id)
         sesh.each do |page|
             if page.has_key?(id)
                 return page[id]

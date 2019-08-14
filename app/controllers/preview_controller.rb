@@ -1,9 +1,10 @@
 class PreviewController < ApplicationController
   def index
-    @questionnaire = GetQuestionnaires.getQuestionnaire(SessionStack.read(session.id)[1]["version"])
-
-    @tempForPreviewDev = SessionStack.read(session.id)
+    @version = SessionStack.qRead(session.id)[1]["version"]
+    @questionnaire = GetQuestionnaires.getQuestionnaire(@version)
 
     @assessment = helpers.constructAssessment(session.id, @questionnaire)
+
+    SessionStack.qrPush(session.id, @assessment)
   end
 end

@@ -3,7 +3,7 @@ module PreviewHelper
     def constructAssessment(sessionID, quest)
         qSects = getSectionedQuestionnaire(quest)
         currentLevel = 0
-        sesh = SessionStack.read(sessionID)
+        sesh = SessionStack.qRead(sessionID)
 
         assessment = FHIR::QuestionnaireResponse.new
         assessment.status = "in-progress"

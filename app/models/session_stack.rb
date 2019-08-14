@@ -4,20 +4,29 @@ class SessionStack
 
     def self.create(id)
         prune()
-        @@sessionHash[id] = [{"started" => Time.now}]
+        @@sessionHash[id] = {q: [{"started" => Time.now}], qr: nil}
     end
 
-    def self.read(id)
-        @@sessionHash[id]
+    def self.qRead(id)
+        @@sessionHash[id][:q]
+    end
+
+    def self.qrRead(id)
+        @@sessionHash[id][:qr]
     end
 
     def self.push(id, input)
-        @@sessionHash[id].each do |section|
-            unless (section.keys & input.keys[1..-1]).empty? #banks on input having an initial "version" key-value pair
-                @@sessionHash[id].delete(section)
+        @@sessionHash[id][:q].each do |section|
+            unless (section.keys & input.keys.select{ |key| !key.eql?("version") }).empty?
+                @@sessionHash[id][:q].delete(section)
             end
         end
-        @@sessionHash[id].push(input)
+        @@sessionHash[id][:q].push(input) unless input.keys.select{ |key| !key.eql?("version") }.empty?
+        puts "\n\n-----\nThe session currently has " + @@sessionHash[id][:q].length.to_s + " pages tracked\n-----\n\n"
+    end
+
+    def self.qrPush(id, qr)
+        @@sessionHash[id][:qr] = qr
     end
 
     def self.delete(id)
@@ -25,7 +34,7 @@ class SessionStack
     end
 
     def self.prune() #removes sessions older than 3 hours
-        @@sessionHash.delete_if { |id, session| (Time.now - session[0]["started"]) > (3 * 60 * 60) }
+        @@sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (3 * 60 * 60) }
     end
 
 end

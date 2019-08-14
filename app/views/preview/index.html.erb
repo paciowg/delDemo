@@ -51,4 +51,28 @@
             <% end %>
         <% end %>
     </table>
+
+    <% if isInactive %>
+        <p style="text-align: center">
+            WARNING: You are about to submit 
+            <%= status.eql?("retired") ? "a retired" : "an inactive" %>
+            form! 
+        </p>
+    <% else %>
+        <p style="text-align: center"> Looks right? Go ahead and submit! Otherwise, go back to editing </p>
+    <% end %>
+
+    <div class="submit-btn-container">
+        <% firstPageParams = SessionStack%>
+        <%= button_to "Back", {action: "index", controller: "questionnaire"}, params: {version: @questionnaire.id, page: "1"}, 
+                method: :get, class: "btn btn-" + (isInactive ? "secondary" : "primary") %>
+        <%# <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# page-change-option"  %>
+                <%# name="page" value="1">Back</button> %>
+
+
+        <%= button_to "Submit", {action: "index", controller: "submission"}, method: :get, 
+                class: "btn btn-" + (isInactive ? "secondary" : "primary") + " submit-btn" %>
+        <%# <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# submit-btn" %>
+                <%# name="page" value="submit">Submit</button> %>
+    </div>
 </div>
