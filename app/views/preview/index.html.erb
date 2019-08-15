@@ -20,6 +20,8 @@
         <p><%= @questionnaire.description %></p>
     </div>
 
+    <hr style="background-color: black">
+
     <table id="qr">
         <tr>
             <th>Structure</th>
@@ -62,6 +64,8 @@
         <% end %>
     </table>
 
+    <hr style="background-color: black">
+
     <% if isInactive %>
         <p style="text-align: center">
             WARNING: You are about to submit 
@@ -72,10 +76,11 @@
         <p style="text-align: center"> Looks right? Go ahead and submit! Otherwise, go back to editing </p>
     <% end %>
 
-    <div class="submit-btn-container">
+    <div class="page-change-container">
         <% firstPageParams = SessionStack%>
-        <%= button_to "Back", {action: "index", controller: "questionnaire"}, params: {version: @questionnaire.id, page: "1"}, 
-                method: :get, class: "btn btn-" + (isInactive ? "secondary" : "primary") %>
+        <%= button_to "Back", {action: "index", controller: "questionnaire"}, 
+                params: {version: @questionnaire.id, page: "1"}, 
+                method: :get, class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
         <%# <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# page-change-option"  %>
                 <%# name="page" value="1">Back</button> %>
 

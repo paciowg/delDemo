@@ -187,7 +187,12 @@ input[type=radio] {
 #qr {
     border-collapse: collapse;
     width: 95%;
-    margin: 0 auto;
+    margin: 20pt auto;
+
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
+
+form.button_to {
+    display: inline;
+}
