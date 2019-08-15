@@ -1,6 +1,6 @@
 class SubmissionController < ApplicationController
   def index
-    @assessment = Submission.submitAssessment(SessionStack.read(session.id))
+    @assessment = Submission.submitAssessment(SessionStack.qrRead(session.id))
 
     SessionStack.delete(session.id)
     

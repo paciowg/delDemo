@@ -167,7 +167,7 @@
 .day,
 .month,
 .year {
-    width: 100%
+    width: 100%;
 }
 
 .radio-label,
@@ -182,4 +182,19 @@ input[type=radio] {
 
 .date-input > label {
     margin-bottom: 0;
+}
+
+#qr {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 20pt auto;
+}
+td, th {
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+form.button_to {
+    display: inline;
 }
