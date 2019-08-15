@@ -33,7 +33,7 @@
                 <% treeText = "|---" * qrItem.level %>
                 <% treeText += (qrSect[i + 1] && qrSect[i + 1].level == qrItem.level + 1) ? "* " : "> " %>
                 <tr>
-                    <td><%= treeText%></td>
+                    <td><%= treeText %></td>
                     <td><%= (qrItem.item.text ? qrItem.item.text : "") %></td>
                     <td>
                         <% qrItem.item.answer.each_with_index do |answer, index| %>
@@ -41,9 +41,19 @@
                                 <br>
                             <% end %>
                             <% ivs = answer.instance_variables %>
-                            <% ivs = ivs.select{ |iv| answer.instance_variable_get(iv) && iv.to_s.include?("value") } %>
-                            <% value = answer.instance_variable_get(ivs.last) %>
-                            <%= (value.respond_to?("display") ? value.display : value.to_s) %>
+                            <% choseniv = ivs.find do |iv| %> 
+                                <% valiv = answer.instance_variable_get(iv) %>
+                                <% shouldSelect = valiv && iv.to_s.include?("value") %>
+                                <% if valiv.is_a?(FHIR::Coding)%>
+                                    <% shouldSelect = shouldSelect && valiv.display && !valiv.display.empty? %>
+                                <% else %>
+                                    <% shouldSelect = shouldSelect && !valiv.empty? %>
+                                <% end %>
+                                <% shouldSelect %>
+                            <% end %>
+                            <% puts "\n-----\n" + choseniv.to_s + "\n-----\n\n" %>
+                            <% value = answer.instance_variable_get(choseniv) %>
+                            <%= (value && value.is_a?(FHIR::Coding) ? value.display : value.to_s) %>
                         <% end %>
                     </td>
                     <td><%= qrItem.item.linkId %></td>

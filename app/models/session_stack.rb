@@ -22,7 +22,6 @@ class SessionStack
             end
         end
         @@sessionHash[id][:q].push(input) unless input.keys.select{ |key| !key.eql?("version") }.empty?
-        puts "\n\n-----\nThe session currently has " + @@sessionHash[id][:q].length.to_s + " pages tracked\n-----\n\n"
     end
 
     def self.qrPush(id, qr)
