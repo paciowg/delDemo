@@ -188,7 +188,9 @@ input[type=radio] {
     border-collapse: collapse;
     width: 95%;
     margin: 20pt auto;
-
+}
+td, th {
+  border: 1px solid #ddd;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
