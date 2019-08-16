@@ -270,3 +270,7 @@ use the hotkey:
     ```
     control-C
     ```
+
+## Copyright
+
+Copyright 2019 The MITRE Corporation
