@@ -7,8 +7,6 @@ ruby '2.6.3'
 gem 'rails', '~> 5.2.3'
 # Use pg as the database for Active Record because Heroku requires it
 gem 'pg'
-# Rails si currenlty conifgured to use sqlite3, this will need to change if heroku hosts
-gem 'sqlite3'
 # Heroku requirement
 gem 'rails_12factor'
 # Use Puma as the app server
