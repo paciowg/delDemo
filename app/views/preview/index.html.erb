@@ -53,7 +53,6 @@
                                 <% end %>
                                 <% shouldSelect %>
                             <% end %>
-                            <% puts "\n-----\n" + choseniv.to_s + "\n-----\n\n" %>
                             <% value = answer.instance_variable_get(choseniv) %>
                             <%= (value && value.is_a?(FHIR::Coding) ? value.display : value.to_s) %>
                         <% end %>
