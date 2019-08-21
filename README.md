@@ -234,6 +234,44 @@ commands will create it directly in the home directory:
     bundle install
     ```
 
+16. Check if you have __PostgreSQL__ installed by inputting:
+
+    ```
+    postgres --version 
+    ```
+
+    * If __PostgreSQL__ is already installed, __Terminal__ should output something 
+    like:
+    
+        ```
+        postgres (PostgreSQL) 11.4
+        ```
+         
+        Jump to [step 18](#step-18) if this is the case.
+    
+    * If __Terminal__ responded with anything that might indicate it did not 
+    recognize __PostgreSQL__, such as:
+    
+         ```
+         -bash: postgres: command not found
+         ``` 
+         
+        continue to [step 17](#step-17).
+
+17. <a name="step-17"></a>Install __PostgreSQL__ by inputting:
+
+    ```
+    brew install postgresql
+    ```
+
+18. <a name="step-18"></a>Create and migrate the (largely unused) DEL Demo dev db
+
+    ```
+    rake db:create:all
+    rake db:migrate
+    ```
+
+
 ## Run Application
 Once installation is complete, you can run the app by following these steps:
 
@@ -250,26 +288,41 @@ inputting the following will get you there:
     If that is not where your delDemo directory is, instead input 
     `cd <path>` where `<path>` is the path to your delDemo directory.
 
-3. Tell __Rails__ to start up a server by inputting:
+3. Start up the __PostgreSQL__ server by inputting:
+
+    ```
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+    ```
+
+4. Tell __Rails__ to start up a __Puma__ server by inputting:
 
     ```
     rails server
     ```
 
-4. The DEL Demo should be running! Open a browser (I suggest __Chrome__) 
+5. The DEL Demo should be running! Open a browser (I suggest __Chrome__) 
 and type the following into the address bar:
 
     ```
     localhost:3000
     ```
 
-5. When you're done using the app, you need to make sure the server stops 
-running. To do this gracefully, just go back to your __Terminal__ window and 
-use the hotkey:
+6. When you're done using the app, you need to make sure the server stops 
+running. To do this gracefully, you need to do two things:
+    
+    * First, go back to your __Terminal__ window and stop __Puma__ by
+    using the hotkey:
 
-    ```
-    control-C
-    ```
+        ```
+        control-C
+        ```
+
+    * Then, stop the __PostgreSQL__ server by inputting:
+
+        ```
+        pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop
+        ```
+
 
 ## Copyright
 
