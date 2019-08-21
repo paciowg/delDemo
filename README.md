@@ -3,6 +3,8 @@ This is a simple (and currently unfinished) web app meant to demonstrate
 the kind of website that's made possible through interaction with CMS's DEL 
 on FHIR.
 
+You can see it up and running at https://deldemo.herokuapp.com
+
 ## Installation
 These installation instructions may seem long, but it should go quickly if 
 you already have the necessary tools installed and follow the jumps provided!
