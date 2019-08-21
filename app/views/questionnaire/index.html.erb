@@ -19,7 +19,7 @@
     <div class="description">
         <p><%= @questionnaire.description %></p>
     </div>
-    <% if @questionnaire.item.nil? %>
+    <% if !@questionnaire.item || @questionnaire.item.empty? %>
         <h3 class="no-questions">
             <%= @questionnaire.name %> (v.<%= @questionnaire.version %>)
             currently has no questions.
