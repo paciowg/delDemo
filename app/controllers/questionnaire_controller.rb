@@ -7,7 +7,7 @@ class QuestionnaireController < ApplicationController
 
     @currentSection = nil
 
-    if params[:page].nil?
+    if params[:page].nil? && params[:back].nil?
       @currentSection = 1
       SessionStack.create(session.id)
 
@@ -17,7 +17,7 @@ class QuestionnaireController < ApplicationController
       redirect_to url_for(controller: "preview", action: "index")
 
     else
-      @currentSection = params[:page].to_i
+      @currentSection = (params[:page] ? params[:page].to_i : (params[:back] ? params[:back].to_i : 1))
       SessionStack.push(session.id, helpers.getRelevantParams(params))
     end
 

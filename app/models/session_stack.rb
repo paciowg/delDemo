@@ -16,12 +16,11 @@ class SessionStack
     end
 
     def self.push(id, input)
-        @@sessionHash[id][:q].each do |section|
-            unless (section.keys & input.keys.select{ |key| !key.eql?("version") }).empty?
-                @@sessionHash[id][:q].delete(section)
-            end
-        end
-        @@sessionHash[id][:q].push(input) unless input.keys.select{ |key| !key.eql?("version") }.empty?
+        current = (input["page"] ? input["page"].to_i - 1 : (input["back"] ? input["back"].to_i + 1 : 1) )
+        input["current"] = current
+        index = @@sessionHash[id][:q].index{ |page| page["current"] == current }
+        @@sessionHash[id][:q].delete_at(index) if index
+        @@sessionHash[id][:q].push(input) unless input["edit_post_preview"].eql?("true")
     end
 
     def self.qrPush(id, qr)
@@ -32,8 +31,8 @@ class SessionStack
         @@sessionHash.delete(id)
     end
 
-    def self.prune() #removes sessions older than 3 hours
-        @@sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (3 * 60 * 60) }
+    def self.prune() #removes sessions older than 5 hours
+        @@sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (5 * 60 * 60) }
     end
 
 end

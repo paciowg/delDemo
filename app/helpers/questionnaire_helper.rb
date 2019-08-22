@@ -65,7 +65,7 @@ module QuestionnaireHelper
 
     def getRelevantParams(params)
         revisedParams = Hash.new
-        avoidKeys = ["page", "utf8", "attempt", "controller", "action"]
+        avoidKeys = ["utf8", "attempt", "controller", "action"]
         params.each_pair { |key, value|
             unless avoidKeys.include?(key)
                 revisedParams[key] = value

@@ -24,8 +24,8 @@ module PreviewHelper
     def qrPopulateItem(item, sesh, qSect, page, index = 0)
         item.text = qSect[index].item.text
         item.linkId = qSect[index].item.linkId
-
-        itemSeshKeys = sesh[page].keys.select{ |key| key.include?(qSect[index].item.linkId) }
+    
+        itemSeshKeys = (sesh[page] ? sesh[page].keys.select{ |key| key.include?(qSect[index].item.linkId) } : [])
         if itemSeshKeys.length > 0 && !qSect[index].item.type.end_with?("display", "group")
 
             answers = itemSeshKeys.collect{ |key| sesh[page][key] }

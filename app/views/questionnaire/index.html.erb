@@ -173,7 +173,7 @@
                 <div class="<%= @currentSection == 1 ? "submit-btn" : "page-change" %>-container">
                     <% if @currentSection != 1 %>
                         <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
-                                name="page" value="<%= @currentSection - 1 %>">Back</button>
+                                name="back" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
                             name="page" value="submit">Preview</button>
@@ -181,7 +181,7 @@
 
             <% else %>
                 <div class="page-change-container">
-                    <%= button_tag "Back", name: "page", value: @currentSection - 1, disabled: @currentSection == 1,
+                    <%= button_tag "Back", name: "back", value: @currentSection - 1, disabled: @currentSection == 1,
                             class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
 
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option"

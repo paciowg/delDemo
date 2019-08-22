@@ -76,9 +76,8 @@
     <% end %>
 
     <div class="page-change-container">
-        <% firstPageParams = SessionStack%>
-        <%= button_to "Back", {action: "index", controller: "questionnaire"}, 
-                params: {version: @questionnaire.id, page: "1"}, 
+        <%= button_to "Continue Editing", {action: "index", controller: "questionnaire"}, 
+                params: {version: @questionnaire.id, page: "1", edit_post_preview: "true"}, 
                 method: :get, class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
         <%# <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# page-change-option"  %>
                 <%# name="page" value="1">Back</button> %>
