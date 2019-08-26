@@ -8,7 +8,8 @@
 <% @questionnaireVersions.sort_by{ |version| version[:name] }.each do |v| %>
     
     <% if v[:status].eql?("active") %>
-        <%= link_to v[:name], {controller: "questionnaire", version: v[:id]},
+        <%= link_to v[:name].sub("MDS30", "MDS3.0"), 
+            {controller: "questionnaire", version: v[:id]},
             {class: "btn btn-primary questionnaire-option", id: v[:id]} %>
     <% else %>
         <% inactiveVersions.append(v)%>
@@ -19,7 +20,8 @@
 <div class="home-inactive-section">
     <h3 style="margin: 5pt"> Inactive (Draft, Retired, etc.) </h3>
     <% inactiveVersions.sort_by{ |v| v[:name] }.each do |v| %>
-        <%= link_to v[:name], {controller: "questionnaire", version: v[:id]},
+        <%= link_to v[:name].sub("MDS30", "MDS3.0"), 
+            {controller: "questionnaire", version: v[:id]},
             {class: "btn btn-secondary questionnaire-option", id: v[:id]} %>
     <% end %>
 </div>
