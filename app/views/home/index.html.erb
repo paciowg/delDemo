@@ -6,3 +6,19 @@
 
 <hr>
 
+<div class="home-active-cards-container">
+    <h2 class="home-active-cards-header">Fill out an Assessment from the DEL</h2>
+    <div class="home-active-cards">
+        <% @questionnaireVersions.each do |qv| %>
+            <div class="card text-white bg-primary active-cards">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+</div>
+

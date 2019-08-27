@@ -31,13 +31,13 @@
     padding-top: 7.5pt;
 }
 
-.home-inactive-section {
+.qmenu-inactive-section {
     padding: 1pt 2pt 2pt 2pt;
     margin-top: 5pt;
 }
 
 .inactive-section,
-.home-inactive-section {
+.qmenu-inactive-section {
     background-color: var(--inactive-color);
 }
 
@@ -202,4 +202,26 @@ form.button_to {
 .descriptive-graphic {
     margin: 40pt auto;
     display: block;
+}
+
+.home-active-cards-container {
+    width: 100%;
+    padding: 0 30pt 0 30pt;
+}
+
+.home-active-cards-header {
+    width: 100%;
+    text-align: center;
+    margin: 20pt 0 25pt 0;
+}
+
+.home-active-cards {
+    display: flex;
+    overflow: scroll;
+}
+
+.active-cards {
+    margin: 0 30pt 15pt 0;
+    min-width: 180pt;
+    max-width: 180pt;
 }

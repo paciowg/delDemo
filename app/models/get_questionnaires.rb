@@ -63,7 +63,9 @@ class GetQuestionnaires
                 @questionnaireVersions.push(reply["entry"].collect do |ent| 
                     {id: ent["resource"]["id"],
                         name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
-                        status: ent["resource"]["status"]} 
+                        status: ent["resource"]["status"],
+                        title: ent["resource"]["title"],
+                        publisher: ent["resource"]["publisher"]} 
                 end)
             end
             @questionnaireVersions.compact!

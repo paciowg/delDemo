@@ -17,7 +17,7 @@
 
 <% end %>
 
-<div class="home-inactive-section">
+<div class="qmenu-inactive-section">
     <h3 style="margin: 5pt"> Inactive (Draft, Retired, etc.) </h3>
     <% inactiveVersions.sort_by{ |v| v[:name] }.each do |v| %>
         <%= link_to v[:name].sub("MDS30", "MDS3.0"), 
