@@ -1,0 +1,2 @@
+module QMenuHelper
+end
