@@ -15,9 +15,27 @@
     </div>
 </div>
 
-<div class="<%= (isInactive ? "inactive" : "active") %>-section">
+<% pageArr = getPage(@questionnaire, @currentSection) %>
+<% qSect = pageArr[0] %>
+<% totalPages = pageArr[1] %>
+
+<div class="<%= (isInactive ? "inactive" : "active") -%>-section">
     <div class="description">
         <p><%= @questionnaire.description %></p>
+    </div>
+    <% currentProgress = (params[:page] ? params[:page].to_f : (params[:back] ? params[:back].to_f : 1.0)) %>
+    <% currentProgress *= 100.0 / totalPages.to_f %>
+    <% overallProgress = (@filledSections.to_f * 100.0 / totalPages.to_f) - currentProgress %>
+    <% overallProgress = 0 if overallProgress < 0 %>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= currentProgress.to_i -%>%" 
+                aria-valuenow="<%= currentProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
+            <%= currentProgress -%>%
+        </div>
+        <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= overallProgress.to_i -%>%" 
+                aria-valuenow="<%= overallProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
+            <%= overallProgress + currentProgress -%>%
+        </div>
     </div>
     <% if !@questionnaire.item || @questionnaire.item.empty? %>
         <h3 class="no-questions">
@@ -28,9 +46,6 @@
     <% else %>
         <%= form_tag '/questionnaire', method: :get, id: "form" %>
             <%= hidden_field_tag "version", params[:version] %>
-            <% pageArr = getPage(@questionnaire, @currentSection) %>
-            <% qSect = pageArr[0] %>
-            <% totalPages = pageArr[1] %>
             <% qSect.each do |qItem| %>
                 <% leftMargin = "margin-left: " + (qItem.level * 4 + 2).to_s + "%" %>
                 <% fontSize = "font-size: " + (qItem.level == 0 ? 22 : 14).to_s + "pt" %>

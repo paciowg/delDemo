@@ -11,6 +11,10 @@ class SessionStack
         @@sessionHash[id][:q]
     end
 
+    def self.qLength(id)
+        @@sessionHash[id][:q].length - 1
+    end
+
     def self.qrRead(id)
         @@sessionHash[id][:qr]
     end

@@ -12,7 +12,7 @@ class QuestionnaireController < ApplicationController
       SessionStack.create(session.id)
 
     elsif params[:page].eql?("submit")
-      # submit logic (render submission page, finish )
+      # preview logic (render preview page)
       SessionStack.push(session.id, helpers.getRelevantParams(params))
       redirect_to url_for(controller: "preview", action: "index")
 
@@ -20,6 +20,8 @@ class QuestionnaireController < ApplicationController
       @currentSection = (params[:page] ? params[:page].to_i : (params[:back] ? params[:back].to_i : 1))
       SessionStack.push(session.id, helpers.getRelevantParams(params))
     end
+
+    @filledSections = SessionStack.qLength(session.id)
 
     if @questionnaire.nil?
       render '/questionnaire/error'
