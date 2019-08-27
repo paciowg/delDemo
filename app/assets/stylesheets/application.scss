@@ -220,8 +220,21 @@ form.button_to {
     overflow: scroll;
 }
 
-.active-cards {
+.active-cards,
+.active-cards:hover,
+.active-cards:active {
     margin: 0 30pt 15pt 0;
     min-width: 180pt;
     max-width: 180pt;
+    color: black;
+    text-decoration: none;
+}
+
+.active-cards:hover,
+.active-cards:active {
+    box-shadow: outset;
+}
+
+.qmenu-link {
+    text-align: center;
 }

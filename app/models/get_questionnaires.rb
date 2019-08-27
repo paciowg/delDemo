@@ -60,13 +60,14 @@ class GetQuestionnaires
             replies.compact!
             @questionnaireVersions = []
             replies.each do |reply|
-                @questionnaireVersions.push(reply["entry"].collect do |ent| 
+                entry = reply["entry"].collect do |ent| 
                     {id: ent["resource"]["id"],
-                        name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
-                        status: ent["resource"]["status"],
-                        title: ent["resource"]["title"],
-                        publisher: ent["resource"]["publisher"]} 
-                end)
+                    name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
+                    status: ent["resource"]["status"],
+                    title: ent["resource"]["title"],
+                    publisher: ent["resource"]["publisher"]}
+                end
+                @questionnaireVersions.push(entry)
             end
             @questionnaireVersions.compact!
             @questionnaireVersions.flatten!(1)

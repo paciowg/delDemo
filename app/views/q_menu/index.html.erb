@@ -1,4 +1,7 @@
 <div class="banner" id="banner">
+    <a class="float-right banner-btn-gray" href="/">
+        <div class="banner-btn-content">Home</div>
+    </a>
     <div class="banner-content">Choose Patient Assessment</div>
 </div>
 
@@ -21,7 +24,7 @@
     <h3 style="margin: 5pt"> Inactive (Draft, Retired, etc.) </h3>
     <% inactiveVersions.sort_by{ |v| v[:name] }.each do |v| %>
         <%= link_to v[:name].sub("MDS30", "MDS3.0"), 
-            {controller: "questionnaire", version: v[:id]},
+            {controller: "questionnaire", version: v[:id]}, 
             {class: "btn btn-secondary questionnaire-option", id: v[:id]} %>
     <% end %>
 </div>
