@@ -2,7 +2,7 @@
 <% isInactive = !status.eql?("active")%>
 <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
     <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" 
-            data-toggle="modal" data-target="#modal-warning">
+            data-toggle="modal" data-target="#q-modal-warning">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
@@ -16,12 +16,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" 
-        aria-labelledby="modal-warning-label" aria-hidden="true">
+<div class="modal fade" id="q-modal-warning" tabindex="-1" role="dialog" 
+        aria-labelledby="q-modal-warning-label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modal-warninng-label">Progress will be lost!</h5>
+        <h5 class="modal-title" id="q-modal-warninng-label">Progress will be lost!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
