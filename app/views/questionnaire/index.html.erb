@@ -23,19 +23,23 @@
     <div class="description">
         <p><%= @questionnaire.description %></p>
     </div>
+    <h4 style="text-align: center">Form Progress</h4>
     <% currentProgress = (params[:page] ? params[:page].to_f : (params[:back] ? params[:back].to_f : 1.0)) %>
     <% currentProgress *= 100.0 / totalPages.to_f %>
     <% overallProgress = (@filledSections.to_f * 100.0 / totalPages.to_f) - currentProgress %>
     <% overallProgress = 0 if overallProgress < 0 %>
-    <div class="progress">
+    <div class="progress qprogress">
         <div class="progress-bar" role="progressbar" style="width: <%= currentProgress.to_i -%>%" 
                 aria-valuenow="<%= currentProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
-            <%= currentProgress -%>%
+            <%= (currentProgress % 1 == 0 ? currentProgress.to_i : currentProgress.round(1)) -%>% Done
         </div>
-        <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= overallProgress.to_i -%>%" 
-                aria-valuenow="<%= overallProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
-            <%= overallProgress + currentProgress -%>%
-        </div>
+        <% unless overallProgress == 0 %>
+            <% overallDisplay = overallProgress + currentProgress %>
+            <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= overallProgress.to_i -%>%" 
+                    aria-valuenow="<%= overallProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
+                <%= (overallDisplay % 1 == 0 ? overallDisplay.to_i : overallDisplay.round(1)) -%>% Saved
+            </div>
+        <% end %>
     </div>
     <% if !@questionnaire.item || @questionnaire.item.empty? %>
         <h3 class="no-questions">
