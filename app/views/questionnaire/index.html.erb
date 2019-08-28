@@ -1,7 +1,8 @@
 <% status = @questionnaire.status %>
 <% isInactive = !status.eql?("active")%>
 <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
-    <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" href="/">
+    <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" 
+            data-toggle="modal" data-target="#modal-warning">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
@@ -13,6 +14,27 @@
             <%= "(v." + @questionnaire.version + ")" %>
         <% end %>
     </div>
+</div>
+
+<div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" 
+        aria-labelledby="modal-warning-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-warninng-label">Progress will be lost!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        If you go to the homepage, you will lose all saved progress on this form. Are you sure you want that?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to form</button>
+        <a class="btn btn-primary" href="/">Go to homepage</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% pageArr = getPage(@questionnaire, @currentSection) %>
