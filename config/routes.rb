@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get '/preview', to: 'preview#index'
-  resources :submission
   get '/submission', to: 'submission#index'
   get '/submission/error'
+  get '/submission/download'
   resources :questionnaire
   get '/questionnaire', to: 'questionnaire#questionnaire'
   get '/questionnaire/error'

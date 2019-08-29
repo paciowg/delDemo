@@ -1,5 +1,5 @@
 <div class="banner" id="banner">
-    <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" 
+    <a class="float-right banner-btn-gray" 
             data-toggle="modal" data-target="#s-modal-warning">
         <div class="banner-btn-content">Home</div>
     </a>
@@ -17,12 +17,17 @@
         </button>
       </div>
       <div class="modal-body">
-        If you go to the homepage, you will lose the ability to download this submission. Are you sure you want that?
+        If you go to the homepage, you will lose the ability to download a copy of the submitted assessment. 
+        Are you sure you want that?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to submission</button>
+        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to confirmation page</button>
         <a class="btn btn-primary" href="/">Go to homepage</a>
       </div>
     </div>
   </div>
 </div>
+
+<%= link_to 'Download as .json', submission_download_path(fileExt: "json") %>
+
+<%= link_to 'Download as .xml', submission_download_path(fileExt: "xml") %>
