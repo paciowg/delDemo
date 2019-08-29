@@ -1,8 +1,9 @@
 <div class="banner" id="banner">
-    <a class="float-right banner-btn-blue" data-toggle="modal" data-target="#s-modal-warning">
+  <a class="float-right banner-btn-gray" 
+            data-toggle="modal" data-target="#s-modal-warning">
         <div class="banner-btn-content">Home</div>
-    </a>
-    <div class="banner-content">Assessment Submitted!</div>
+  </a>
+  <div class="banner-content">Assessment Submitted!</div>
 </div>
 
 <div class="modal fade" id="s-modal-warning" tabindex="-1" role="dialog" 
@@ -10,18 +11,34 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="s-modal-warninng-label">You will lose access to this download</h5>
+        <h5 class="modal-title" id="s-modal-warning-label">You will lose access to this download</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        If you go to the homepage, you will lose the ability to download this submission. Are you sure you want that?
+        If you go to the homepage, you will lose the ability to download a copy of the submitted assessment. 
+        Are you sure you want that?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to submission</button>
+        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >
+          Return to confirmation page
+        </button>
         <a class="btn btn-primary" href="/">Go to homepage</a>
       </div>
     </div>
+  </div>
+</div>
+
+<h1 class="submission-confirmation">Assessment Submitted!</h1>
+
+<h2 class="submission-message">Want a copy?</h2>
+
+<div class="submission-download-row">
+  <div class="submission-download-container">
+    <%= link_to 'Download as .json', submission_download_path(fileExt: "json"), 
+        class: "button bg-success submission-download"%>
+    <%= link_to 'Download as .xml', submission_download_path(fileExt: "xml"),  
+        class: "button bg-success submission-download ml-auto"%>
   </div>
 </div>

@@ -243,3 +243,39 @@ form.button_to {
     width: 95%;
     margin: 10pt 2.5%;
 }
+
+.submission-confirmation {
+    margin: 50pt 0 30pt;
+    text-align: center;
+}
+
+.submission-message {
+    margin: 0 0 15pt;
+    text-align: center;
+}
+
+.submission-download-row {
+    width: 100%;
+    display: inline-flex;
+}
+
+.submission-download-container {
+    margin: 0 auto;
+    display: inline-flex;
+}
+
+.submission-download {
+    width: 250pt;
+    margin: 0 20pt;
+    text-decoration: none;
+    color: white;
+    font-size: 30pt;
+    text-align: center;
+    border-radius: 5pt;
+}
+
+.submission-download:hover,
+.submission-download:active {
+    color: white;
+    text-decoration: none;
+}

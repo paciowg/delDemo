@@ -1,5 +1,6 @@
 class Submission
-    def self.submitAssessment(session)
-        session
+    def self.submitAssessment(assessment)
+        assessment.status = "completed"
+        assessment
     end
 end
