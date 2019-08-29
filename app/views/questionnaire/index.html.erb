@@ -217,7 +217,7 @@
                                 name="back" value="<%= @currentSection - 1 %>">Back</button>
                     <% end %>
                     <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
-                            name="page" value="submit">Preview</button>
+                            name="page" value="<%= @currentSection + 1 %>-preview">Preview</button>
                 </div>
 
             <% else %>
