@@ -1,40 +1,44 @@
 <% status = @questionnaire.status %>
 <% isInactive = !status.eql?("active")%>
 <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner"> 
-    <a class="float-right banner-btn-<%= (isInactive ? "blue" : "gray" ) %>" 
+<!--<a class="float-right banner-btn-<%#= (isInactive ? "blue" : "gray" ) %>" 
             data-toggle="modal" data-target="#q-modal-warning">
         <div class="banner-btn-content">Home</div>
     </a>
     <div class="banner-content">
-        <%= @questionnaire.title %>
-        <% if isInactive %>
-            <del><%= "(v." + @questionnaire.version + ")" -%></del>
-            <%= status.eql?("unknown") ? "INACTIVE" : status.upcase %>
-        <% else %>
-            <%= "(v." + @questionnaire.version + ")" %>
-        <% end %>
+        <%#= @questionnaire.title %>
+        <%# if isInactive %>
+            <del><%#= "(v." + @questionnaire.version + ")" -%></del>
+            <%#= status.eql?("unknown") ? "INACTIVE" : status.upcase %>
+        <%# else %>
+            <%#= "(v." + @questionnaire.version + ")" %>
+        <%# end %>
+    </div>-->
+    <div class="banner-content" data-toggle="modal" data-target="#q-modal-warning">
+        <%= image_tag "logo_placeholder.png", class: "logo" %>
+        Name TBD
     </div>
 </div>
 
 <div class="modal fade" id="q-modal-warning" tabindex="-1" role="dialog" 
         aria-labelledby="q-modal-warning-label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="q-modal-warninng-label">Progress will be lost!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        If you go to the homepage, you will lose all saved progress on this form. Are you sure you want that?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to form</button>
-        <a class="btn btn-primary" href="/">Go to homepage</a>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="q-modal-warninng-label">Progress will be lost!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                If you go to the homepage, you will lose all saved progress on this form. Are you sure you want that?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to form</button>
+                <a class="btn btn-primary" href="/">Go to homepage</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <% pageArr = getPage(@questionnaire, @currentSection) %>

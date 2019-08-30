@@ -52,10 +52,22 @@
     font-size: 24pt;
     height: auto;
     overflow: auto;
+    display: flex;
 }
 
-.banner-content {
+.banner-content,
+.banner-content:hover,
+.banner-content:active {
     padding: 5pt;
+    margin-right: auto;
+    cursor: pointer;
+    color: white;
+    font-size: 24pt;
+    text-decoration: none;
+}
+
+.logo {
+    width: 40pt;
 }
 
 .banner-btn-content {
