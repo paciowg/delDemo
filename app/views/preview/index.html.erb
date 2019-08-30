@@ -5,6 +5,11 @@
         <%#= image_tag "logo_placeholder.png", class: "logo" %>
         DEL FHIR Client
     </div>
+    <a href="/about" class="about" data-toggle="modal" data-target="#p-modal-warning">
+        <div class="banner-about">
+            About
+        </div>
+    </a>
 </div>
 
 <div class="modal fade" id="p-modal-warning" tabindex="-1" role="dialog" 
@@ -12,17 +17,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="p-modal-warninng-label">Assessment will be lost!</h5>
+                <h5 class="modal-title" id="p-modal-warning-label">Assessment will be lost!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                If you go to the homepage, you will lose this assessment and be unable to submit it. Are you sure you want that?
+                If you leave this page, you will lose this assessment and be unable to submit it. Are you sure you want that?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return to preview</button>
-                <a class="btn btn-primary" href="/">Go to homepage</a>
+                <a class="btn btn-primary" href="/">Leave form unsubmitted</a>
             </div>
         </div>
     </div>

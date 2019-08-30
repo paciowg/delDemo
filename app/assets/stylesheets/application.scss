@@ -66,6 +66,24 @@
     text-decoration: none;
 }
 
+a.about,
+a.about:hover,
+a.about:active {
+    text-decoration: none;
+    color: white;
+}
+
+.banner-about,
+.banner-about:hover,
+.banner-about:active {
+    margin: auto 15pt;
+    font-size: 14pt;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline;
+}
+
 .logo {
     width: 40pt;
 }
@@ -91,11 +109,13 @@
     background-color: var(--blue);
 }
 
-.banner-btn-blue:hover {
+.banner-btn-blue:hover,
+a.about:hover {
     background-color: darken($blue, 5%);
 }
 
-.banner-btn-blue:active {
+.banner-btn-blue:active,
+a.about:active {
     background-color: darken($blue, 10%);
 }
 
@@ -103,11 +123,13 @@
     background-color: var(--gray);
 }
 
-.banner-btn-gray:hover {
+.banner-btn-gray:hover,
+a.inactive-about:hover {
     background-color: darken(gray, 7.5%);
 }
 
-.banner-btn-gray:active {
+.banner-btn-gray:active,
+a.inactive-about:active {
     background-color: darken(gray, 15%);
 }
 

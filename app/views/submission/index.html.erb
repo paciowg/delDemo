@@ -3,6 +3,11 @@
         <%#= image_tag "logo_placeholder.png", class: "logo" %>
         DEL FHIR Client
     </div>
+    <a href="/about" class="about" data-toggle="modal" data-target="#s-modal-warning">
+        <div class="banner-about">
+            About
+        </div>
+    </a>
 </div>
 
 <div class="modal fade" id="s-modal-warning" tabindex="-1" role="dialog" 
@@ -16,14 +21,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                If you go to the homepage, you will lose the ability to download a copy of the submitted assessment. 
+                If you leave this page, you will lose the ability to download a copy of the submitted assessment.
                 Are you sure you want that?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >
                     Return to confirmation page
                 </button>
-                <a class="btn btn-primary" href="/">Go to homepage</a>
+                <a class="btn btn-primary" href="/">Exit confirmation page</a>
             </div>
         </div>
     </div>
