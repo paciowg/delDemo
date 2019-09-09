@@ -6,8 +6,9 @@ on FHIR.
 You can see it up and running at https://deldemo.herokuapp.com
 
 ## Installation
-These installation instructions may seem long, but it should go quickly if 
-you already have the necessary tools installed and follow the jumps provided!
+These installation instructions may seem verbose as they were written to be 
+accessible to most anyone. It should go quickly if you already have the 
+necessary tools installed and follow the jumps provided!
 
 ### MacOS
 It is most likely the case that these steps are incredibly similar for all 
