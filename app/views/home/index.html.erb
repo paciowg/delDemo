@@ -10,13 +10,18 @@
     </a>
 </div>
 
+<div class="code-toggle-container">
+    <div class="btn btn-primary code-toggle">Using CMS Codes</div>
+    <p class="code-toggle-description">Toggle for LOINC codes</p>
+</div>
+
 <% inactiveVersions = Array.new %>
 <div class="home-cards-container">
     <h2 class="home-cards-header">Choose an active DEL assessment to fill out</h2>
     <div class="home-cards">
         <% @questionnaireVersions.each do |qv| %>
             <% if qv[:status].eql?("active") %>
-                <a href="/questionnaire?version=<%= qv[:id] -%>" class="card active-cards">
+                <a href="/questionnaire?version=<%= qv[:id] -%>&loinc=false" class="card active-cards">
                     <h5 class="card-header"><%= qv[:name].sub("MDS30", "MDS3.0") -%></h5>
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-subtitle mb-2"><%= qv[:title] -%></h6>

@@ -133,6 +133,20 @@ a.inactive-about:active {
     background-color: darken(gray, 15%);
 }
 
+.code-toggle-container {
+    width: 100%;
+    display: grid;
+}
+
+.code-toggle {
+    margin: 15pt auto 5pt;
+}
+
+.code-toggle-description {
+    text-align: center;
+    margin-bottom: 0;
+}
+
 .description {
     padding: 5pt 5pt 3pt 5pt;
 }
