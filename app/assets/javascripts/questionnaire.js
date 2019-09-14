@@ -37,7 +37,6 @@
         },
 
         dateShowListener: function() {
-            window.toggle.dateShow
             $(".date-collapse").on("shown.bs.collapse", window.toggle.dateShow)
         },
 
@@ -53,20 +52,61 @@
             $(".banner-content").click(function(){
                 $(".modal-footer > a").attr("href", "/")
             });
+        },
+
+        codeChange: function() {
+            codeButtonText = $('.code-toggle').text()
+            console.log(codeButtonText)
+            if (codeButtonText.includes("CMS")) {
+                window.toggle.codeToCMS()
+            } else {
+                window.toggle.codeToLOINC()
+            }
+        },
+
+        codeToLOINC: function() {
+            $('.code-toggle').text('Switch to CMS codes')
+            $('.code-toggle').attr('class', 'btn btn-success code-toggle')
+            $('.code-toggle-description').text('Currently using LOINC codes')
+            $('.home-cards .card').each(function() {
+                newHref = $(this).attr('href').replace("false", "true")
+                $(this).attr('href', newHref)
+            })
+        },
+
+        codeToCMS: function() {
+            $('.code-toggle').text('Switch to LOINC codes')
+            $('.code-toggle').attr('class', 'btn btn-primary code-toggle')
+            $('.code-toggle-description').text('Currently using CMS codes')
+            $('.home-cards .card').each(function() {
+                newHref = $(this).attr('href').replace("true", "false")
+                $(this).attr('href', newHref)
+            })
+        },
+
+        codeListener: function() {
+            $(".code-toggle").click(window.toggle.codeChange)
         }
 
     }
 
+    // $(document).ready(window.disable.formEnter);
+    $(document).on('turbolinks:load', window.disable.formEnter);
+
+    // $(document).ready(window.toggle.dateShowListener);
+    $(document).on('turbolinks:load', window.toggle.dateShowListener);
+
+    // $(document).ready(window.toggle.dateHideListener);
+    $(document).on('turbolinks:load', window.toggle.dateHideListener);
+
+    // $(document).ready(window.toggle.modalLinkListener);
+    $(document).on('turbolinks:load', window.toggle.modalLinkListener);
+
+
+    // $(document).ready(() => {
+    //     console.log('got here...');
+    //     window.toggle.codeListener();
+    // });
+    $(document).on('turbolinks:load', window.toggle.codeListener);
+
 })(jQuery)
-
-$(document).ready(window.disable.formEnter);
-$(document).on('turbolinks:load', window.disable.formEnter);
-
-$(document).ready(window.toggle.dateShowListener);
-$(document).on('turbolinks:load', window.toggle.dateShowListener);
-
-$(document).ready(window.toggle.dateHideListener);
-$(document).on('turbolinks:load', window.toggle.dateHideListener);
-
-$(document).ready(window.toggle.modalLinkListener);
-$(document).on('turbolinks:load', window.toggle.modalLinkListener);

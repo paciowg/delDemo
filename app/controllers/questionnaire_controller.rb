@@ -7,10 +7,11 @@ class QuestionnaireController < ApplicationController
 
     @currentSection = nil
 
+    @loinc = params[:loinc].eql?("true")
+
     if params[:page].nil? && params[:back].nil?
       @currentSection = 1
       SessionStack.create(session.id)
-
     else
       @currentSection = (params[:page] ? params[:page].to_i : (params[:back] ? params[:back].to_i : 1))
       SessionStack.push(session.id, helpers.getRelevantParams(params))
