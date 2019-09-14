@@ -2,9 +2,13 @@ class SessionStack
 
     @@sessionHash = Hash.new
 
-    def self.create(id)
+    def self.create(id, loinc = false)
         prune()
-        @@sessionHash[id] = {q: [{"started" => Time.now}], qr: nil}
+        @@sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil}
+    end
+
+    def self.loinc(id)
+        @@sessionHash[id][:q][0]["loinc"]
     end
 
     def self.qRead(id)

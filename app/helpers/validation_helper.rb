@@ -8,8 +8,8 @@ module ValidationHelper
         {regex: ".*\\S.*", message: "Must have a non-whitespace character"}
     end
 
-    def validateOpen(item)
-        options = getRawOptions(item)
+    def validateOpen(item, loinc = false)
+        options = getRawOptions(item, loinc)
 
         boundDisplays = ["Minimum value", "Maximum value"]
         intBounds = options.select{ |option| boundDisplays.any?{ |bound| option[0].include?(bound) } }

@@ -104,7 +104,7 @@
                                     class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
 
                         <% else %>
-                            <% options = getOrderedOptions(item) %>
+                            <% options = getOrderedOptions(item, @loinc) %>
 
                             <% if type.eql?("open-choice") || type.eql?("date") %>
                                 <% val = getValidation(item) %>

@@ -38,8 +38,10 @@ module QuestionnaireHelper
     end
 
     # returns array of 2 element arrays, like [[display, code], [display, code]]
-    def getRawOptions(item)
-        item.answerOption.collect{ |i| [cleanText(i.valueCoding.display), i.valueCoding.code] }
+    def getRawOptions(item, loinc = false)
+        url = (loinc ? "http://loinc.org" : "http://del.cms.gov")
+        options = item.answerOption.select{ |i| i.valueCoding.system.eql?(url) }
+        options.collect{ |i| [cleanText(i.valueCoding.display), i.valueCoding.code] }
     end
 
     # returns pruned array of 2 element arrays, like [[display, code], [display, code]]
@@ -49,8 +51,8 @@ module QuestionnaireHelper
     end
 
     # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default
-    def getOrderedOptions(item)
-        options = pruneOptions(getRawOptions(item))
+    def getOrderedOptions(item, loinc = false)
+        options = pruneOptions(getRawOptions(item, loinc))
         prepop = getFromSession(item.linkId)
         return options if prepop.empty?
 
