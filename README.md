@@ -6,8 +6,9 @@ on FHIR.
 You can see it up and running at https://deldemo.herokuapp.com
 
 ## Installation
-These installation instructions may seem long, but it should go quickly if 
-you already have the necessary tools installed and follow the jumps provided!
+These installation instructions may seem verbose as they were written to be 
+accessible to most anyone. It should go quickly if you already have the 
+necessary tools installed and follow the jumps provided!
 
 ### MacOS
 It is most likely the case that these steps are incredibly similar for all 
@@ -28,7 +29,7 @@ other unix based operating systems
         git version 2.21.0
         ```
          
-        Jump to [step 6](#step-6) if this is the case.
+        Jump to [step 7](#step-7) if this is the case.
     
     * If __Terminal__ responded with anything that might indicate it did not 
     recognize __Git__, such as:
@@ -88,9 +89,9 @@ inputting:
     (Don't have a __Github__ account? Register [here](https://github.com/join) 
     then run the above commands)
 
-7. Create a new directory to store this web app. Feel free to put this 
-directory wherever makes sense. For the sake of simplicity, the following 
-commands will create it directly in the home directory:
+7. <a name="step-7"></a>Create a new directory to store this web app. Feel 
+free to put this directory wherever makes sense. For the sake of simplicity, 
+the following commands will create it directly in the home directory:
 
     ```
     cd ~
