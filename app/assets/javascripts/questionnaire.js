@@ -9,6 +9,16 @@
                     return false;
                 }
             })
+        },
+
+        unsupportedCards: function() {
+            $('.card').click(function(e) {
+                if ($(this).hasClass('disabled-card')){
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            })
         }
 
     };
@@ -69,9 +79,10 @@
             $('.code-toggle').attr('class', 'btn btn-success code-toggle')
             $('.code-toggle-description').text('Currently using LOINC codes')
             $('.home-cards .card').each(function() {
-                newHref = $(this).attr('href').replace("false", "true")
+                newHref = $(this).attr('href').replace("loinc=false", "loinc=true")
                 $(this).attr('href', newHref)
             })
+            $('.no-loinc').addClass('disabled-card')
         },
 
         codeToCMS: function() {
@@ -79,9 +90,10 @@
             $('.code-toggle').attr('class', 'btn btn-primary code-toggle')
             $('.code-toggle-description').text('Currently using CMS codes')
             $('.home-cards .card').each(function() {
-                newHref = $(this).attr('href').replace("true", "false")
+                newHref = $(this).attr('href').replace("loinc=true", "loinc=false")
                 $(this).attr('href', newHref)
             })
+            $('.no-loinc').removeClass('disabled-card')
         },
 
         codeListener: function() {
@@ -90,23 +102,16 @@
 
     }
 
-    // $(document).ready(window.disable.formEnter);
     $(document).on('turbolinks:load', window.disable.formEnter);
 
-    // $(document).ready(window.toggle.dateShowListener);
+    $(document).on('turbolinks:load', window.disable.unsupportedCards);
+
     $(document).on('turbolinks:load', window.toggle.dateShowListener);
 
-    // $(document).ready(window.toggle.dateHideListener);
     $(document).on('turbolinks:load', window.toggle.dateHideListener);
 
-    // $(document).ready(window.toggle.modalLinkListener);
     $(document).on('turbolinks:load', window.toggle.modalLinkListener);
 
-
-    // $(document).ready(() => {
-    //     console.log('got here...');
-    //     window.toggle.codeListener();
-    // });
     $(document).on('turbolinks:load', window.toggle.codeListener);
 
 })(jQuery)

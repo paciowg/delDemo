@@ -66,7 +66,8 @@ class GetQuestionnaires
                     name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
                     status: ent["resource"]["status"],
                     title: ent["resource"]["title"],
-                    publisher: ent["resource"]["publisher"]}
+                    publisher: ent["resource"]["publisher"],
+                    code: ent["resource"]["code"]}
                 end
                 @questionnaireVersions.push(entry)
             end
