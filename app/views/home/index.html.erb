@@ -65,9 +65,9 @@
                     <h6 class="card-subtitle mb-2"><%= iv[:title] -%></h6>
                     <p class="mt-auto">
                         <% if iv[:code].nil? %>
-                            No LOINC Association
+                            No LOINC Support
                         <% else %>
-                            LOINC Association (<%= iv[:code][0]["code"] -%>)
+                            LOINC Supported (<%= iv[:code][0]["code"] -%>)
                         <% end %>
                     </p>
                     <small class="card-text align-self-end">

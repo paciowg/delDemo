@@ -3,8 +3,7 @@ require 'json'
 class GetQuestionnaires
 
     def self.setConnection
-        # @url = "https://api.logicahealth.org/PACIO/open"
-        @url = "https://impact-fhir.mitre.org/r4"
+        @url = "https://api.logicahealth.org/PACIO/open"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
     end
