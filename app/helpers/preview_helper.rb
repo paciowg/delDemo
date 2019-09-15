@@ -10,6 +10,10 @@ module PreviewHelper
         assessment.questionnaire = quest.url
         assessment.subject = FHIR::Reference.new
         assessment.subject.type = "Questionnaire"
+        assessment.text = FHIR::Narrative.new
+        assessment.text.status = "generated"
+        assessment.text.div = '<div xmlns=\"http://www.w3.org/1999/xhtml\">Questionnaire response from the DEL Demo Client.</div>'
+
         timeStr = Time.now.to_s.gsub(" ", "");
         assessment.authored = timeStr[0..9] + "T" + timeStr[10..-3] + ":" + timeStr[-2..-1]
 
@@ -25,8 +29,8 @@ module PreviewHelper
         item.text = qSect[index].item.text
         item.linkId = qSect[index].item.linkId
     
-        itemSeshKeys = (sesh[page] ? sesh[page].keys.select{ |key| key.include?(qSect[index].item.linkId) } : [])
-        if itemSeshKeys.length > 0 && !qSect[index].item.type.end_with?("display", "group")
+        itemSeshKeys = (sesh[page] ? sesh[page].keys.select{ |key| key.eql?(item.linkId) || key.include?(item.linkId + "-") } : [])
+        if !itemSeshKeys.empty? && !qSect[index].item.type.end_with?("display", "group")
 
             answers = itemSeshKeys.collect{ |key| sesh[page][key] }
             if itemSeshKeys.any?{ |k| k.end_with?("--m", "--d", "--y") }
@@ -45,7 +49,7 @@ module PreviewHelper
                     item.answer.push(FHIR::QuestionnaireResponse::Item::Answer.new({valueDecimal: answer.to_f}))
                 else
                     if !qSect[index].item.answerOption.empty?
-                        answerCoding = qSect[index].item.answerOption.find{ |code| code.valueCoding.code.eql?(answer) }
+                        answerCoding = qSect[index].item.answerOption.find{ |code| code.valueCoding.code.eql?(answer) } 
                         if answerCoding
                             item.answer.push(answerCoding)
                         else

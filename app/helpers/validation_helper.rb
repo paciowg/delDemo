@@ -1,7 +1,7 @@
 module ValidationHelper
 
-    def getValidation(item)
-        item.type.eql?("text") ? validateText() : validateOpen(item)
+    def getValidation(item, loinc = false)
+        item.type.eql?("text") ? validateText() : validateOpen(item, loinc)
     end
 
     def validateText()

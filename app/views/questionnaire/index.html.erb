@@ -107,7 +107,7 @@
                             <% options = getOrderedOptions(item, @loinc) %>
 
                             <% if type.eql?("open-choice") || type.eql?("date") %>
-                                <% val = getValidation(item) %>
+                                <% val = getValidation(item, @loinc) %>
 
                                 <% if val.has_key?(:yr) # All open-choice dates will have year regex %>
                                     <% options.each do |option| %>
