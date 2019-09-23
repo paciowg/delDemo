@@ -20,6 +20,23 @@
     --inactive-color: #DDDDDD;
 }
 
+.landing-container-blue, .landing-container-green {
+    margin: 3pt;
+    border-width: 4pt;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.landing-container-blue {
+    border-color: #007BFF;
+    background-color: #F0F7FF;
+}
+
+.landing-container-green {
+    border-color: #28A745;
+    background-color: #F0FAF2
+}
+
 .questionnaire-option {
     margin: 5pt 0pt 5pt 5pt;
     font-size: 14pt;
@@ -248,7 +265,7 @@ form.button_to {
 
 .home-cards-container {
     width: 100%;
-    padding: 0 30pt 0 30pt;
+    padding: 0 15pt;
 }
 
 .home-cards-header {
