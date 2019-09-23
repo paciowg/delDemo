@@ -10,11 +10,6 @@
     </a>
 </div>
 <div class='landing-container-blue'>
-    <div class="code-toggle-container">
-        <div class="btn btn-success code-toggle">Switch to LOINC codes</div>
-        <small class="code-toggle-description">Currently using CMS codes</small>
-    </div>
-
     <% inactiveVersions = Array.new %>
     <div class="home-cards-container">
         <h2 class="home-cards-header">Choose an active DEL assessment to fill out</h2>
@@ -47,13 +42,6 @@
         </div>
     </div>
 
-    <p class="inactive-toggle-link">Looking for an inactive assessment version?
-        <a data-toggle="collapse" href="#inactive-card-container" 
-                aria-expanded="false" aria-controls="inactive-card-container">
-            Toggle inactive section
-        </a>
-    </p>
-
     <div id="inactive-card-container" class="home-cards-container collapse">
         <h2 class="home-cards-header">Choose an inactive DEL assessment to fill out</h2>
         <div class="home-cards">
@@ -77,5 +65,23 @@
                 </a>
             <% end %>
         </div>
+    </div>
+
+    <div class='assessment-toggles'>
+        <small class="toggle-section-codes">
+            Currently using 
+                <strong class="current-code-cms">CMS</strong> 
+            codes
+            <br>
+            <a class='code-toggle'>Switch to LOINC codes</a>
+        </small>
+
+        <small class="toggle-section-inactive">Looking for an inactive assessment version?
+            <br>
+            <a data-toggle="collapse" href="#inactive-card-container" 
+                    aria-expanded="false" aria-controls="inactive-card-container">
+                Toggle inactive section
+            </a>
+        </small>
     </div>
 </div>

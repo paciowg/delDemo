@@ -28,12 +28,12 @@
 }
 
 .landing-container-blue {
-    border-color: #007BFF;
+    border-color:var(--blue);
     background-color: #F0F7FF;
 }
 
 .landing-container-green {
-    border-color: #28A745;
+    border-color:var(--green);
     background-color: #F0FAF2
 }
 
@@ -144,18 +144,43 @@ a.inactive-about:active {
     background-color: darken(gray, 15%);
 }
 
-.code-toggle-container {
-    width: 100%;
+.assessment-toggles {
     display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.toggle-section-inactive, .toggle-section-codes {
+    text-align: center;
+    margin-top: auto; 
+}
+
+.toggle-section-inactive {
+    grid-column-start: 3;
+    grid-column-end: 6;
+}
+
+.toggle-section-codes {
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .code-toggle {
-    margin: 15pt auto 5pt;
-}
-
-.code-toggle-description {
     text-align: center;
     margin-bottom: 0;
+}
+
+.code-toggle:hover {
+    cursor: pointer;
+    color: #0056b3 !important;
+    text-decoration: underline !important;
+}
+
+.current-code-cms, .code-toggle {
+    color: var(--blue) !important;
+}
+
+.current-code-loinc {
+    color: var(--green);
 }
 
 .description {
@@ -271,7 +296,7 @@ form.button_to {
 .home-cards-header {
     width: 100%;
     text-align: center;
-    margin: 20pt 0 25pt 0;
+    margin: 8pt 0 12pt;
 }
 
 .home-cards {
@@ -297,10 +322,6 @@ form.button_to {
 .disabled-card {
     cursor: not-allowed;
     background-color: #DDDDDD;
-}
-
-.inactive-toggle-link {
-    text-align: center;
 }
 
 .qprogress {

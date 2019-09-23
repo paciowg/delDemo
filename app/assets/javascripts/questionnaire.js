@@ -82,9 +82,11 @@
             $('.landing-container-blue')
                     .addClass('landing-container-green')
                     .removeClass('landing-container-blue');
+            $('.current-code-cms')
+                    .text('LOINC')
+                    .addClass('current-code-loinc')
+                    .removeClass('current-code-cms');
             $('.code-toggle').text('Switch to CMS codes');
-            $('.code-toggle').attr('class', 'btn btn-primary code-toggle');
-            $('.code-toggle-description').text('Currently using LOINC codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
                 $(this).attr('href', newHref);
@@ -96,9 +98,11 @@
             $('.landing-container-green')
                     .addClass('landing-container-blue')
                     .removeClass('landing-container-green');
+            $('.current-code-loinc')
+                .text('CMS')
+                .addClass('current-code-cms')
+                .removeClass('current-code-loinc');
             $('.code-toggle').text('Switch to LOINC codes');
-            $('.code-toggle').attr('class', 'btn btn-success code-toggle');
-            $('.code-toggle-description').text('Currently using CMS codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");
                 $(this).attr('href', newHref);
