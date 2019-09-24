@@ -20,11 +20,11 @@
     --inactive-color: #DDDDDD;
 }
 
-.landing-container-blue, .landing-container-green {
-    margin: 3pt;
-    border-width: 4pt;
+.landing-container-blue, 
+.landing-container-green {
+    padding-top: 8pt;
+    border-width: 0 4pt 4pt;
     border-style: solid;
-    border-radius: 10px;
 }
 
 .landing-container-blue {
@@ -56,14 +56,21 @@
     background-color: var(--gray) !important;
 }
 
-.banner {
+.banner, .banner-green {
     padding: 0pt;
-    background-color: var(--blue);
     color: white;
     font-size: 24pt;
     height: auto;
     overflow: auto;
     display: flex;
+}
+
+.banner {
+    background-color: var(--blue);
+}
+
+.banner-green {
+    background-color: var(--green);
 }
 
 .banner-content,
@@ -149,7 +156,8 @@ a.inactive-about:active {
     grid-template-columns: repeat(5, 1fr);
 }
 
-.toggle-section-inactive, .toggle-section-codes {
+.toggle-section-inactive, 
+.toggle-section-codes {
     text-align: center;
     margin-top: auto; 
 }
@@ -175,7 +183,8 @@ a.inactive-about:active {
     text-decoration: underline !important;
 }
 
-.current-code-cms, .code-toggle {
+.current-code-cms, 
+.code-toggle {
     color: var(--blue) !important;
 }
 
@@ -277,7 +286,9 @@ td, th {
   border: 1px solid #ddd;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
 form.button_to {
     display: inline;
