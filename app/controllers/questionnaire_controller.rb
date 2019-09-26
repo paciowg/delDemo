@@ -16,7 +16,7 @@ class QuestionnaireController < ApplicationController
       redirect_to url_for(controller: "preview", action: "index") if params[:page] && params[:page].include?("preview")
     end
 
-    @loinc = SessionStack.loinc(session.id)
+    @loinc = SessionStack.loinc?(session.id)
 
     @filledSections = SessionStack.qLength(session.id)
 

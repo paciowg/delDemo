@@ -7,7 +7,7 @@ class SessionStack
         @@sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil}
     end
 
-    def self.loinc(id)
+    def self.loinc?(id)
         @@sessionHash[id][:q][0]["loinc"]
     end
 

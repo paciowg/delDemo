@@ -41,6 +41,13 @@
 <div class="<%= (isInactive ? "inactive" : "active") -%>-section">
     <div class="description">
         <p><%= @questionnaire.description %></p>
+        <p style="text-align: center">
+            Currently using 
+            <strong class="current-code-<%= @loinc ? "loinc" : "cms" %>">
+                <%= @loinc ? "LOINC" : "CMS" %>
+            </strong>
+            codes
+        </p>
     </div>
     <h4 style="text-align: center">Form Progress</h4>
     <% currentProgress = (params[:page] ? params[:page].to_f : (params[:back] ? params[:back].to_f : 1.0)) %>
