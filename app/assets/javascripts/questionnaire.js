@@ -79,16 +79,13 @@
         },
 
         codeToLOINC: function() {
-            $('.landing-container-blue')
-                    .addClass('landing-container-green')
-                    .removeClass('landing-container-blue');
+            $('.qop-container-blue')
+                    .addClass('qop-container-green')
+                    .removeClass('qop-container-blue');
             $('.current-code-cms')
                     .text('LOINC')
                     .addClass('current-code-loinc')
                     .removeClass('current-code-cms');
-            $('#banner')
-                    .addClass('banner-green')
-                    .removeClass('banner');
             $('.code-toggle').text('Switch to CMS codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
@@ -98,16 +95,13 @@
         },
 
         codeToCMS: function() {
-            $('.landing-container-green')
-                    .addClass('landing-container-blue')
-                    .removeClass('landing-container-green');
+            $('.qop-container-green')
+                    .addClass('qop-container-blue')
+                    .removeClass('qop-container-green');
             $('.current-code-loinc')
                 .text('CMS')
                 .addClass('current-code-cms')
                 .removeClass('current-code-loinc');
-            $('#banner')
-                    .addClass('banner')
-                    .removeClass('banner-green');
             $('.code-toggle').text('Switch to LOINC codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");

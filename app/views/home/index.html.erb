@@ -9,10 +9,21 @@
         </div>
     </a>
 </div>
-<div class='landing-container-blue'>
+
+<h2 class='home-header mt-5'>Search for Data Elements by ID or Text</h2>
+<div class='search-container'>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="DEL Search" aria-label="DEL Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class='qop-container-blue'>
     <% inactiveVersions = Array.new %>
     <div class="home-cards-container">
-        <h2 class="home-cards-header">Choose an active DEL assessment to fill out</h2>
+        <h2 class="home-header">Choose an active DEL assessment to fill out</h2>
         <div class="home-cards">
             <% @questionnaireVersions.each do |qv| %>
                 <% if qv[:status].eql?("active") %>
@@ -43,7 +54,7 @@
     </div>
 
     <div id="inactive-card-container" class="home-cards-container collapse">
-        <h2 class="home-cards-header">Choose an inactive DEL assessment to fill out</h2>
+        <h2 class="home-header">Choose an inactive DEL assessment to fill out</h2>
         <div class="home-cards">
             <% inactiveVersions.each do |iv| %>
                 <a href="/questionnaire?version=<%= iv[:id] -%>&loinc=false" 

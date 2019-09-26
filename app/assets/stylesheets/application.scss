@@ -20,19 +20,23 @@
     --inactive-color: #DDDDDD;
 }
 
-.landing-container-blue, 
-.landing-container-green {
+.search-container {
+    padding: 0 15% 35pt;
+}
+
+.qop-container-blue, 
+.qop-container-green {
     padding-top: 8pt;
-    border-width: 0 4pt 4pt;
+    border-width: 2pt;
     border-style: solid;
 }
 
-.landing-container-blue {
+.qop-container-blue {
     border-color:var(--blue);
     background-color: #F0F7FF;
 }
 
-.landing-container-green {
+.qop-container-green {
     border-color:var(--green);
     background-color: #F0FAF2
 }
@@ -56,21 +60,14 @@
     background-color: var(--gray) !important;
 }
 
-.banner, .banner-green {
+.banner {
     padding: 0pt;
     color: white;
     font-size: 24pt;
     height: auto;
     overflow: auto;
     display: flex;
-}
-
-.banner {
     background-color: var(--blue);
-}
-
-.banner-green {
-    background-color: var(--green);
 }
 
 .banner-content,
@@ -304,7 +301,7 @@ form.button_to {
     padding: 0 15pt;
 }
 
-.home-cards-header {
+.home-header {
     width: 100%;
     text-align: center;
     margin: 8pt 0 12pt;
