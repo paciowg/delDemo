@@ -22,6 +22,16 @@
 
 .search-container {
     padding: 0 15% 40pt;
+    display: block;
+}
+
+.search-form {
+    display: flex;
+}
+
+.search-dropdown {
+    width: 120pt;
+    margin-right: 3pt;
 }
 
 .qop-container-blue, 
