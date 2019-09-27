@@ -1,6 +1,6 @@
 require 'json'
 
-class GetQuestionnaires
+class ServerInteraction
 
     def self.setConnection
         # @url = "https://api.logicahealth.org/PACIO/open"
@@ -34,7 +34,7 @@ class GetQuestionnaires
     def self.getAllReplies(klasses = nil)
         klasses = coerce_to_a(klasses)
         replies = []
-        unless blank?(klasses)
+        unless klasses.blank?
             klasses.each do |klass|
                 replies.push(@client.read_feed(klass))
                 while replies.last
@@ -45,21 +45,22 @@ class GetQuestionnaires
             replies.push(@client.all_history)
         end
         replies.compact!
-        blank?(replies) ? nil : replies
+        replies.blank? ? nil : replies
     end
 
-    def self.getQuestionnaireVersions()
+    def self.getSummaries(klass)
+        summaries = []
         begin
             setConnection()
-            replies = [].push(JSON.parse(@client.raw_read(resource: FHIR::Questionnaire, summary: "true").response[:body]))
+            replies = [].push(JSON.parse(@client.raw_read(resource: klass, summary: "true").response[:body]))
             while replies.last
                 nextLink = replies.last["link"].select{ |link| link["relation"].eql?("next") }
-                break if blank?(nextLink)
+                break if nextLink.blank?
                 url = nextLink[0]["url"] + "&_summary=true"
                 replies.push(JSON.parse(@client.raw_read_url(url).response[:body]))
             end
             replies.compact!
-            @questionnaireVersions = []
+            summaries = []
             replies.each do |reply|
                 entry = reply["entry"].collect do |ent| 
                     {id: ent["resource"]["id"],
@@ -69,14 +70,14 @@ class GetQuestionnaires
                     publisher: ent["resource"]["publisher"],
                     code: ent["resource"]["code"]}
                 end
-                @questionnaireVersions.push(entry)
+                summaries.push(entry)
             end
-            @questionnaireVersions.compact!
-            @questionnaireVersions.flatten!(1)
+            summaries.compact!
+            summaries.flatten!(1)
         rescue
-            @questionnaireVersions = []
+            summaries = []
         end
-        @questionnaireVersions
+        summaries
     end
 
     def self.getQuestionnaire(id)
@@ -88,8 +89,13 @@ class GetQuestionnaires
         end
     end
 
-    def self.blank?(param)
-        param.nil? || param.empty?
+    def self.searchMeasures(parameters = {})
+        begin
+            setConnection()
+            return @client.search(FHIR::Questionnaire, id).resource
+        rescue
+            return nil
+        end
     end
 
     def self.coerce_to_a(param)

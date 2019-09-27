@@ -18,13 +18,13 @@
             <option value='' disabled>---------------</option>
             <option value='' disabled>Active Forms</option>
             <option value='' disabled>---------------</option>
-            <% @activeVersions.each do |av| %>
+            <% @lssActive.each do |av| %>
                 <option value="<%= av[:id] -%>"><%= av[:name].sub("MDS30", "MDS3.0") -%></option>
             <% end %>
             <option value='' disabled>---------------</option>
             <option value='' disabled>Inactive Forms</option>
             <option value='' disabled>---------------</option>
-            <% @inactiveVersions.each do |iv| %>
+            <% @lssInactive.each do |iv| %>
                 <option value="<%= iv[:id] -%>"><%= iv[:name].sub("MDS30", "MDS3.0") -%></option>
             <% end %>
         </select>
@@ -42,7 +42,7 @@
     <div class="home-cards-container">
         <h2 class="home-header">Choose an active DEL assessment to fill out</h2>
         <div class="home-cards">
-            <% @activeVersions.each do |av| %>
+            <% @qssActive.each do |av| %>
                 <% if av[:status].eql?("active") %>
                     <a href="/questionnaire?version=<%= av[:id] -%>&loinc=false" 
                             class="card active-cards <%= "no-loinc" if av[:code].nil? %>">
@@ -71,7 +71,7 @@
     <div id="inactive-card-container" class="home-cards-container collapse">
         <h2 class="home-header">Choose an inactive DEL assessment to fill out</h2>
         <div class="home-cards">
-            <% @inactiveVersions.each do |iv| %>
+            <% @qssInactive.each do |iv| %>
                 <a href="/questionnaire?version=<%= iv[:id] -%>&loinc=false" 
                         class="card active-cards <%= "no-loinc" if iv[:code].nil? %>">
                     <h5 class="card-header"><%= iv[:name].sub("MDS30", "MDS3.0") -%></h5>
