@@ -9,3 +9,23 @@
         </div>
     </a>
 </div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Forms</th>
+    </tr>
+    <% @measures.each do |measure| %>
+        <tr>
+            <td><%= measure.id -%></td>
+            <td><%= measure.title -%></td>
+            <td>
+                <% measure.library.each do |lib| %>
+                    <%= @libraries[lib].name.sub("MDS30", "MDS3.0") + " (v." + @libraries[lib].version + ")" -%>
+                    <br />
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

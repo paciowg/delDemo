@@ -20,6 +20,17 @@ class ServerInteraction
         @questionnaires
     end
 
+    def self.getAllLibraries
+        return @libraries if @libraries
+        begin
+            setConnection()
+            @libraries = getAllResources(FHIR::Library)
+        rescue
+            @libraries = nil
+        end
+        @libraries
+    end
+
     def self.getAllResources(klasses = nil, search = nil)
         replies = getAllReplies(klasses, search)
         return nil unless replies
