@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
-  def index
-  end
+    def index
+        @measures = ServerInteraction.searchMeasures(params[:input])
+    end
 end

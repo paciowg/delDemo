@@ -20,8 +20,8 @@ class ServerInteraction
         @questionnaires
     end
 
-    def self.getAllResources(klasses = nil)
-        replies = getAllReplies(klasses)
+    def self.getAllResources(klasses = nil, search = nil)
+        replies = getAllReplies(klasses, search)
         return nil unless replies
         resources = []
         replies.each do |reply|
@@ -31,12 +31,12 @@ class ServerInteraction
         resources.flatten(1)
     end
 
-    def self.getAllReplies(klasses = nil)
+    def self.getAllReplies(klasses = nil, search = nil)
         klasses = coerce_to_a(klasses)
         replies = []
-        unless klasses.blank?
+        if klasses.present?
             klasses.each do |klass|
-                replies.push(@client.read_feed(klass))
+                replies.push(search.present? ? @client.search(klass, search) : @client.read_feed(klass))
                 while replies.last
                     replies.push(@client.next_page(replies.last))
                 end
@@ -89,10 +89,13 @@ class ServerInteraction
         end
     end
 
-    def self.searchMeasures(parameters = {})
+    def self.searchMeasures(input = nil)
+        measureProfile = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
         begin
             setConnection()
-            return @client.search(FHIR::Questionnaire, id).resource
+            search = { search: { parameters: { _count: 50, _profile: measureProfile } } }
+            search[:search][:parameters]["title:contains"] = input if input.present?
+            return getAllResources(FHIR::Measure, search)
         rescue
             return nil
         end
