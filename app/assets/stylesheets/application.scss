@@ -236,7 +236,8 @@ a.inactive-about:active {
     padding-right: 1pt;
 }
 
-.no-questions {
+.no-questions,
+.no-search-results {
     padding: 50pt 0;
     text-align: center;
 }
@@ -381,4 +382,21 @@ form.button_to {
 .submission-download:active {
     color: white;
     text-decoration: none;
+}
+
+.search-table-container {
+    width: 100%;
+    padding: 25pt;
+}
+
+.search-table {
+    width: 100%;
+}
+
+.search-table-col-form {
+    min-width: 90pt;
+}
+
+.search-table-col-id {
+    max-width: 75pt;
 }

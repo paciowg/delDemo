@@ -10,19 +10,25 @@
     </a>
 </div>
 
-<table>
-    <tr>
-        <th>Form</th>
-        <th>ID</th>
-        <th>Title</th>
-    </tr>
-    <% @qs.each_pair do |form, items| %>
-        <% items.each do |item| %>
+<% if @qs.present? %>
+    <div class='search-table-container'>
+        <table class='search-table'>
             <tr>
-                <td><%= form -%></td>
-                <td><%= item.prefix -%></td>
-                <td><%= item.text -%></td>
+                <th class='search-table-col-form'>Form</th>
+                <th class='search-table-col-id'>ID</th>
+                <th class='search-table-col-title'>Title</th>
             </tr>
-        <% end %>
-    <% end %>
-</table>
+            <% @qs.each_pair do |form, items| %>
+                <% items.each do |item| %>
+                    <tr>
+                        <td class='search-table-col-form'><%= form -%></td>
+                        <td class='search-table-col-id'><%= item.prefix -%></td>
+                        <td class='search-table-col-title'><%= item.text -%></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <h2 class='no-search-results'>No Data Elements match the search term "<%= @input -%>"</h2>
+<% end %>
