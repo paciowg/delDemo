@@ -18,13 +18,13 @@
             <option value='' disabled>---------------</option>
             <option value='' disabled>Active Forms</option>
             <option value='' disabled>---------------</option>
-            <% @lssActive.each do |av| %>
+            <% @qssActive.each do |av| %>
                 <option value="<%= av[:id] -%>"><%= av[:name].sub("MDS30", "MDS3.0") -%></option>
             <% end %>
             <option value='' disabled>---------------</option>
             <option value='' disabled>Inactive Forms</option>
             <option value='' disabled>---------------</option>
-            <% @lssInactive.each do |iv| %>
+            <% @qssInactive.each do |iv| %>
                 <option value="<%= iv[:id] -%>"><%= iv[:name].sub("MDS30", "MDS3.0") -%></option>
             <% end %>
         </select>
