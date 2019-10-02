@@ -20,17 +20,6 @@ class ServerInteraction
         @questionnaires
     end
 
-    def self.getAllLibraries
-        return @libraries if @libraries
-        begin
-            setConnection()
-            @libraries = getAllResources(FHIR::Library)
-        rescue
-            @libraries = nil
-        end
-        @libraries
-    end
-
     def self.getAllResources(klasses = nil, search = nil)
         replies = getAllReplies(klasses, search)
         return nil unless replies
@@ -100,13 +89,31 @@ class ServerInteraction
         end
     end
 
-    def self.searchMeasures(input = nil)
-        measureProfile = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
+    # handles FHIR::Measure and FHIR::Questionnaire text searches
+    def self.search(klass, input = nil)
+        profiles = Hash.new
+        profiles[:q] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardForm"
+        profiles[:m] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
         begin
             setConnection()
-            search = { search: { parameters: { _count: 50, _profile: measureProfile } } }
-            search[:search][:parameters]["title:contains"] = input if input.present?
-            return getAllResources(FHIR::Measure, search)
+            search = { search: { parameters: Hash.new } }
+            if klass.eql?(FHIR::Measure)
+                search[:search][:parameters][:_profile] = profiles[:m]
+                search[:search][:parameters][:_count] = 50
+                search[:search][:parameters]["title:contains"] = input if input.present?
+            elsif klass.eql?(FHIR::Questionnaire)
+                search[:search][:parameters][:_profile] = profiles[:q]
+                search[:search][:parameters]["item-text:contains"] = input if input.present?
+                elements = "id,name,version"
+                itemDepth = 5
+                for i in 1..itemDepth
+                    elements += "," + ("item." * i) + "text," + ("item." * i) + "prefix"
+                end
+                search[:search][:parameters]["_elements"] = elements
+            else
+                return nil
+            end
+            return getAllResources(klass, search)
         rescue
             return nil
         end

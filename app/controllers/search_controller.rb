@@ -1,9 +1,6 @@
 class SearchController < ApplicationController
     def index
-        @measures = ServerInteraction.searchMeasures(params[:input])
-        @libraries = Hash.new
-        ServerInteraction.getAllLibraries().each do |lib|
-            @libraries["Library/" + lib.id] = lib
-        end
+        unfilteredQs = ServerInteraction.search(FHIR::Questionnaire, params[:input])
+        @qs = helpers.searchItems(unfilteredQs, params[:input])
     end
 end
