@@ -20,9 +20,17 @@
     --inactive-color: #DDDDDD;
 }
 
+.search-container,
+.search-page-search-container {
+    display: block;
+}
+
 .search-container {
     padding: 0 15% 40pt;
-    display: block;
+}
+
+.search-page-search-container {
+    padding: 20pt 15%;
 }
 
 .search-form {
@@ -386,14 +394,14 @@ form.button_to {
 
 .search-table-container {
     width: 100%;
-    padding: 25pt;
+    padding: 0 25pt 25pt;
 }
 
 .search-table {
     width: 100%;
 }
 
-.search-table-col-form {
+.search-table-col-assessment {
     min-width: 90pt;
 }
 
