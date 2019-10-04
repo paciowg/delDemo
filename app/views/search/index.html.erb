@@ -67,6 +67,11 @@
     </div>
 <% else %>
     <h4 class='no-search-results'>
-        No Data Elements match the search term "<%= @input -%>"
+        No Data Elements
+        <% if @assessment.present? %>
+            in
+            <%= (@qssActive + @qssInactive).select{ |av| av[:id].eql?(@assessment) }.first[:name] %>
+        <% end %>
+        match the search term "<%= @input -%>"
     </h4>
 <% end %>
