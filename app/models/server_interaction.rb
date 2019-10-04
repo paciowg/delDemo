@@ -2,7 +2,11 @@ require 'json'
 
 class ServerInteraction
 
-    def self.setConnection
+    def initialize
+        setConnection()
+    end
+
+    def setConnection
         # @url = "https://api.logicahealth.org/PACIO/open"
         return nil if @client
         @url = "https://impact-fhir.mitre.org/r4"
@@ -10,7 +14,7 @@ class ServerInteraction
         FHIR::Model.client = @client
     end
 
-    def self.getAllQuestionnaires
+    def getAllQuestionnaires
         return @questionnaires if @questionnaires
         begin
             setConnection()
@@ -21,7 +25,7 @@ class ServerInteraction
         @questionnaires
     end
 
-    def self.getAllResources(klasses = nil, search = nil)
+    def getAllResources(klasses = nil, search = nil)
         replies = getAllReplies(klasses, search)
         return nil unless replies
         resources = []
@@ -32,7 +36,7 @@ class ServerInteraction
         resources.flatten(1)
     end
 
-    def self.getAllReplies(klasses = nil, search = nil)
+    def getAllReplies(klasses = nil, search = nil)
         klasses = coerce_to_a(klasses)
         replies = []
         if klasses.present?
@@ -49,7 +53,7 @@ class ServerInteraction
         replies.blank? ? nil : replies
     end
 
-    def self.getSummaries(klass)
+    def getSummaries(klass)
         summaries = []
         begin
             setConnection()
@@ -81,7 +85,7 @@ class ServerInteraction
         summaries
     end
 
-    def self.getSpecificResource(klass, id, search = {})
+    def getSpecificResource(klass, id, search = {})
         begin
             setConnection()
             return @client.search_existing(klass, id, search).resource
@@ -91,7 +95,7 @@ class ServerInteraction
     end
 
     # handles FHIR::Measure and FHIR::Questionnaire text searches
-    def self.search(klass, input = nil, assessment = nil)
+    def search(klass, input = nil, assessment = nil)
         begin
             setConnection()
             return getAllResources(klass, itemSearchParams(klass, input)) if assessment.empty?
@@ -104,7 +108,7 @@ class ServerInteraction
     private
 
     # search parameters for FHIR::Measure and FHIR::Questionnaire text searches
-    def self.itemSearchParams(klass, input = nil)
+    def itemSearchParams(klass, input = nil)
         search = { search: { parameters: Hash.new } }
         profiles = Hash.new
         profiles[:m] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
@@ -128,7 +132,7 @@ class ServerInteraction
         search
     end
 
-    def self.coerce_to_a(param)
+    def coerce_to_a(param)
         return nil unless param
         param.respond_to?('to_a') ? param.to_a : Array.[](param)
     end
