@@ -3,7 +3,7 @@ class ConnectionTracker
     @connections = Hash.new
 
     def self.establish(sessionID)
-        @connections[sessionID] = {si: ServerInteraction.new, lastUsed: Time.now}
+        @connections[sessionID] = { si: ServerInteraction.new, lastUsed: Time.now }
         prune()
     end
 

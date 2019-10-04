@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'detail/index'
   get '/search', to: 'search#index'
   get '/preview', to: 'preview#index'
   get '/submission', to: 'submission#index'
