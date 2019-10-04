@@ -4,6 +4,7 @@ class ServerInteraction
 
     def self.setConnection
         # @url = "https://api.logicahealth.org/PACIO/open"
+        return nil if @client
         @url = "https://impact-fhir.mitre.org/r4"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
@@ -80,43 +81,51 @@ class ServerInteraction
         summaries
     end
 
-    def self.getQuestionnaire(id)
+    def self.getSpecificResource(klass, id, search = {})
         begin
             setConnection()
-            return @client.search_existing(FHIR::Questionnaire, id).resource
+            return @client.search_existing(klass, id, search).resource
         rescue
             return nil
         end
     end
 
     # handles FHIR::Measure and FHIR::Questionnaire text searches
-    def self.search(klass, input = nil)
-        profiles = Hash.new
-        profiles[:q] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardForm"
-        profiles[:m] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
+    def self.search(klass, input = nil, assessment = nil)
         begin
             setConnection()
-            search = { search: { parameters: Hash.new } }
-            if klass.eql?(FHIR::Measure)
-                search[:search][:parameters][:_profile] = profiles[:m]
-                search[:search][:parameters][:_count] = 50
-                search[:search][:parameters]["title:contains"] = input if input.present?
-            elsif klass.eql?(FHIR::Questionnaire)
-                search[:search][:parameters][:_profile] = profiles[:q]
-                search[:search][:parameters]["item-text:contains"] = input if input.present?
-                elements = "id,name,version"
-                itemDepth = 5
-                for i in 1..itemDepth
-                    elements += "," + ("item." * i) + "text," + ("item." * i) + "prefix"
-                end
-                search[:search][:parameters]["_elements"] = elements
-            else
-                return nil
-            end
-            return getAllResources(klass, search)
+            return getAllResources(klass, itemSearchParams(klass, input)) if assessment.empty?
+            return [getSpecificResource(klass, assessment, itemSearchParams(klass))]
         rescue
             return nil
         end
+    end
+
+    private
+
+    # search parameters for FHIR::Measure and FHIR::Questionnaire text searches
+    def self.itemSearchParams(klass, input = nil)
+        search = { search: { parameters: Hash.new } }
+        profiles = Hash.new
+        profiles[:m] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardFormQuestion"
+        profiles[:q] = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardForm"
+        if klass.eql?(FHIR::Measure)
+            search[:search][:parameters][:_profile] = profile[:m]
+            search[:search][:parameters][:_count] = 50
+            search[:search][:parameters]["title:contains"] = input if input.present?
+        elsif klass.eql?(FHIR::Questionnaire)
+            search[:search][:parameters][:_profile] = profiles[:q]
+            search[:search][:parameters]["item-text:contains"] = input if input.present?
+            elements = "id,name,version"
+            itemDepth = 5
+            for i in 1..itemDepth
+                elements += "," + ("item." * i) + "text," + ("item." * i) + "prefix"
+            end
+            search[:search][:parameters]["_elements"] = elements
+        else
+            return nil
+        end
+        search
     end
 
     def self.coerce_to_a(param)

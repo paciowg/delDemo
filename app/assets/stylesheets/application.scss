@@ -20,17 +20,9 @@
     --inactive-color: #DDDDDD;
 }
 
-.search-container,
-.search-page-search-container {
-    display: block;
-}
-
 .search-container {
+    display: block;
     padding: 0 15% 40pt;
-}
-
-.search-page-search-container {
-    padding: 20pt 15%;
 }
 
 .search-form {
@@ -244,10 +236,14 @@ a.inactive-about:active {
     padding-right: 1pt;
 }
 
-.no-questions,
-.no-search-results {
+.no-questions{
     padding: 50pt 0;
     text-align: center;
+}
+
+.no-search-results {
+    padding: 15pt 0;
+    text-align: center
 }
 
 .submission-error,

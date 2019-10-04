@@ -1,7 +1,8 @@
 class SearchController < ApplicationController
     def index
         @input = params[:input]
-        unfilteredQs = ServerInteraction.search(FHIR::Questionnaire, @input)
+        @assessment = params[:assessment]
+        unfilteredQs = ServerInteraction.search(FHIR::Questionnaire, @input, @assessment)
         @qs = helpers.searchItems(unfilteredQs, @input)
 
         @qssActive = Array.new

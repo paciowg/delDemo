@@ -3,7 +3,7 @@ class QuestionnaireController < ApplicationController
     helper ValidationHelper
 
     def index
-        @questionnaire = ServerInteraction.getQuestionnaire(params[:version])
+        @questionnaire = ServerInteraction.getSpecificResource(FHIR::Questionnaire, params[:version])
 
         @currentSection = nil
 

@@ -39,8 +39,7 @@ module QuestionnaireHelper
 
     # returns array of 2 element arrays, like [[display, code], [display, code]]
     def getRawOptions(item, loinc = false)
-        url = (loinc ? "http://loinc.org" : "http://del.cms.gov")
-        options = item.answerOption.select{ |i| i.valueCoding.system.eql?(url) }
+        options = item.answerOption.select{ |i| i.valueCoding.system.eql?("http://loinc.org") == loinc }
         options.collect{ |i| [cleanText(i.valueCoding.display), i.valueCoding.code] }
     end
 
