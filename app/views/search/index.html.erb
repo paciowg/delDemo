@@ -20,9 +20,9 @@
             <option value='' disabled>---------------</option>
             <% @qssActive.each do |av| %>
                 <% if av[:id].eql?(@assessment) %>
-                    <option value="<%= av[:id] -%>" selected><%= av[:name].sub("MDS30", "MDS3.0") -%></option>
+                    <option value="<%= av[:id] -%>" selected><%= av[:name] -%></option>
                 <% else %>
-                    <option value="<%= av[:id] -%>"><%= av[:name].sub("MDS30", "MDS3.0") -%></option>
+                    <option value="<%= av[:id] -%>"><%= av[:name] -%></option>
                 <% end %>
             <% end %>
             <option value='' disabled>---------------</option>
@@ -30,9 +30,9 @@
             <option value='' disabled>---------------</option>
             <% @qssInactive.each do |iv| %>
                 <% if iv[:id].eql?(@assessment) %>
-                    <option value="<%= iv[:id] -%>" selected><%= iv[:name].sub("MDS30", "MDS3.0") -%></option>
+                    <option value="<%= iv[:id] -%>" selected><%= iv[:name] -%></option>
                 <% else %>
-                    <option value="<%= iv[:id] -%>"><%= iv[:name].sub("MDS30", "MDS3.0") -%></option>
+                    <option value="<%= iv[:id] -%>"><%= iv[:name] -%></option>
                 <% end %>
             <% end %>
         </select>
@@ -56,9 +56,14 @@
             </tr>
             <% @qs.each_pair do |form, items| %>
                 <% items.each do |item| %>
+                    <% asmtid = (@qssActive + @qssInactive).select{ |qs| qs[:name].eql?(form) }.first[:id] %>
                     <tr>
                         <td class='search-table-col-form'><%= form -%></td>
-                        <td class='search-table-col-id'><%= item.prefix -%></td>
+                        <td class='search-table-col-id'>
+                            <a href='/detail?assessment=<%= asmtid + '&id=' + item.linkId + '&input=' + @input -%>'>
+                                <%= item.prefix -%>
+                            </a>
+                        </td>
                         <td class='search-table-col-title'><%= item.text -%></td>
                     </tr>
                 <% end %>
@@ -70,7 +75,7 @@
         No Data Elements
         <% if @assessment.present? %>
             in
-            <%= (@qssActive + @qssInactive).select{ |av| av[:id].eql?(@assessment) }.first[:name] %>
+            <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessment) }.first[:name] %>
         <% end %>
         match the search term "<%= @input -%>"
     </h4>

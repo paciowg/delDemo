@@ -40,7 +40,8 @@ class SessionStack
     end
 
     def self.prune() #removes sessions older than 5 hours
-        @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (5 * 60 * 60) }
+        safeHours = 5
+        @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
     end
 
 end

@@ -69,7 +69,7 @@ class ServerInteraction
             replies.each do |reply|
                 entry = reply["entry"].collect do |ent| 
                     {id: ent["resource"]["id"],
-                    name: ent["resource"]["name"] + " (v." + ent["resource"]["version"] + ")",
+                    name: ent["resource"]["name"].sub("MDS30", "MDS3.0") + " (v." + ent["resource"]["version"] + ")",
                     status: ent["resource"]["status"],
                     title: ent["resource"]["title"],
                     publisher: ent["resource"]["publisher"],
@@ -123,7 +123,8 @@ class ServerInteraction
             elements = "id,name,version"
             itemDepth = 5
             for i in 1..itemDepth
-                elements += "," + ("item." * i) + "text," + ("item." * i) + "prefix"
+                itemStr = ("item." * i)
+                elements += "," + itemStr + "text," + itemStr + "prefix," + itemStr + "linkId"
             end
             search[:search][:parameters]["_elements"] = elements
         else
