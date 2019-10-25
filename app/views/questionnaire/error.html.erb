@@ -1,9 +1,6 @@
-<div class="banner" id="banner">
-    <a class="float-right banner-btn-gray" href="/">
-        <div class="banner-btn-content">Home</div>
-    </a>
-    <div class="banner-content">Whoops! Questionnaire not found.</div>
-</div>
+<%= render 'partials/banner' %>
+
+<h2>Whoops! Questionnaire not found.</h2>
 
 <% if params[:attempt].nil? || params[:attempt].to_i < 5 %>
         <small>Automatically trying again (retry attempts thus far: <%= params[:attempt].nil? ? "0" : params[:attempt]%>)</small>
