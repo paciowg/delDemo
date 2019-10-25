@@ -18,7 +18,8 @@ class ServerInteraction
         return @questionnaires if @questionnaires
         begin
             setConnection()
-            @questionnaires = getAllResources(FHIR::Questionnaire)
+            search = { search: { parameters: { _count: 50 } } }
+            @questionnaires = getAllResources(FHIR::Questionnaire, search)
         rescue
             @questionnaires = nil
         end
@@ -57,7 +58,8 @@ class ServerInteraction
         summaries = []
         begin
             setConnection()
-            replies = [].push(JSON.parse(@client.raw_read(resource: klass, summary: "true").response[:body]))
+            params = { resource: klass, summary: "true", search: { parameters: { _count: 50 } } }
+            replies = [].push(JSON.parse(@client.raw_read(params).response[:body]))
             while replies.last
                 nextLink = replies.last["link"].select{ |link| link["relation"].eql?("next") }
                 break if nextLink.blank?
@@ -119,6 +121,7 @@ class ServerInteraction
             search[:search][:parameters]["title:contains"] = input if input.present?
         elsif klass.eql?(FHIR::Questionnaire)
             search[:search][:parameters][:_profile] = profiles[:q]
+            search[:search][:parameters][:_count] = 50
             search[:search][:parameters]["item-text:contains"] = input if input.present?
             elements = "id,name,version"
             itemDepth = 5

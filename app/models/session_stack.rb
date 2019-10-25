@@ -3,12 +3,27 @@ class SessionStack
     @sessionHash = Hash.new
 
     def self.create(id, loinc = false)
+        summaries = @sessionHash[id] ? @sessionHash[id][:qSummaries].clone : { active: nil, inactive: nil }
         prune()
         @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil}
+        @sessionHash[id][:qSummaries] = summaries
+    end
+
+    def self.prune() #removes sessions older than 5 hours
+        safeHours = 5
+        @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
     end
 
     def self.loinc?(id)
         @sessionHash[id][:q][0]["loinc"]
+    end
+
+    def self.qrRead(id)
+        @sessionHash[id][:qr]
+    end
+
+    def self.qrPush(id, qr)
+        @sessionHash[id][:qr] = qr
     end
 
     def self.qRead(id)
@@ -19,10 +34,6 @@ class SessionStack
         @sessionHash[id][:q].length - 1
     end
 
-    def self.qrRead(id)
-        @sessionHash[id][:qr]
-    end
-
     def self.push(id, input)
         current = (input["page"] ? input["page"].to_i - 1 : (input["back"] ? input["back"].to_i + 1 : 1) )
         input["current"] = current
@@ -31,17 +42,14 @@ class SessionStack
         @sessionHash[id][:q].push(input) unless input["edit_post_preview"].eql?("true")
     end
 
-    def self.qrPush(id, qr)
-        @sessionHash[id][:qr] = qr
+    def self.qSummariesPush(id, active, inactive)
+        @sessionHash[id][:qSummaries][:active] = active
+        @sessionHash[id][:qSummaries][:inactive] = inactive
     end
 
-    def self.delete(id)
-        @sessionHash.delete(id)
-    end
-
-    def self.prune() #removes sessions older than 5 hours
-        safeHours = 5
-        @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
+    def self.qSummariesRead(id)
+        @sessionHash[id].nil?
+        @sessionHash[id][:qSummaries]
     end
 
 end

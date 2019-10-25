@@ -1,6 +1,6 @@
 <%= render 'partials/banner' %>
 
-<h2>Whoops! Questionnaire not found.</h2>
+<h2 class='home-header mt-5'>Whoops! Questionnaire not found.</h2>
 
 <% if params[:attempt].nil? || params[:attempt].to_i < 5 %>
         <small>Automatically trying again (retry attempts thus far: <%= params[:attempt].nil? ? "0" : params[:attempt]%>)</small>
