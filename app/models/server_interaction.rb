@@ -121,7 +121,7 @@ class ServerInteraction
             search[:search][:parameters]["title:contains"] = input if input.present?
         elsif klass.eql?(FHIR::Questionnaire)
             search[:search][:parameters][:_profile] = profiles[:q]
-            search[:search][:parameters][:_count] = 10
+            search[:search][:parameters][:_count] = 25
             search[:search][:parameters]["item-text:contains"] = input if input.present?
             elements = "id,name,version"
             itemDepth = 5

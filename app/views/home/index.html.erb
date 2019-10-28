@@ -4,52 +4,29 @@
 
 <div class='qop-container-blue'>
     <div class="home-cards-container">
-        <h2 class="home-header">Choose an active DEL assessment to fill out</h2>
+        <h2 class="home-header mb-1">Choose a DEL assessment to fill out</h2>
+        <input class="form-control card-search" placeholder="Narrow assessment options" ></input>
         <div class="home-cards">
-            <% @qssActive.each do |av| %>
-                <% if av[:status].eql?("active") %>
-                    <a href="/questionnaire?version=<%= av[:id] -%>&loinc=false" 
-                            class="card active-cards <%= "no-loinc" if av[:code].nil? %>">
-                        <h5 class="card-header"><%= av[:name].sub("MDS3_0", "MDS3.0") -%></h5>
-                        <div class="card-body d-flex flex-column">
-                            <h6 class="card-subtitle mb-2">
-                                <%= av[:title] -%>
-                            </h6>
-                            <p class="mt-auto">
-                            <% if av[:code].nil? %>
-                                No LOINC Support
-                            <% else %>
-                                LOINC Supported (<%= av[:code][0]["code"] -%>)
-                            <% end %>
-                            </p>
-                            <small class="card-text">
-                                Published by <%= av[:publisher] -%>
-                            </small>
-                        </div>
-                    </a>
-                <% end %>
-            <% end %>
-        </div>
-    </div>
-
-    <div id="inactive-card-container" class="home-cards-container collapse">
-        <h2 class="home-header">Choose an inactive DEL assessment to fill out</h2>
-        <div class="home-cards">
-            <% @qssInactive.each do |iv| %>
-                <a href="/questionnaire?version=<%= iv[:id] -%>&loinc=false" 
-                        class="card active-cards <%= "no-loinc" if iv[:code].nil? %>">
-                    <h5 class="card-header"><%= iv[:name].sub("MDS3_0", "MDS3.0") -%></h5>
+            <% (@qssActive + @qssInactive).each do |qv| %>
+                <a href="/questionnaire?version=<%= qv[:id] -%>&loinc=false" 
+                        class="card active-cards <%= "no-loinc" if qv[:code].nil? %>">
+                    <h5 class="card-header"><%= qv[:name].sub("MDS3_0", "MDS3.0") -%></h5>
                     <div class="card-body d-flex flex-column">
-                        <h6 class="card-subtitle mb-2"><%= iv[:title] -%></h6>
+                        <h6 class="card-subtitle mb-2">
+                            <%= qv[:title] -%>
+                        </h6>
                         <p class="mt-auto">
-                            <% if iv[:code].nil? %>
+                            Status: <%= qv[:status].capitalize %>
+                        </p>
+                        <p>
+                            <% if qv[:code].nil? %>
                                 No LOINC Support
                             <% else %>
-                                LOINC Supported (<%= iv[:code][0]["code"] -%>)
+                                LOINC Supported (<%= qv[:code][0]["code"] -%>)
                             <% end %>
                         </p>
                         <small class="card-text">
-                            Published by <%= iv[:publisher] -%>
+                            Published by <%= qv[:publisher] -%>
                         </small>
                     </div>
                 </a>
@@ -64,14 +41,6 @@
             codes
             <br>
             <a class='code-toggle'>Switch to LOINC codes</a>
-        </small>
-
-        <small class="toggle-section-inactive">Looking for an inactive assessment version?
-            <br>
-            <a data-toggle="collapse" href="#inactive-card-container" 
-                    aria-expanded="false" aria-controls="inactive-card-container">
-                Toggle inactive section
-            </a>
         </small>
     </div>
 </div>

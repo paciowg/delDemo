@@ -52,12 +52,12 @@
 }
 
 .qop-container-blue {
-    border-color:var(--blue);
+    border-color: var(--blue);
     background-color: #F0F7FF;
 }
 
 .qop-container-green {
-    border-color:var(--green);
+    border-color: var(--green);
     background-color: #F0FAF2
 }
 
@@ -169,24 +169,14 @@ a.inactive-about:active {
 }
 
 .assessment-toggles {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    margin: 0 auto;
 }
 
 .toggle-section-inactive, 
 .toggle-section-codes {
     text-align: center;
-    margin-top: auto; 
-}
-
-.toggle-section-inactive {
-    grid-column-start: 3;
-    grid-column-end: 6;
-}
-
-.toggle-section-codes {
-    grid-column-start: 1;
-    grid-column-end: 3;
+    margin: auto; 
 }
 
 .code-toggle {
@@ -319,6 +309,11 @@ form.button_to {
 .descriptive-graphic {
     margin: 40pt auto;
     display: block;
+}
+
+.card-search {
+    width: 400pt;
+    margin: 0 auto 8pt;
 }
 
 .home-cards-container {
