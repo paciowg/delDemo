@@ -35,7 +35,7 @@ class SessionStack
     end
 
     def self.push(id, input)
-        current = (input["page"] ? input["page"].to_i - 1 : (input["back"] ? input["back"].to_i + 1 : 1) )
+        current = input["page"] ? input["page"].to_i - 1 : (input["back"] ? input["back"].to_i + 1 : 1)
         input["current"] = current
         index = @sessionHash[id][:q].index{ |page| page["current"] == current }
         @sessionHash[id][:q].delete_at(index) if index
@@ -48,7 +48,7 @@ class SessionStack
     end
 
     def self.qSummariesRead(id)
-        @sessionHash[id].nil?
+        create(id) if @sessionHash[id].nil?
         @sessionHash[id][:qSummaries]
     end
 

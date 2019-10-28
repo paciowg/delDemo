@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
     def index
         SessionStack.create(session.id)
-        
+
+        # Satisfies requirements for search partial
+        @assessmentID = nil
+
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
             serverInteraction = ConnectionTracker.get(session.id)

@@ -1,40 +1,6 @@
 <%= render 'partials/banner' %>
 
-<h2 class='home-header mt-5'>Search for Data Elements by ID or Text</h2>
-<div class='search-container'>
-    <form class='search-form' action="/search" accept-charset="UTF-8" method="get">
-        <select name='assessment' class='form-control search-dropdown'>
-            <option value=''>All Forms</option>
-            <option value='' disabled>---------------</option>
-            <option value='' disabled>Active Forms</option>
-            <option value='' disabled>---------------</option>
-            <% @qssActive.each do |av| %>
-                <% if av[:id].eql?(@assessment) %>
-                    <option value="<%= av[:id] -%>" selected><%= av[:name] -%></option>
-                <% else %>
-                    <option value="<%= av[:id] -%>"><%= av[:name] -%></option>
-                <% end %>
-            <% end %>
-            <option value='' disabled>---------------</option>
-            <option value='' disabled>Inactive Forms</option>
-            <option value='' disabled>---------------</option>
-            <% @qssInactive.each do |iv| %>
-                <% if iv[:id].eql?(@assessment) %>
-                    <option value="<%= iv[:id] -%>" selected><%= iv[:name] -%></option>
-                <% else %>
-                    <option value="<%= iv[:id] -%>"><%= iv[:name] -%></option>
-                <% end %>
-            <% end %>
-        </select>
-        <div class="input-group">
-            <input type="text" name="input" class="form-control" placeholder="DEL Search" 
-                    aria-label="DEL Search" aria-describedby="basic-addon2" value="<%= @input -%>">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-        </div>
-    </form>
-</div>
+<%= render 'partials/search'%>
 
 <% if @qs.present? %>
     <div class='search-table-container'>
@@ -63,9 +29,9 @@
 <% else %>
     <h4 class='no-search-results'>
         No Data Elements
-        <% if @assessment.present? %>
+        <% if @assessmentID.present? %>
             in
-            <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessment) }.first[:name] %>
+            <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessmentID) }.first[:name] %>
         <% end %>
         match the search term "<%= @input -%>"
     </h4>

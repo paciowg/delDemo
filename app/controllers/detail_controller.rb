@@ -10,7 +10,6 @@ class DetailController < ApplicationController
         
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
-            serverInteraction = ConnectionTracker.get(session.id)
             @qssActive = Array.new
             @qssInactive = Array.new
             serverInteraction.getSummaries(FHIR::Questionnaire).each do |qv|

@@ -71,7 +71,7 @@ class ServerInteraction
             replies.each do |reply|
                 entry = reply["entry"].collect do |ent| 
                     {id: ent["resource"]["id"],
-                    name: ent["resource"]["name"].sub("MDS30", "MDS3.0") + " (v." + ent["resource"]["version"] + ")",
+                    name: ent["resource"]["name"].sub("MDS3_0", "MDS3.0") + " (v." + ent["resource"]["version"] + ")",
                     status: ent["resource"]["status"],
                     title: ent["resource"]["title"],
                     publisher: ent["resource"]["publisher"],
@@ -100,7 +100,7 @@ class ServerInteraction
     def search(klass, input = nil, assessment = nil)
         begin
             setConnection()
-            return getAllResources(klass, itemSearchParams(klass, input)) if assessment.empty?
+            return getAllResources(klass, itemSearchParams(klass, input)) if assessment.blank?
             return [getSpecificResource(klass, assessment, itemSearchParams(klass))]
         rescue
             return nil
@@ -121,7 +121,7 @@ class ServerInteraction
             search[:search][:parameters]["title:contains"] = input if input.present?
         elsif klass.eql?(FHIR::Questionnaire)
             search[:search][:parameters][:_profile] = profiles[:q]
-            search[:search][:parameters][:_count] = 50
+            search[:search][:parameters][:_count] = 10
             search[:search][:parameters]["item-text:contains"] = input if input.present?
             elements = "id,name,version"
             itemDepth = 5

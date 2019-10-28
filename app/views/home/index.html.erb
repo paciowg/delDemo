@@ -1,32 +1,6 @@
 <%= render 'partials/banner' %>
 
-<h2 class='home-header mt-5'>Search for Data Elements by ID or Text</h2>
-<div class='search-container'>
-    <form class='search-form' action="/search" accept-charset="UTF-8" method="get">
-        <select name='assessment' class='form-control search-dropdown'>
-            <option value=''>All Forms</option>
-            <option value='' disabled>---------------</option>
-            <option value='' disabled>Active Forms</option>
-            <option value='' disabled>---------------</option>
-            <% @qssActive.each do |av| %>
-                <option value="<%= av[:id] -%>"><%= av[:name].sub("MDS30", "MDS3.0") -%></option>
-            <% end %>
-            <option value='' disabled>---------------</option>
-            <option value='' disabled>Inactive Forms</option>
-            <option value='' disabled>---------------</option>
-            <% @qssInactive.each do |iv| %>
-                <option value="<%= iv[:id] -%>"><%= iv[:name].sub("MDS30", "MDS3.0") -%></option>
-            <% end %>
-        </select>
-        <div class="input-group">
-            <input type="text" name="input" class="form-control" placeholder="DEL Search" 
-                    aria-label="DEL Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-        </div>
-    </form>
-</div>
+<%= render 'partials/search' %>
 
 <div class='qop-container-blue'>
     <div class="home-cards-container">
@@ -36,7 +10,7 @@
                 <% if av[:status].eql?("active") %>
                     <a href="/questionnaire?version=<%= av[:id] -%>&loinc=false" 
                             class="card active-cards <%= "no-loinc" if av[:code].nil? %>">
-                        <h5 class="card-header"><%= av[:name].sub("MDS30", "MDS3.0") -%></h5>
+                        <h5 class="card-header"><%= av[:name].sub("MDS3_0", "MDS3.0") -%></h5>
                         <div class="card-body d-flex flex-column">
                             <h6 class="card-subtitle mb-2">
                                 <%= av[:title] -%>
@@ -64,7 +38,7 @@
             <% @qssInactive.each do |iv| %>
                 <a href="/questionnaire?version=<%= iv[:id] -%>&loinc=false" 
                         class="card active-cards <%= "no-loinc" if iv[:code].nil? %>">
-                    <h5 class="card-header"><%= iv[:name].sub("MDS30", "MDS3.0") -%></h5>
+                    <h5 class="card-header"><%= iv[:name].sub("MDS3_0", "MDS3.0") -%></h5>
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-subtitle mb-2"><%= iv[:title] -%></h6>
                         <p class="mt-auto">

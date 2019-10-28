@@ -4,9 +4,9 @@ module SearchHelper
         items = Hash.new
         unless qs.nil?
             qs.each do |q|
-                items[q.name.sub("MDS30", "MDS3.0") + " (v." + q.version + ")"] = relevantItems(q.item, term)
+                items[q.name.sub("MDS3_0", "MDS3.0") + " (v." + q.version + ")"] = relevantItems(q.item, term)
             end
-            items.keep_if{ |key, value| value.present? }
+            items.delete_if{ |key, value| value.blank? }
         end
         items
     end
