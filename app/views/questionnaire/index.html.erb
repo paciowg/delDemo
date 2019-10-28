@@ -1,4 +1,4 @@
-<% status = @questionnaire.status %>
+<% status = @questionnaireStatus %>
 <% isInactive = !status.eql?("active")%>
 
 <%= render 'partials/banner_with_modal' %>
@@ -10,7 +10,7 @@
 <div class="<%= (isInactive ? "inactive" : "active") -%>-section">
     <div class="description">
         <p><%= @questionnaire.description %></p>
-        <p style="text-align: center">
+        <p class="mt-2" style="text-align: center">
             Currently using 
             <strong class="current-code-<%= @loinc ? "loinc" : "cms" %>">
                 <%= @loinc ? "LOINC" : "CMS" %>

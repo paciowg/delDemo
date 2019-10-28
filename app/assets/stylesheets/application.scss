@@ -20,6 +20,16 @@
     --inactive-color: #DDDDDD;
 }
 
+.page-location-container {
+    width: calc(100% - 5pt);
+    padding: 5pt 0 0 5pt;
+}
+
+.home-icon {
+    height: 20pt;
+    width: 20pt;
+}
+
 .search-container {
     display: block;
     padding: 0 15% 40pt;
@@ -200,7 +210,7 @@ a.inactive-about:active {
 }
 
 .description {
-    padding: 5pt 5pt 3pt 5pt;
+    padding: 0 5pt;
 }
 
 .description > p {

@@ -1,5 +1,7 @@
 class DetailController < ApplicationController
     def index
+        @pageLocation = ["Search", "Detail"]
+
         serverInteraction = ConnectionTracker.get(session.id)
 
         @input = params[:input]

@@ -1,6 +1,9 @@
 class SubmissionController < ApplicationController
 
     def index
+        @pageLocation = ["Questionnaire", "Preview", "Submission"]
+
+        @questionnaireStatus = "active"
     end
 
     def download

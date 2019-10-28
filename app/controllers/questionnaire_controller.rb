@@ -3,9 +3,12 @@ class QuestionnaireController < ApplicationController
     helper ValidationHelper
 
     def index
+        @pageLocation = ["Questionnaire"]
+
         serverInteraction = ConnectionTracker.get(session.id)
 
         @questionnaire = serverInteraction.getSpecificResource(FHIR::Questionnaire, params[:version])
+        @questionnaireStatus = @questionnaire.status
 
         @currentSection = nil
 

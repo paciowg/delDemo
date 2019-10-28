@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
     def index
+        @pageLocation = ["Search"]
+
         serverInteraction = ConnectionTracker.get(session.id)
 
         @input = params[:input]
