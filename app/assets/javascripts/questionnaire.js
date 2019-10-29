@@ -114,6 +114,31 @@
             $(".code-toggle").click(window.toggle.codeChange);
         }
 
+    };
+
+    window.search = {
+
+        cardSearchListener: function() {
+            $(".card-search").on("keyup", window.search.filterCards);
+        },
+
+        filterCards: function() {
+            let dirtySearchTerms = $("input.card-search").val().split(/\s+/);
+            let searchTerms = dirtySearchTerms.filter(function(el) { return el; });
+            $('.home-cards .card').each(function() {
+                let text = $(this).text();
+                let matches = true;
+                searchTerms.forEach(function(term) {
+                    if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
+                });
+                if (matches || searchTerms.length == 0) {
+                    if (!$(this).hasClass('show')) $(this).addClass('show');
+                } else {
+                    $(this).removeClass('show');
+                }
+            })
+        }
+        
     }
 
     $(document).on('turbolinks:load', window.disable.formEnter);
@@ -127,5 +152,7 @@
     $(document).on('turbolinks:load', window.toggle.modalLinkListener);
 
     $(document).on('turbolinks:load', window.toggle.codeListener);
+
+    $(document).on('turbolinks:load', window.search.cardSearchListener);
 
 })(jQuery)

@@ -9,7 +9,7 @@
         <div class="home-cards">
             <% (@qssActive + @qssInactive).each do |qv| %>
                 <a href="/questionnaire?version=<%= qv[:id] -%>&loinc=false" 
-                        class="card active-cards <%= "no-loinc" if qv[:code].nil? %>">
+                        class="card active-cards <%= "no-loinc" if qv[:code].nil? %> collapse show">
                     <h5 class="card-header"><%= qv[:name].sub("MDS3_0", "MDS3.0") -%></h5>
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-subtitle mb-2">
