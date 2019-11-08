@@ -137,6 +137,15 @@
                     $(this).removeClass('show');
                 }
             })
+        },
+
+        itemSearchListener: function() {
+            $("#item-search-submit").on("click", window.search.switchToSpinner)
+        },
+
+        switchToSpinner: function() {
+            $(".item-search-text").removeClass("show");
+            $(".white-spinner").addClass("show");
         }
         
     }
@@ -154,5 +163,7 @@
     $(document).on('turbolinks:load', window.toggle.codeListener);
 
     $(document).on('turbolinks:load', window.search.cardSearchListener);
+
+    $(document).on('turbolinks:load', window.search.itemSearchListener);
 
 })(jQuery)

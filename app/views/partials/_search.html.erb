@@ -29,7 +29,10 @@
                 <input type="text" name="input" class="form-control" placeholder="DEL Search" 
                         aria-label="DEL Search" aria-describedby="basic-addon2" value="<%= @input -%>">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                    <button id="item-search-submit" class="btn btn-primary" type="submit">
+                        <div class="item-search-text collapse show">Search</div>
+                        <%= image_tag "white_spinner.svg", alt: "loading", class: "white-spinner collapse"%>
+                    </button>
                 </div>
             </div>
         </form>

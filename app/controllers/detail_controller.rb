@@ -8,7 +8,6 @@ class DetailController < ApplicationController
         @assessmentID = params[:assessment]
         questionnaire = serverInteraction.getSpecificResource(FHIR::Questionnaire, @assessmentID)
         @item = helpers.getItemByID(questionnaire, params[:id])
-
         
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
@@ -22,7 +21,6 @@ class DetailController < ApplicationController
             @qssActive = qss[:active]
             @qssInactive = qss[:inactive]
         end
-        
 
         @assessmentName = (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessmentID) }.first[:name]
     end
