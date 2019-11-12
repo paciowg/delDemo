@@ -71,9 +71,12 @@
         },
 
         codeChange: function() {
-            if ($('.code-toggle').text().includes("CMS")) {
+            console.log("BKDFIBSBFI");
+            if ($('div.toggle-width > div.toggle').hasClass("off")) {
+                console.log("TO CMS");
                 window.toggle.codeToCMS();
             } else {
+                console.log("TO LOINC");
                 window.toggle.codeToLOINC();
             }
         },
@@ -82,11 +85,6 @@
             $('.qop-container-blue')
                     .addClass('qop-container-green')
                     .removeClass('qop-container-blue');
-            $('.current-code-cms')
-                    .text('LOINC')
-                    .addClass('current-code-loinc')
-                    .removeClass('current-code-cms');
-            $('.code-toggle').text('Switch to CMS codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
                 $(this).attr('href', newHref);
@@ -98,11 +96,6 @@
             $('.qop-container-green')
                     .addClass('qop-container-blue')
                     .removeClass('qop-container-green');
-            $('.current-code-loinc')
-                .text('CMS')
-                .addClass('current-code-cms')
-                .removeClass('current-code-loinc');
-            $('.code-toggle').text('Switch to LOINC codes');
             $('.home-cards .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");
                 $(this).attr('href', newHref);
@@ -111,7 +104,7 @@
         },
 
         codeListener: function() {
-            $(".code-toggle").click(window.toggle.codeChange);
+            $(".toggle-group").click(window.toggle.codeChange);
         }
 
     };
@@ -150,6 +143,7 @@
         
     }
 
+
     $(document).on('turbolinks:load', window.disable.formEnter);
 
     $(document).on('turbolinks:load', window.disable.unsupportedCards);
@@ -160,10 +154,13 @@
 
     $(document).on('turbolinks:load', window.toggle.modalLinkListener);
 
-    $(document).on('turbolinks:load', window.toggle.codeListener);
-
     $(document).on('turbolinks:load', window.search.cardSearchListener);
 
     $(document).on('turbolinks:load', window.search.itemSearchListener);
+
+    $(document).on('turbolinks:load', function() { 
+        $('input[type="checkbox"].code-toggle').bootstrapToggle(); // assumes .code-toggle for toggle checkboxes
+        window.toggle.codeListener();
+    });
 
 })(jQuery)

@@ -4,8 +4,15 @@
 
 <div class='qop-container-blue'>
     <div class="home-cards-container">
-        <h2 class="home-header mb-1">Choose a DEL assessment to fill out</h2>
-        <input class="form-control card-search" placeholder="Narrow assessment options" ></input>
+        <div class="cards-title-grid">
+            <div class="toggle-width"></div>
+            <h2 class="home-header mb-1">Choose a DEL assessment to fill out</h2>
+            <div class='toggle-width'>
+                <input type="checkbox" checked class="code-toggle" data-toggle="toggle" 
+                        data-on="CMS" data-off="LOINC" data-onstyle="primary" data-offstyle="success">
+            </div>
+        </div>
+        <input class="form-control card-search" placeholder="Narrow assessment options" >
         <div class="home-cards">
             <% (@qssActive + @qssInactive).each do |qv| %>
                 <a href="/questionnaire?version=<%= qv[:id] -%>&loinc=false" 
@@ -32,15 +39,5 @@
                 </a>
             <% end %>
         </div>
-    </div>
-
-    <div class='assessment-toggles'>
-        <small class="toggle-section-codes">
-            Currently using 
-                <strong class="current-code-cms">CMS</strong> 
-            codes
-            <br>
-            <a class='code-toggle'>Switch to LOINC codes</a>
-        </small>
     </div>
 </div>

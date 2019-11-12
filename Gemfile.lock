@@ -74,6 +74,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-toggle-rails (2.2.1.0)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.20.2)
@@ -281,6 +282,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
+  bootstrap-toggle-rails
   byebug
   capybara (>= 2.15)
   chromedriver-helper
