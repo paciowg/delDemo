@@ -54,6 +54,7 @@
                 <% type = item.type %>
                 <% text = cleanText(item.text) %>
                 <% id = item.linkId %>
+                <% prefix = item.prefix %>
 
                 <% if type.eql?("group") %>
                     <% if qItem.level == 0 %>
@@ -91,7 +92,7 @@
                                             <%= radio_button_tag id, option[1], getFromSession(id).eql?(option[1]),
                                                     style: leftMargin + "; " + fontSize, required: true, 
                                                     data: {toggle: "collapse",
-                                                    target: ".date-" + item.prefix + ".date-collapse.show"} %>
+                                                    target: ".date-" + prefix + ".date-collapse.show"} %>
                                             <div class="radio-label" style="<%= fontSize %>"><%= option[0] %></div>
                                         </div>
                                     <% end %>
@@ -101,13 +102,13 @@
                                             <%= radio_button_tag id, "date", getFromSession(id).eql?("date"), 
                                                     style: leftMargin + "; " + fontSize, required: true, 
                                                     data: {toggle: "collapse", 
-                                                    target: ".date-" + item.prefix + ".date-collapse:not(.show)"} %>
+                                                    target: ".date-" + prefix + ".date-collapse:not(.show)"} %>
                                             <div class="radio-label" style="<%= fontSize %>">Input Date</div>
                                         </div>
                                     <% end %>
 
                                     <div class="form-group collapse date-collapse
-                                            <%= "date-" + item.prefix %>
+                                            <%= "date-" + prefix %>
                                             <%= options.empty? || getFromSession(id).eql?("date") ? " show" : "" %>"
                                             style="<%= dynamicStyle %>">
                                         <div class="row" style="padding-left: <%= options.empty? ? "12" : "24" -%>pt">
@@ -167,7 +168,9 @@
                                 <% end %>
                             <% end %>
                         <% end %>
-                        <small class="form-text" style="<%= leftMargin %>"><%= id %></small>
+                        <small class="form-text" style="<%= leftMargin %>">
+                            <%= if prefix.present? ? prefix : id %>
+                        </small>
                     </div>
                 <% end %>
             <% end %>

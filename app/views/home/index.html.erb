@@ -19,6 +19,9 @@
                 <p class="search-result-counter collapse">Search Results: <strong>0</strong></p>
             </div>
         </div>
+        <div class="home-browse-cards collapse show">
+            <h3>Hey this is the browse section</h3>
+        </div>
         <div class="home-search-cards collapse">
             <% (@qssActive + @qssInactive).each do |qv| %>
                 <%= render 'partials/form_card', qv: qv %>

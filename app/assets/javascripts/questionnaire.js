@@ -109,24 +109,36 @@
     window.search = {
 
         cardSearchListener: function() {
-            $(".card-search").on("keyup", window.search.filterCards);
+            $("input.card-search").on("keyup", window.search.filterCards);
         },
 
         filterCards: function() {
             let dirtySearchTerms = $("input.card-search").val().split(/\s+/);
             let searchTerms = dirtySearchTerms.filter(function(el) { return el; });
-            $('.home-cards .card').each(function() {
-                let text = $(this).text();
-                let matches = true;
-                searchTerms.forEach(function(term) {
-                    if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
+            if (searchTerms.length == 0) {
+                if (!$('.home-browse-cards').hasClass('show')) $('.home-browse-cards').addClass('show');
+                if ($('.home-search-cards').hasClass('show')) $('.home-search-cards').removeClass('show');
+                if ($('p.search-result-counter').hasClass('show')) $('p.search-result-counter').removeClass('show');
+            } else {
+                if ($('.home-browse-cards').hasClass('show')) $('.home-browse-cards').removeClass('show');
+                if (!$('.home-search-cards').hasClass('show')) $('.home-search-cards').addClass('show');
+                if (!$('p.search-result-counter').hasClass('show')) $('p.search-result-counter').addClass('show');
+                let count = 0;
+                $('.home-search-cards section .card').each(function() {
+                    let text = $(this).text();
+                    let matches = true;
+                    searchTerms.forEach(function(term) {
+                        if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
+                    });
+                    if (matches) {
+                        if (!$(this).hasClass('show')) $(this).addClass('show');
+                        count++;
+                    } else {
+                        $(this).removeClass('show');
+                    }
                 });
-                if (matches || searchTerms.length == 0) {
-                    if (!$(this).hasClass('show')) $(this).addClass('show');
-                } else {
-                    $(this).removeClass('show');
-                }
-            });
+                $('p.search-result-counter strong').text(count);
+            }
         },
 
         itemSearchListener: function() {
@@ -138,7 +150,7 @@
             $(".white-spinner").addClass("show");
         }
         
-    }
+    };
 
 
     $(document).on('turbolinks:load', window.disable.formEnter);
