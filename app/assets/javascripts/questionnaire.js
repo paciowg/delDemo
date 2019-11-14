@@ -71,12 +71,9 @@
         },
 
         codeChange: function() {
-            console.log("BKDFIBSBFI");
             if ($('div.toggle-width > div.toggle').hasClass("off")) {
-                console.log("TO CMS");
                 window.toggle.codeToCMS();
             } else {
-                console.log("TO LOINC");
                 window.toggle.codeToLOINC();
             }
         },
@@ -129,11 +126,11 @@
                 } else {
                     $(this).removeClass('show');
                 }
-            })
+            });
         },
 
         itemSearchListener: function() {
-            $("#item-search-submit").on("click", window.search.switchToSpinner)
+            $("#item-search-submit").on("click", window.search.switchToSpinner);
         },
 
         switchToSpinner: function() {
@@ -163,4 +160,4 @@
         window.toggle.codeListener();
     });
 
-})(jQuery)
+})(jQuery);

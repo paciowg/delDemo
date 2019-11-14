@@ -301,8 +301,9 @@ form.button_to {
 }
 
 .card-search {
-    width: 400pt;
-    margin: 0 auto 8pt;
+    max-width: 250pt;
+    min-width: 200pt;
+    margin: 0;
 }
 
 .home-cards-container {
@@ -317,11 +318,20 @@ form.button_to {
     margin: 8pt 0 12pt;
 }
 
-.cards-title-grid {
+.cards-title-grid,
+.search-cards-grid {
     margin: auto;
     display: grid;
-    grid-template-columns: auto auto auto;
     text-align: center;
+}
+
+.cards-title-grid {
+    grid-template-columns: auto auto auto;
+}
+
+.search-cards-grid {
+    grid-template-columns: auto min-content auto;
+    margin-bottom: 8pt;
 }
 
 .toggle-width {
@@ -329,11 +339,21 @@ form.button_to {
     margin: auto 0 auto auto;
 }
 
+.search-result-width {
+    min-width: 75pt;
+    max-width: 125pt;
+}
+
+.search-result-counter{
+    text-align: left;
+    margin: auto auto auto 5pt;
+}
+
 span.toggle-handle {
     background-color: white;
 }
 
-.home-cards {
+.home-search-cards {
     display: flex;
     overflow: scroll;
 }
