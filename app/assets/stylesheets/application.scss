@@ -330,7 +330,7 @@ form.button_to {
 }
 
 .search-cards-grid {
-    grid-template-columns: auto min-content auto;
+    grid-template-columns: auto minmax(auto, 125pt) min-content minmax(auto, 125pt) auto;
     margin-bottom: 8pt;
 }
 
