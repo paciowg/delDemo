@@ -125,8 +125,8 @@
         },
 
         filterCards: function() {
-            let dirtySearchTerms = $("input.card-search").val().split(/\s+/);
-            let searchTerms = dirtySearchTerms.filter(function(el) { return el; });
+            dirtySearchTerms = $("input.card-search").val().split(/\s+/);
+            searchTerms = dirtySearchTerms.filter(function(el) { return el; });
             if (searchTerms.length == 0) {
                 if (!$('.home-browse-cards').hasClass('show')) $('.home-browse-cards').addClass('show');
                 if ($('.home-search-cards').hasClass('show')) $('.home-search-cards').removeClass('show');
@@ -135,10 +135,10 @@
                 if ($('.home-browse-cards').hasClass('show')) $('.home-browse-cards').removeClass('show');
                 if (!$('.home-search-cards').hasClass('show')) $('.home-search-cards').addClass('show');
                 if (!$('p.search-result-counter').hasClass('show')) $('p.search-result-counter').addClass('show');
-                let count = 0;
+                count = 0;
                 $('.home-search-cards section .card').each(function() {
-                    let text = $(this).text();
-                    let matches = true;
+                    text = $(this).text();
+                    matches = true;
                     searchTerms.forEach(function(term) {
                         if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
                     });
