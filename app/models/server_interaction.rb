@@ -9,7 +9,8 @@ class ServerInteraction
     def setConnection
         return nil if @client
         # @url = "https://api.logicahealth.org/PACIO/open"
-        @url = "https://impact-fhir.mitre.org/r4"
+        # @url = "https://impact-fhir.mitre.org/r4"
+        @url = "http://hapi.fhir.org/baseR4"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
     end
@@ -71,6 +72,10 @@ class ServerInteraction
             replies.each do |reply|
                 entry = reply["entry"].collect do |ent| 
                     res = ent["resource"]
+                    unless res["id"] && res["name"] && res["version"] && res["status"] && res["title"] &&
+                                res["publisher"] && res["identifier"] && res["identifier"][0] #&& res["code"] 
+                        next
+                    end
                     {id: res["id"],
                     name: res["name"].gsub("MDS3_0", "MDS3.0").gsub("_", " ") + " (v." + res["version"] + ")",
                     status: res["status"],
@@ -79,7 +84,7 @@ class ServerInteraction
                     code: res["code"],
                     assessment: res["identifier"][0]["value"]}
                 end
-                summaries.push(entry)
+                summaries.push(entry.compact)
             end
             summaries.compact!
             summaries.flatten!(1)
