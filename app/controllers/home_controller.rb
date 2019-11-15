@@ -13,10 +13,12 @@ class HomeController < ApplicationController
             serverInteraction.getSummaries(FHIR::Questionnaire).each do |qv|
                 qv[:status].eql?("active") ? @qssActive.append(qv) : @qssInactive.append(qv)
             end
+            @qssActive = @qssActive.sort{ |i, j| i[:id] <=> j[:id] }
+            @qssInactive = @qssInactive.sort{ |i, j| i[:id] <=> j[:id] }
             SessionStack.qSummariesPush(session.id, @qssActive, @qssInactive)
         else
-            @qssActive = qss[:active]
-            @qssInactive = qss[:inactive]
+            @qssActive = qss[:active].sort{ |i, j| i[:id] <=> j[:id] }
+            @qssInactive = qss[:inactive].sort{ |i, j| i[:id] <=> j[:id] }
         end
 
         @summaryHash = helpers.populateSummaryHash(@qssActive + @qssInactive)

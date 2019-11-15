@@ -22,13 +22,15 @@
         },
 
         itemSearch: function() {
-            $("form.search-form > div.input-group > input.form-control")
-                    .prop("disabled", true)
-                    .attr("placeholder", "Searching through assessments, may take a second...");
             $("form.search-form > div.input-group > div.input-group-append > button")
                     .addClass("disabled")
                     .prop("disabled", true)
                     .parents("form").submit();
+            $("form.search-form > div.input-group > input.form-control")
+                    .prop("disabled", true)
+                    .val("")
+                    .attr("placeholder", "Searching through assessments, may take a second...");
+            $("form.search-form > select.search-dropdown").prop("disabled", true);
         }
 
     };
@@ -92,7 +94,7 @@
             $('.qop-container-blue')
                     .addClass('qop-container-green')
                     .removeClass('qop-container-blue');
-            $('.home-cards .card').each(function() {
+            $('.home-cards-container .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
                 $(this).attr('href', newHref);
             })
@@ -103,7 +105,7 @@
             $('.qop-container-green')
                     .addClass('qop-container-blue')
                     .removeClass('qop-container-green');
-            $('.home-cards .card').each(function() {
+            $('.home-cards-container .card, ').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");
                 $(this).attr('href', newHref);
             })
