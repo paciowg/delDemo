@@ -97,7 +97,7 @@
             $('.home-cards-container .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
                 $(this).attr('href', newHref);
-            })
+            });
             $('.no-loinc').addClass('disabled-card');
         },
 
@@ -105,10 +105,10 @@
             $('.qop-container-green')
                     .addClass('qop-container-blue')
                     .removeClass('qop-container-green');
-            $('.home-cards-container .card, ').each(function() {
+            $('.home-cards-container .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");
                 $(this).attr('href', newHref);
-            })
+            });
             $('.no-loinc').removeClass('disabled-card');
         },
 
