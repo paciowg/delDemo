@@ -19,6 +19,16 @@
                 }
                 return true;
             })
+        },
+
+        itemSearch: function() {
+            $("form.search-form > div.input-group > input.form-control")
+                    .prop("disabled", true)
+                    .attr("placeholder", "Searching through assessments, may take a second...");
+            $("form.search-form > div.input-group > div.input-group-append > button")
+                    .addClass("disabled")
+                    .prop("disabled", true)
+                    .parents("form").submit();
         }
 
     };
@@ -148,6 +158,7 @@
         switchToSpinner: function() {
             $(".item-search-text").removeClass("show");
             $(".white-spinner").addClass("show");
+            window.disable.itemSearch();
         }
         
     };
