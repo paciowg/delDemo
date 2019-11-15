@@ -353,9 +353,15 @@ span.toggle-handle {
     background-color: white;
 }
 
+.home-browse-cards-section,
 .home-search-cards {
     display: flex;
     overflow: scroll;
+}
+
+.home-browse-section-header {
+    text-align: center;
+    text-decoration: underline;
 }
 
 .active-cards,

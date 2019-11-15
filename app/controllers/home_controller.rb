@@ -18,5 +18,7 @@ class HomeController < ApplicationController
             @qssActive = qss[:active]
             @qssInactive = qss[:inactive]
         end
+
+        @summaryHash = helpers.populateSummaryHash(@qssActive + @qssInactive)
     end
 end

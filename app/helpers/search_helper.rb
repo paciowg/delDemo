@@ -15,7 +15,7 @@ module SearchHelper
     def relevantItems(items, term)
         chosen = []
         items.each do |item|
-            chosen.push(item) if item.text.upcase.include?(term.upcase) && item.prefix.present?
+            chosen.push(item) if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)
             chosen += relevantItems(item.item, term) if item.item.present?
         end
         chosen

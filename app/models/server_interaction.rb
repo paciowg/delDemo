@@ -76,7 +76,8 @@ class ServerInteraction
                     status: res["status"],
                     title: res["title"],
                     publisher: res["publisher"],
-                    code: res["code"]}
+                    code: res["code"],
+                    assessment: res["identifier"][0]["value"]}
                 end
                 summaries.push(entry)
             end

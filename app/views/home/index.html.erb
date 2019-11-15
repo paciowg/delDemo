@@ -22,7 +22,17 @@
             <div></div>
         </div>
         <div class="home-browse-cards collapse show">
-            <h3>Hey this is the browse section</h3>
+            <% @summaryHash.each do |asmt, categoryHash| %>
+                <h3 class="home-browse-section-header"><%= asmt.to_s %></h3>
+                <% categoryHash.each do |category, formArray| %>
+                    <h4><%= category.to_s %></h4>
+                    <div class="home-browse-cards-section">
+                        <% formArray.each do |form| %>
+                            <%= render 'partials/form_card', qv: form %>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
         </div>
         <div class="home-search-cards collapse">
             <% (@qssActive + @qssInactive).each do |qv| %>
