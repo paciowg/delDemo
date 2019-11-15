@@ -13,6 +13,7 @@ module SearchHelper
     end
 
     def relevantItems(items, term)
+        term = "" if term.nil?
         chosen = []
         items.each do |item|
             chosen.push(item) if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)

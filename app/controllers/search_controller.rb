@@ -6,7 +6,9 @@ class SearchController < ApplicationController
 
         @input = params[:input]
         @assessmentID = params[:assessment]
-        unfilteredQs = serverInteraction.search(FHIR::Questionnaire, @input, @assessmentID)
+        unless @input.blank? && @assessmentID.blank?
+            unfilteredQs = serverInteraction.search(FHIR::Questionnaire, @input, @assessmentID)
+        end
         @qs = helpers.searchItems(unfilteredQs, @input)
 
         qss = SessionStack.qSummariesRead(session.id)
