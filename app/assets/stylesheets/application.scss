@@ -12,6 +12,7 @@
  *
  * require_tree .
  * require_self
+ *= require bootstrap-toggle
  */
 
 @import 'bootstrap';
@@ -179,19 +180,7 @@ a.inactive-about:active {
     margin: auto; 
 }
 
-.code-toggle {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-.code-toggle:hover {
-    cursor: pointer;
-    color: #0056b3 !important;
-    text-decoration: underline !important;
-}
-
-.current-code-cms, 
-.code-toggle {
+.current-code-cms {
     color: var(--blue) !important;
 }
 
@@ -312,8 +301,9 @@ form.button_to {
 }
 
 .card-search {
-    width: 400pt;
-    margin: 0 auto 8pt;
+    max-width: 250pt;
+    min-width: 200pt;
+    margin: 0;
 }
 
 .home-cards-container {
@@ -321,15 +311,58 @@ form.button_to {
     padding: 0 15pt;
 }
 
+.home-cards-header,
 .home-header {
     width: 100%;
     text-align: center;
     margin: 8pt 0 12pt;
 }
 
-.home-cards {
+.cards-title-grid,
+.search-cards-grid {
+    margin: auto;
+    display: grid;
+    text-align: center;
+}
+
+.cards-title-grid {
+    grid-template-columns: auto auto auto;
+}
+
+.search-cards-grid {
+    grid-template-columns: auto minmax(auto, 125pt) min-content minmax(auto, 125pt) auto;
+    margin-bottom: 8pt;
+}
+
+.toggle-width {
+    width: 75pt;
+    margin: auto 0 auto auto;
+}
+
+.search-result-width {
+    min-width: 75pt;
+    max-width: 125pt;
+}
+
+.search-result-counter{
+    text-align: left;
+    margin: auto auto auto 5pt;
+}
+
+span.toggle-handle {
+    background-color: white;
+}
+
+.home-browse-cards-section,
+.home-search-cards {
     display: flex;
     overflow: scroll;
+}
+
+.home-browse-section-header {
+    text-align: center;
+    text-decoration: underline;
+    margin: 25pt auto 15pt; 
 }
 
 .active-cards,

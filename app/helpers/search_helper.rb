@@ -4,7 +4,8 @@ module SearchHelper
         items = Hash.new
         unless qs.nil?
             qs.each do |q|
-                items[q.name.sub("MDS3_0", "MDS3.0") + " (v." + q.version + ")"] = relevantItems(q.item, term)
+                key = q.name.gsub("MDS3_0", "MDS3.0").gsub("_", " ") + " (v." + q.version + ")"
+                items[key] = relevantItems(q.item, term)
             end
             items.delete_if{ |key, value| value.blank? }
         end
@@ -12,9 +13,10 @@ module SearchHelper
     end
 
     def relevantItems(items, term)
+        term = "" if term.nil?
         chosen = []
         items.each do |item|
-            chosen.push(item) if item.text.upcase.include?(term.upcase) && item.prefix.present?
+            chosen.push(item) if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)
             chosen += relevantItems(item.item, term) if item.item.present?
         end
         chosen

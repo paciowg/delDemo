@@ -4,43 +4,40 @@
 
 <div class='qop-container-blue'>
     <div class="home-cards-container">
-        <h2 class="home-header mb-1">Choose a DEL assessment to fill out</h2>
-        <input class="form-control card-search" placeholder="Narrow assessment options" ></input>
-        <div class="home-cards">
-            <% (@qssActive + @qssInactive).each do |qv| %>
-                <a href="/questionnaire?version=<%= qv[:id] -%>&loinc=false" 
-                        class="card active-cards <%= "no-loinc" if qv[:code].nil? %> collapse show">
-                    <h5 class="card-header"><%= qv[:name].sub("MDS3_0", "MDS3.0") -%></h5>
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-subtitle mb-2">
-                            <%= qv[:title] -%>
-                        </h6>
-                        <p class="mt-auto">
-                            Status: <%= qv[:status].capitalize %>
-                        </p>
-                        <p>
-                            <% if qv[:code].nil? %>
-                                No LOINC Support
-                            <% else %>
-                                LOINC Supported (<%= qv[:code][0]["code"] -%>)
-                            <% end %>
-                        </p>
-                        <small class="card-text">
-                            Published by <%= qv[:publisher] -%>
-                        </small>
+        <div class="cards-title-grid">
+            <div class="toggle-width"></div>
+            <h2 class="home-header mb-1">Choose a DEL assessment to fill out</h2>
+            <div class='toggle-width'>
+                <input type="checkbox" checked class="code-toggle" data-toggle="toggle" 
+                        data-on="CMS" data-off="LOINC" data-onstyle="primary" data-offstyle="success">
+            </div>
+        </div>
+        <div class="search-cards-grid">
+            <div></div>
+            <div class="search-result-width"></div>
+            <input class="form-control card-search" placeholder="Search assessments">
+            <div class="search-result-width">
+                <p class="search-result-counter collapse">Search Results: <strong>0</strong></p>
+            </div>
+            <div></div>
+        </div>
+        <div class="home-browse-cards collapse show">
+            <% @summaryHash.each do |asmt, categoryHash| %>
+                <h3 class="home-browse-section-header"><%= asmt.to_s %></h3>
+                <% categoryHash.each do |category, formArray| %>
+                    <h4><%= category.to_s %></h4>
+                    <div class="home-browse-cards-section">
+                        <% formArray.each do |form| %>
+                            <%= render 'partials/form_card', qv: form %>
+                        <% end %>
                     </div>
-                </a>
+                <% end %>
             <% end %>
         </div>
-    </div>
-
-    <div class='assessment-toggles'>
-        <small class="toggle-section-codes">
-            Currently using 
-                <strong class="current-code-cms">CMS</strong> 
-            codes
-            <br>
-            <a class='code-toggle'>Switch to LOINC codes</a>
-        </small>
+        <div class="home-search-cards collapse">
+            <% (@qssActive + @qssInactive).each do |qv| %>
+                <%= render 'partials/form_card', qv: qv %>
+            <% end %>
+        </div>
     </div>
 </div>

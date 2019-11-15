@@ -19,6 +19,18 @@
                 }
                 return true;
             })
+        },
+
+        itemSearch: function() {
+            $("form.search-form > div.input-group > div.input-group-append > button")
+                    .addClass("disabled")
+                    .prop("disabled", true)
+                    .parents("form").submit();
+            $("form.search-form > div.input-group > input.form-control")
+                    .prop("disabled", true)
+                    .val("")
+                    .attr("placeholder", "Searching through assessments, may take a second...");
+            $("form.search-form > select.search-dropdown").prop("disabled", true);
         }
 
     };
@@ -71,7 +83,7 @@
         },
 
         codeChange: function() {
-            if ($('.code-toggle').text().includes("CMS")) {
+            if ($('div.toggle-width > div.toggle').hasClass("off")) {
                 window.toggle.codeToCMS();
             } else {
                 window.toggle.codeToLOINC();
@@ -82,15 +94,10 @@
             $('.qop-container-blue')
                     .addClass('qop-container-green')
                     .removeClass('qop-container-blue');
-            $('.current-code-cms')
-                    .text('LOINC')
-                    .addClass('current-code-loinc')
-                    .removeClass('current-code-cms');
-            $('.code-toggle').text('Switch to CMS codes');
-            $('.home-cards .card').each(function() {
+            $('.home-cards-container .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=false", "loinc=true");
                 $(this).attr('href', newHref);
-            })
+            });
             $('.no-loinc').addClass('disabled-card');
         },
 
@@ -98,20 +105,15 @@
             $('.qop-container-green')
                     .addClass('qop-container-blue')
                     .removeClass('qop-container-green');
-            $('.current-code-loinc')
-                .text('CMS')
-                .addClass('current-code-cms')
-                .removeClass('current-code-loinc');
-            $('.code-toggle').text('Switch to LOINC codes');
-            $('.home-cards .card').each(function() {
+            $('.home-cards-container .card').each(function() {
                 newHref = $(this).attr('href').replace("loinc=true", "loinc=false");
                 $(this).attr('href', newHref);
-            })
+            });
             $('.no-loinc').removeClass('disabled-card');
         },
 
         codeListener: function() {
-            $(".code-toggle").click(window.toggle.codeChange);
+            $(".toggle-group").click(window.toggle.codeChange);
         }
 
     };
@@ -119,36 +121,50 @@
     window.search = {
 
         cardSearchListener: function() {
-            $(".card-search").on("keyup", window.search.filterCards);
+            $("input.card-search").on("keyup", window.search.filterCards);
         },
 
         filterCards: function() {
             let dirtySearchTerms = $("input.card-search").val().split(/\s+/);
             let searchTerms = dirtySearchTerms.filter(function(el) { return el; });
-            $('.home-cards .card').each(function() {
-                let text = $(this).text();
-                let matches = true;
-                searchTerms.forEach(function(term) {
-                    if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
+            if (searchTerms.length == 0) {
+                if (!$('.home-browse-cards').hasClass('show')) $('.home-browse-cards').addClass('show');
+                if ($('.home-search-cards').hasClass('show')) $('.home-search-cards').removeClass('show');
+                if ($('p.search-result-counter').hasClass('show')) $('p.search-result-counter').removeClass('show');
+            } else {
+                if ($('.home-browse-cards').hasClass('show')) $('.home-browse-cards').removeClass('show');
+                if (!$('.home-search-cards').hasClass('show')) $('.home-search-cards').addClass('show');
+                if (!$('p.search-result-counter').hasClass('show')) $('p.search-result-counter').addClass('show');
+                let count = 0;
+                $('.home-search-cards section .card').each(function() {
+                    let text = $(this).text();
+                    let matches = true;
+                    searchTerms.forEach(function(term) {
+                        if (matches) matches = text.toUpperCase().includes(term.toUpperCase());
+                    });
+                    if (matches) {
+                        if (!$(this).hasClass('show')) $(this).addClass('show');
+                        count++;
+                    } else {
+                        $(this).removeClass('show');
+                    }
                 });
-                if (matches || searchTerms.length == 0) {
-                    if (!$(this).hasClass('show')) $(this).addClass('show');
-                } else {
-                    $(this).removeClass('show');
-                }
-            })
+                $('p.search-result-counter strong').text(count);
+            }
         },
 
         itemSearchListener: function() {
-            $("#item-search-submit").on("click", window.search.switchToSpinner)
+            $("#item-search-submit").on("click", window.search.switchToSpinner);
         },
 
         switchToSpinner: function() {
             $(".item-search-text").removeClass("show");
             $(".white-spinner").addClass("show");
+            window.disable.itemSearch();
         }
         
-    }
+    };
+
 
     $(document).on('turbolinks:load', window.disable.formEnter);
 
@@ -160,10 +176,13 @@
 
     $(document).on('turbolinks:load', window.toggle.modalLinkListener);
 
-    $(document).on('turbolinks:load', window.toggle.codeListener);
-
     $(document).on('turbolinks:load', window.search.cardSearchListener);
 
     $(document).on('turbolinks:load', window.search.itemSearchListener);
 
-})(jQuery)
+    $(document).on('turbolinks:load', function() { 
+        $('input[type="checkbox"].code-toggle').bootstrapToggle(); // assumes .code-toggle for toggle checkboxes
+        window.toggle.codeListener();
+    });
+
+})(jQuery);

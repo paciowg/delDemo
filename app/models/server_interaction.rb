@@ -7,8 +7,8 @@ class ServerInteraction
     end
 
     def setConnection
-        # @url = "https://api.logicahealth.org/PACIO/open"
         return nil if @client
+        # @url = "https://api.logicahealth.org/PACIO/open"
         @url = "https://impact-fhir.mitre.org/r4"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
@@ -70,12 +70,14 @@ class ServerInteraction
             summaries = []
             replies.each do |reply|
                 entry = reply["entry"].collect do |ent| 
-                    {id: ent["resource"]["id"],
-                    name: ent["resource"]["name"].sub("MDS3_0", "MDS3.0") + " (v." + ent["resource"]["version"] + ")",
-                    status: ent["resource"]["status"],
-                    title: ent["resource"]["title"],
-                    publisher: ent["resource"]["publisher"],
-                    code: ent["resource"]["code"]}
+                    res = ent["resource"]
+                    {id: res["id"],
+                    name: res["name"].gsub("MDS3_0", "MDS3.0").gsub("_", " ") + " (v." + res["version"] + ")",
+                    status: res["status"],
+                    title: res["title"],
+                    publisher: res["publisher"],
+                    code: res["code"],
+                    assessment: res["identifier"][0]["value"]}
                 end
                 summaries.push(entry)
             end
@@ -121,7 +123,7 @@ class ServerInteraction
             search[:search][:parameters]["title:contains"] = input if input.present?
         elsif klass.eql?(FHIR::Questionnaire)
             search[:search][:parameters][:_profile] = profiles[:q]
-            search[:search][:parameters][:_count] = 25
+            search[:search][:parameters][:_count] = 50
             search[:search][:parameters]["item-text:contains"] = input if input.present?
             elements = "id,name,version"
             itemDepth = 5

@@ -28,11 +28,15 @@
     </div>
 <% else %>
     <h4 class='no-search-results'>
-        No Data Elements
-        <% if @assessmentID.present? %>
-            in
-            <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessmentID) }.first[:name] %>
+        <% if @input.blank? && @assessmentID.blank? %>
+            Cannot search all forms without a search term
+        <% else %>
+            No Data Elements
+            <% if @assessmentID.present? %>
+                in
+                <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessmentID) }.first[:name] %>
+            <% end %>
+            match the search term "<%= @input -%>"
         <% end %>
-        match the search term "<%= @input -%>"
     </h4>
 <% end %>
