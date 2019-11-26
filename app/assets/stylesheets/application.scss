@@ -447,3 +447,26 @@ span.toggle-handle {
     width: 15pt;
     height: 15pt;
 }
+
+.search-table-nav-container {
+    width: 100%;
+    padding: 0 50pt;
+}
+
+.search-table-nav-back,
+.search-table-nav-next {
+    width: 100pt;
+}
+
+.search-table-nav-back {
+    margin-right: auto;
+}
+
+.search-table-nav-next {
+    margin-left: auto;
+}
+
+.search-table-count {
+    margin: auto;
+    text-align: center;
+}

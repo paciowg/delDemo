@@ -5,12 +5,12 @@ class SessionStack
     def self.create(id, loinc = false)
         summaries = @sessionHash[id] ? @sessionHash[id][:qSummaries].clone : { active: nil, inactive: nil }
         prune()
-        @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil}
+        @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil, sr: [nil, nil]}
         @sessionHash[id][:qSummaries] = summaries
     end
 
-    def self.prune() #removes sessions older than 5 hours
-        safeHours = 5
+    def self.prune() #removes sessions older than 3 hours
+        safeHours = 3
         @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
     end
 
@@ -24,6 +24,14 @@ class SessionStack
 
     def self.qrPush(id, qr)
         @sessionHash[id][:qr] = qr
+    end
+
+    def self.searchPush(id, searchResults)
+        @sessionHash[id][:sr] = searchResults
+    end
+
+    def self.searchRead(id)
+        @sessionHash[id][:sr]
     end
 
     def self.qRead(id)

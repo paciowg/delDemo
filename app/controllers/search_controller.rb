@@ -6,10 +6,19 @@ class SearchController < ApplicationController
 
         @input = params[:input]
         @assessmentID = params[:assessment]
-        unless @input.blank? && @assessmentID.blank?
-            unfilteredQs = serverInteraction.search(FHIR::Questionnaire, @input, @assessmentID)
+        searchKey = @assessmentID + "--" + @input
+        @page = params[:page].blank? ? 1 : params[:page].to_i
+
+        unless SessionStack.searchRead(session.id)[0].eql?(searchKey)
+            unless @input.blank? && @assessmentID.blank?
+                unfilteredQs = serverInteraction.search(FHIR::Questionnaire, @input, @assessmentID)
+            end
+            SessionStack.searchPush(session.id, [searchKey, helpers.searchItems(unfilteredQs, @input)])
         end
-        @qs = helpers.searchItems(unfilteredQs, @input)
+        search = SessionStack.searchRead(session.id)[1]
+        @qsTotalSize = search[0]
+        @pageUpperBound = search[1].length
+        @qs = search[1][@page - 1]
 
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
