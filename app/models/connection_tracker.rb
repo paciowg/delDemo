@@ -14,8 +14,8 @@ class ConnectionTracker
         @connections[sessionID][:si]
     end
 
-    def self.prune #removes connections older than 5 hours
-        safeHours = 5
+    def self.prune #removes connections older than 1.5 hours
+        safeHours = 1.5
         @connections.delete_if { |sessionID, connection| (Time.now - connection[:lastUsed]) > (safeHours * 60 * 60) }
     end
 

@@ -9,8 +9,8 @@ class SessionStack
         @sessionHash[id][:qSummaries] = summaries
     end
 
-    def self.prune() #removes sessions older than 3 hours
-        safeHours = 3
+    def self.prune() #removes sessions older than 1.5 hours
+        safeHours = 1.5
         @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
     end
 
