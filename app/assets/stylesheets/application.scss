@@ -428,7 +428,7 @@ span.toggle-handle {
 
 .search-table-container {
     width: 100%;
-    padding: 0 25pt 25pt;
+    padding: 0 25pt 10pt;
 }
 
 .search-table {
@@ -450,23 +450,33 @@ span.toggle-handle {
 
 .search-table-nav-container {
     width: 100%;
-    padding: 0 50pt;
+    padding: 0 25pt 10pt;
+    display: flex;
 }
 
-.search-table-nav-back,
-.search-table-nav-next {
-    width: 100pt;
+.search-table-nav-back-container,
+.search-table-nav-next-container,
+.search-table-nav-button {
+    width: 50pt;
+    height: 30pt;
+
 }
 
-.search-table-nav-back {
-    margin-right: auto;
+.search-table-nav-back-container {
+    margin: 0 10pt 0 auto;
 }
 
-.search-table-nav-next {
-    margin-left: auto;
+.search-table-nav-next-container {
+    margin: 0 auto 0 10pt;
 }
 
-.search-table-count {
-    margin: auto;
+.search-table-count-container {
     text-align: center;
+    max-width: 300pt;
+    margin: auto 0;
+}
+
+.search-table-nav-button {
+    padding: 5pt;
+    font-size: 12pt !important;
 }
