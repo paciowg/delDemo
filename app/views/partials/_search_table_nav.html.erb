@@ -12,7 +12,7 @@
                 </form>
             </div>
             <div class='search-table-count-container'>
-                <p>
+                <p style="margin: 0;">
                     Displaying
                     <%= ((@page - 1) * 100 + 1).to_s + "-" + [@page * 100, @qsTotalSize].min.to_s -%>
                     of <%= @qsTotalSize -%> total results
