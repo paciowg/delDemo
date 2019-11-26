@@ -22,6 +22,7 @@ module SearchHelper
                 chosen.push(newItem)
             end
             chosen += relevantItems(item.item, term) if item.item.present?
+            item = nil
         end
         chosen
     end

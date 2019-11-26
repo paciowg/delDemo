@@ -29,10 +29,13 @@ module QuestionnaireHelper
         items = []
         return nil if itemArray.nil?
         itemArray.each do |item|
-            items.append(QItem.new(item, level))
+            newItem = item.dup
+            newItem.item = nil
+            items.append(QItem.new(newItem, level))
             if item.item
                 items.append(getItem(item.item, level + 1))
             end
+            item = nil
         end
         items
     end
