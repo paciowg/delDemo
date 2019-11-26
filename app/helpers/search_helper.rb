@@ -16,7 +16,11 @@ module SearchHelper
         term = "" if term.nil?
         chosen = []
         items.each do |item|
-            chosen.push(item) if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)
+            if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)
+                newItem = item.dup
+                newItem.item = nil
+                chosen.push(newItem)
+            end
             chosen += relevantItems(item.item, term) if item.item.present?
         end
         chosen
