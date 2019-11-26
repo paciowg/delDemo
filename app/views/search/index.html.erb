@@ -3,6 +3,7 @@
 <%= render 'partials/search'%>
 
 <% if @qs.present? %>
+
     <%= render 'partials/search_table_nav' %>
 
     <div class='search-table-container'>
@@ -29,7 +30,8 @@
         </table>
     </div>
 
-    <%= render 'partials/search_table_nav' %>
+    <%= render 'partials/search_table_nav' if @qsTotalSize > 9 %>
+
 <% else %>
     <h4 class='no-search-results'>
         <% if @input.blank? && @assessmentID.blank? %>
