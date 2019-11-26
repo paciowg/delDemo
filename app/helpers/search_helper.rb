@@ -17,7 +17,7 @@ module SearchHelper
         chosen = []
         items.each do |item|
             if item.text.present? && item.prefix.present? && item.text.upcase.include?(term.upcase)
-                newItem = item.dup
+                newItem = item.dup # helps solve heroku memory leak issue
                 newItem.item = nil
                 chosen.push(newItem)
             end

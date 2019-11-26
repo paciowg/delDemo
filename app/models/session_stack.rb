@@ -3,16 +3,26 @@ class SessionStack
     @sessionHash = Hash.new
 
     def self.create(id, loinc = false)
-        summaries = @sessionHash[id] ? @sessionHash[id][:qSummaries].clone : { active: nil, inactive: nil }
+        if @sessionHash[id] # sets all prior references to nil and runs GC (seems to solve memory leak)
+            @sessionHash[id][:q].delete_if{ |e| true }
+            @sessionHash[id][:q] = nil
+            @sessionHash[id][:q] = [{"started" => Time.now, "loinc" => loinc}]
+            @sessionHash[id][:qr] = nil
+            @sessionHash[id][:sr][0] = nil
+            @sessionHash[id][:sr][1] = nil
+            @sessionHash[id][:sr] = nil
+            @sessionHash[id][:sr] = [nil, nil]
+        else 
+            @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil, sr: [nil, nil]}
+            @sessionHash[id][:qSummaries] = { active: nil, inactive: nil }
+        end
         prune
-        @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil, sr: [nil, nil]}
-        @sessionHash[id][:qSummaries] = summaries
+        GC.start
     end
 
     def self.prune() #removes sessions older than 1.5 hours
         safeHours = 1.5
         @sessionHash.delete_if { |id, session| (Time.now - session[:q][0]["started"]) > (safeHours * 60 * 60) }
-        GC.start
     end
 
     def self.loinc?(id)

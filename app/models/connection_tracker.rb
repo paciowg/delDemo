@@ -4,13 +4,13 @@ class ConnectionTracker
 
     def self.establish(sessionID)
         @connections[sessionID] = { si: ServerInteraction.new, lastUsed: Time.now }
-        prune()
+        prune
     end
 
     def self.get(sessionID)
         establish(sessionID) if @connections[sessionID].blank?
         @connections[sessionID][:lastUsed] = Time.now
-        prune()
+        prune
         @connections[sessionID][:si]
     end
 
