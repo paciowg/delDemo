@@ -193,6 +193,13 @@ the following commands will create it directly in the home directory:
     ```
     Then close __Terminal__, and open __Terminal__ again.
 
+    **NOTE**: Both Ruby and Rails can be installed with one command by inputting:
+    ```
+    \curl -sSL https://get.rvm.io | bash -s stable --rails
+    ```
+    If you choose this option, you can jump ahead to [step 15](#step-15) 
+    Reference http://rvm.io/ for more information about the Ruby Version Manager.
+
 13. <a name="step-13"></a>Install __Ruby__ by inputting:
 
     ```
@@ -264,6 +271,9 @@ the following commands will create it directly in the home directory:
     ```
     brew install postgresql
     ```
+    Alternately, you can install PostgreSQL using a GUI installer. Binary packages are available for multiple operating systems at https://www.postgresql.org/download/. 
+
+**NOTE:** A minimum of Postgres version 12 is required to run the demo. 
 
 18. <a name="step-18"></a>Create and migrate the (largely unused) DEL Demo dev db
 
@@ -327,4 +337,4 @@ running. To do this gracefully, you need to do two things:
 
 ## Copyright
 
-Copyright 2019 The MITRE Corporation
+Copyright 2020 The MITRE Corporation
