@@ -1,0 +1,1706 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "sdc-questionnaireresponse-BetsyMitre",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">SDC QuestionnaireResponse converted from the DEL Demo Client.</div>"
+  },
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaireresponse"
+    ]
+  },
+  "questionnaire" : "http://hapi.fhir.org/baseR4/Questionnaire/LCDS-LA-4.00",
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/17023",
+    "type": "Patient"
+  },
+  "authored": "2020-04-13T19:57:19+00:00",
+  "item": [
+    {
+      "linkId": "Section-2",
+      "text": "Section B: Hearing, Speech, and Vision",
+      "item": [
+        {
+          "linkId": "Section-2/B0100",
+          "text": "Comatose. Persistent vegetative state/no discernible consciousness",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-2/BB0700",
+          "text": "Expression of Ideas and Wants (consider both verbal and non-verbal expression and excluding language barriers)",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "4",
+                "display": "Expresses complex messages without difficulty and with speech that is clear and easy to understand"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-2/BB0800",
+          "text": "Understanding Verbal and Non-Verbal Content (with hearing aid or device, if used, and excluding language barriers)",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "4",
+                "display": "Understands: Clear comprehension without cues or repetitions"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-3",
+      "text": "Section C: Cognitive Patterns",
+      "item": [
+        {
+          "linkId": "Section-3/C1610",
+          "text": "Signs and Symptoms of Delirium (from CAM©). Confusion Assessment Method (CAM©) Shortened Version Worksheet",
+          "item": [
+            {
+              "linkId": "Section-3/C1610A",
+              "text": "Is there evidence of an acute change in mental status from the {patient's/resident's} baseline?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-3/C1610B",
+              "text": "Did the (abnormal) behavior fluctuate during the day, that is, tend to come and go or increase and decrease in severity?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-3/C1610C",
+              "text": "Did the {patient/resident} have difficulty focusing attention, for example, being easily distractible or having difficulty keeping track of what was being said?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-3/C1610D",
+              "text": "Was the {patient's/resident's} thinking disorganized or incoherent, such as rambling or irrelevant conversation, unclear or illogical flow of ideas, or unpredictable, switching from subject to subject?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-3/C1610E",
+              "text": "Overall, how would you rate the {patient's/resident's} level of consciousness?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-8",
+      "text": "Section H: Bladder and Bowel",
+      "item": [
+        {
+          "linkId": "Section-8/H0400",
+          "text": "Bowel Continence - Select the one category that best describes the {patient/resident}.",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "Always continent"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-8/H0350",
+          "text": "Bladder Continence - Select the one category that best describes the {patient/resident}.",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "Always continent (no documented incontinence)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-9",
+      "text": "Section I: Active Diagnoses",
+      "item": [
+        {
+          "linkId": "Section-9/I0050",
+          "text": "Indicate the {patient's/resident's} primary medical condition category",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "4",
+                "display": "Chronic Cardiac Condition (e.g., heart failure)"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-9/I0050A",
+          "text": "If \"Other Medical Condition\", enter the ICD code in the boxes.",
+          "answer": [
+            {
+              "valueString": "J10"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-9/I0000",
+          "text": "Active Diagnoses in the last 7 days: Check all that apply. Diagnoses listed in parentheses are provided as examples and should not be considered as all-inclusive lists",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "I2900",
+                "display": "Diabetes Mellitus (DM) (e.g., diabetic retinopathy, nephropathy, and neuropathy)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-10",
+      "text": "Section J: Health Conditions",
+      "item": [
+        {
+          "linkId": "Section-10/J1800",
+          "text": "Has the {patient/resident} had any falls since {admission} or the prior assessment whichever is more recent?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-10/J1900",
+          "text": "Number of Falls Since {Admission} or Prior Assessment whichever is most recent",
+          "item": [
+            {
+              "linkId": "Section-10/J1900A",
+              "text": "No injury - no evidence of any injury is noted on physical assessment by the nurse or primary care clinician; no complaints of pain or injury by the {patient/resident}; no change in the {patient's/resident's} behavior is noted after the fall.",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "None"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J1900B",
+              "text": "Injury (except major) - skin tears, abrasions, lacerations, superficial bruises, hematomas and sprains; or any fall-related injury that causes the {patient/resident} to complain of pain",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "None"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J1900C",
+              "text": "Major injury - bone fractures, joint dislocations, closed head injuries with altered consciousness, subdural hematoma",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "None"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-11",
+      "text": "Section K: Swallowing/Nutritional Status",
+      "item": [
+        {
+          "linkId": "Section-11/K0200",
+          "text": "Height and Weight - While measuring, if the number is X.1 - X.4 round down; X.5 or greater round up",
+          "item": [
+            {
+              "linkId": "Section-11/K0200A",
+              "text": "Height (in inches). Record most recent height measure since {admission}",
+              "answer": [
+                {
+                  "valueString": "67"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-11/K0200B",
+              "text": "Weight (in pounds). Base weight on most recent measure in last {specify time period in days}; measure weight consistently, according to standard {facility/setting} practice (e.g., in a.m. after voiding, before meal, with shoes off, etc.)",
+              "answer": [
+                {
+                  "valueString": "153"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-13",
+      "text": "Section M: Skin Conditions",
+      "item": [
+        {
+          "linkId": "Section-13/M0210",
+          "text": "Unhealed Pressure Ulcers/Injuries. Does this {patient/resident} have one or more unhealed pressure ulcers/injuries?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-13/M0300",
+          "text": "Current Number of Unhealed Pressure Ulcers/Injuries at Each Stage",
+          "item": [
+            {
+              "linkId": "Section-13/M0300A",
+              "text": "Stage 1: Intact skin with non-blanchable redness of a localized area usually over a bony prominence. Darkly pigmented skin may not have a visible blanching; in dark skin tones only it may appear with persistent blue or purple hues"
+            },
+            {
+              "linkId": "Section-13/M0300B",
+              "text": "Stage 2: Partial thickness loss of dermis presenting as a shallow open ulcer with a red or pink wound bed, without slough. May also present as an intact or open/ruptured blister."
+            },
+            {
+              "linkId": "Section-13/M0300C",
+              "text": "Stage 3: Full thickness tissue loss. Subcutaneous fat may be visible but bone, tendon or muscle is not exposed. Slough may be present but does not obscure the depth of tissue loss. May include undermining and tunneling"
+            },
+            {
+              "linkId": "Section-13/M0300D",
+              "text": "Stage 4: Full thickness tissue loss with exposed bone, tendon or muscle. Slough or eschar may be present on some parts of the wound bed. Often includes undermining and tunneling"
+            },
+            {
+              "linkId": "Section-13/M0300E",
+              "text": "Unstageable - Non-removable dressing/device: Known but not stageable due to non-removable dressing/device"
+            },
+            {
+              "linkId": "Section-13/M0300F",
+              "text": "Unstageable - Slough and/or eschar: Known but not stageable due to coverage of wound bed by slough and/or eschar"
+            },
+            {
+              "linkId": "Section-13/M0300G",
+              "text": "Unstageable - Deep tissue injury"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-14",
+      "text": "Section N: Medications",
+      "item": [
+        {
+          "linkId": "Section-14/N2001",
+          "text": "Drug Regimen Review: Did a complete drug regimen review identify potential clinically significant medication issues?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No - No issues found during review"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-14/N2003",
+          "text": "Medication Follow-up. Did the {facility/setting} contact a physician (or physician-designee) by midnight of the next calendar day and complete prescribed/recommended actions in response to the identified potential clinically significant medication issues?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-14/N2005",
+          "text": "Medication Intervention. Did the {facility/setting} contact and complete physician (or physician-designee) prescribed/recommended actions by midnight of the next calendar day each time potential clinically significant medication issues were identified since the {admission}?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-15",
+      "text": "Section O: Special Treatments, Procedures, and Programs",
+      "item": [
+        {
+          "linkId": "Section-15/O0250",
+          "text": "Influenza Vaccine - Refer to the current version of the {manual} for current influenza vaccination season and reporting period",
+          "item": [
+            {
+              "linkId": "Section-15/O0250A",
+              "text": "Did the {patient/resident} receive the influenza vaccine in this {facility/setting} for this year's influenza vaccination season?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "1",
+                    "display": "Yes"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0250C",
+              "text": "If influenza vaccine not received, state reason",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "2",
+                    "display": "Received outside of this facility"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0250B",
+              "text": "Date influenza vaccine received",
+              "answer": [
+                {
+                  "valueString": "09252019"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-15/O0100",
+          "text": "Special Treatments, Procedures, and Programs. Check all of the following treatments, procedures, and programs that were performed",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "H",
+                "display": "IV Medications"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-15/O0150",
+          "text": "Spontaneous Breathing Trial (SBT) (including Tracheostomy Collar or Continuous Positive Airway Pressure (CPAP) Breathing Trial) by Day 2 of the {LTCH} stay.",
+          "item": [
+            {
+              "linkId": "Section-15/O0150A",
+              "text": "Invasive Mechanical Ventilator Support upon {admission} to the {LTCH}",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No, not on invasive mechanical ventilation support"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0150B",
+              "text": "Assessed for readiness for SBT by day 2 of the {LTCH} stay (Note: Day 2 = Date of Admission to the {LTCH} (Day 1) + 1 calendar day)",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0150C",
+              "text": "Deemed medically ready for SBT by day 2 of the {LTCH} stay",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0150D",
+              "text": "Is there documentation of reason(s) in the {patient's/resident's} medical record that the {patient/resident} was deemed medically unready for SBT by day 2 of the {LTCH} stay?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-15/O0150E",
+              "text": "SBT performed by day 2 of the {LTCH} stay",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-15/O0200",
+          "text": "Ventilator Liberation Rate",
+          "item": [
+            {
+              "linkId": "Section-15/O0200A",
+              "text": "Invasive Mechanical Ventilator: Liberation Status at Discharge",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "9",
+                    "display": "NA (Code only if the {patient/resident} was non-weaning or not ventilated on admission)"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-19",
+      "text": "Section Z: Assessment Administration",
+      "item": [
+        {
+          "linkId": "Section-19/Z0400",
+          "text": "Signature of Persons Completing the Assessment",
+          "item": [
+            {
+              "linkId": "Section-19/Z0400A",
+              "text": "Signature, Title, Sections, Date Section Completed A",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400B",
+              "text": "Signature, Title, Sections, Date Section Completed B",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400C",
+              "text": "Signature, Title, Sections, Date Section Completed C",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400D",
+              "text": "Signature, Title, Sections, Date Section Completed D",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400E",
+              "text": "Signature, Title, Sections, Date Section Completed E",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400F",
+              "text": "Signature, Title, Sections, Date Section Completed F",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400G",
+              "text": "Signature, Title, Sections, Date Section Completed G",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400H",
+              "text": "Signature, Title, Sections, Date Section Completed H",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400I",
+              "text": "Signature, Title, Sections, Date Section Completed I",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400J",
+              "text": "Signature, Title, Sections, Date Section Completed J",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400K",
+              "text": "Signature, Title, Sections, Date Section Completed K",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0400L",
+              "text": "Signature, Title, Sections, Date Section Completed L",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-19/Z0500",
+          "text": "Signature of RN Coordinator Verifying Assessment Completion",
+          "item": [
+            {
+              "linkId": "Section-19/Z0500B",
+              "text": "Date RN Assessment Coordinator signed assessment as complete",
+              "answer": [
+                {
+                  "valueString": "04132020"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-19/Z0500A",
+              "text": "Signature",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse Signed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-36",
+      "text": "Section A: Administrative Information",
+      "item": [
+        {
+          "linkId": "Section-36/A0200",
+          "text": "Type of Provider",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "3",
+                "display": "Long-Term Care Hospital"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0700",
+          "text": "Medicaid Number - Enter \"+\" if pending, \"N\" if not a Medicaid recipient",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "N",
+                "display": "Enter \"N\" if not a Medicaid recipient"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0800",
+          "text": "Gender",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "1",
+                "display": "Female"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0900",
+          "text": "Birth Date",
+          "answer": [
+            {
+              "valueString": "1950-11-07"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1200",
+          "text": "Marital Status",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "3",
+                "display": "Widowed"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0050",
+          "text": "Type of Record",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "1",
+                "display": "Add new assessment/record"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0250",
+          "text": "Reason for Assessment",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "01",
+                "display": "Admission"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0220",
+          "text": "Admission Date",
+          "answer": [
+            {
+              "valueString": "04112020"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1802",
+          "text": "Admitted From. Immediately preceding this admission, where was the {patient/resident}?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "04",
+                "display": "Hospital emergency department"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A2110",
+          "text": "Discharge Location",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "02",
+                "display": "Long-term care facility (LTC)"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0210",
+          "text": "Assessment Reference Date. Observation end date",
+          "answer": [
+            {
+              "valueString": "04132020"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0270",
+          "text": "Discharge Date",
+          "answer": [
+            {
+              "valueString": "04/11/2020"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0100",
+          "text": "Facility Provider Numbers",
+          "item": [
+            {
+              "linkId": "Section-36/A0100A",
+              "text": "National Provider Identifier (NPI)",
+              "answer": [
+                {
+                  "valueString": "123456789"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0100B",
+              "text": "CMS Certification Number (CCN)",
+              "answer": [
+                {
+                  "valueString": "98765"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0100C",
+              "text": "State {Facility/Provider} Number",
+              "answer": [
+                {
+                  "valueString": "23"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0500",
+          "text": "Legal Name of {Patient/Resident}",
+          "item": [
+            {
+              "linkId": "Section-36/A0500A",
+              "text": "First name",
+              "answer": [
+                {
+                  "valueString": "Betsy"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500B",
+              "text": "Middle initial",
+              "answer": [
+                {
+                  "valueString": "A"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500C",
+              "text": "Last name",
+              "answer": [
+                {
+                  "valueString": "Mitre"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500D",
+              "text": "Suffix",
+              "answer": [
+                {
+                  "valueString": "^"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0600",
+          "text": "Social Security and Medicare Numbers",
+          "item": [
+            {
+              "linkId": "Section-36/A0600A",
+              "text": "Social Security Number",
+              "answer": [
+                {
+                  "valueString": "111223333"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0600B",
+              "text": "Medicare number",
+              "answer": [
+                {
+                  "valueString": "111223333"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1100",
+          "text": "Language",
+          "item": [
+            {
+              "linkId": "Section-36/A1100A",
+              "text": "Does the {patient/resident} need or want an interpreter to communicate with a doctor or health care staff?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A1100B",
+              "text": "Preferred language",
+              "answer": [
+                {
+                  "valueString": "English"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1000",
+          "text": "Race/Ethnicity: Check all that apply",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "F",
+                "display": "White"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1400",
+          "text": "Payer Information: Check all that apply",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "A",
+                "display": "Medicare (traditional fee-for-service)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-37",
+      "text": "Section GG: Functional Abilities and Goals",
+      "item": [
+        {
+          "linkId": "Section-37/GG0100",
+          "text": "Prior Functioning: Everyday Activities. Indicate the {patient's/resident's} usual ability with everyday activities prior to the current illness, exacerbation, or injury",
+          "item": [
+            {
+              "linkId": "Section-37/GG0100B",
+              "text": "Indoor Mobility (Ambulation): Code the {patient's/resident's} need for assistance with walking from room to room (with or without a device such as cane, crutch, or walker) prior to the current illness, exacerbation, or injury.",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "2",
+                    "display": "Needed Some Help - {Patient/Resident} needed partial assistance from another person to complete activities."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-37/GG0130",
+          "text": "Self-Care. Code the {patient's/resident's} usual performance at {admission} for each activity using the 6-point scale. If activity was not attempted at {admission}, code the reason. Code the {patient's/resident's} {discharge} goal(s) using the 6 point scale. Use of codes 07, 09, 10, or 88 is permissible to code {discharge} goal(s).",
+          "item": [
+            {
+              "linkId": "Section-37/GG0130A1",
+              "text": "Eating: The ability to use suitable utensils to bring food and/or liquid to the mouth and swallow food and/or liquid once the meal is placed before the {patient/resident}. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130B1",
+              "text": "Oral hygiene: The ability to use suitable items to clean teeth. Dentures (if applicable): The ability to insert and remove dentures into and from the mouth, and manage denture soaking and rinsing with use of equipment. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130C1",
+              "text": "Toileting hygiene: The ability to maintain perineal hygiene, adjust clothes before and after voiding or having a bowel movement. If managing an ostomy, include wiping the opening but not managing equipment. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130D1",
+              "text": "Wash Upper Body: The ability to wash, rinse, and dry the face, hands, chest, and arms while sitting in a chair or bed. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130A3",
+              "text": "Eating: The ability to use suitable utensils to bring food and/or liquid to the mouth and swallow food and/or liquid once the meal is placed before the {patient/resident}. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130B3",
+              "text": "Oral hygiene: The ability to use suitable items to clean teeth. Dentures (if applicable): The ability to insert and remove dentures into and from the mouth, and manage denture soaking and rinsing with use of equipment. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130C3",
+              "text": "Toileting hygiene: The ability to maintain perineal hygiene, adjust clothes before and after voiding or having a bowel movement. If managing an ostomy, include wiping the opening but not managing equipment. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130D3",
+              "text": "Wash Upper Body: The ability to wash, rinse, and dry the face, hands, chest, and arms while sitting in a chair or bed. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130A2",
+              "text": "Eating: The ability to use suitable utensils to bring food and/or liquid to the mouth and swallow food and/or liquid once the meal is placed before the {patient/resident}. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "03",
+                    "display": "Partial/moderate assistance - Helper does LESS THAN HALF the effort. Helper lifts, holds, or supports trunk or limbs, but provides less than half the effort."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130B2",
+              "text": "Oral hygiene: The ability to use suitable items to clean teeth. Dentures (if applicable): The ability to insert and remove dentures into and from the mouth, and manage denture soaking and rinsing with use of equipment. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130C2",
+              "text": "Toileting hygiene: The ability to maintain perineal hygiene, adjust clothes before and after voiding or having a bowel movement. If managing an ostomy, include wiping the opening but not managing equipment. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0130D2",
+              "text": "Wash Upper Body: The ability to wash, rinse, and dry the face, hands, chest, and arms while sitting in a chair or bed. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-37/GG0170",
+          "text": "Mobility. Code the {patient's/resident's} usual performance at {admission} for each activity using the 6-point scale. If activity was not attempted at {admission}, code the reason. Code the {patient's/resident's} {discharge} goal(s) using the 6-point scale. Use of codes 07, 09, 10, or 88 is permissible to code {discharge} goal(s).",
+          "item": [
+            {
+              "linkId": "Section-37/GG0170A1",
+              "text": "Roll left and right: The ability to roll from lying on back to left and right side, and return to lying on back on the bed. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170B1",
+              "text": "Sit to lying: The ability to move from sitting on side of bed to lying flat on the bed. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170C1",
+              "text": "Lying to sitting on side of bed: The ability to move from lying on the back to sitting on the side of the bed with feet flat on the floor, and with no back support. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170A3",
+              "text": "Roll left and right: The ability to roll from lying on back to left and right side, and return to lying on back on the bed. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170B3",
+              "text": "Sit to lying: The ability to move from sitting on side of bed to lying flat on the bed. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170C3",
+              "text": "Lying to sitting on side of bed: The ability to move from lying on the back to sitting on the side of the bed with feet flat on the floor, and with no back support. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170A2",
+              "text": "Roll left and right: The ability to roll from lying on back to left and right side, and return to lying on back on the bed. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170B2",
+              "text": "Sit to lying: The ability to move from sitting on side of bed to lying flat on the bed. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170C2",
+              "text": "Lying to sitting on side of bed: The ability to move from lying on the back to sitting on the side of the bed with feet flat on the floor, and with no back support. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170D1",
+              "text": "Sit to stand: The ability to come to a standing position from sitting in a chair, wheelchair, or on the side of the bed. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170E1",
+              "text": "Chair/bed-to-chair transfer: The ability to transfer to and from a bed to a chair (or wheelchair). - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170F1",
+              "text": "Toilet transfer: The ability to get on and off a toilet or commode. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170I1",
+              "text": "Walk 10 feet: Once standing, the ability to walk at least 10 feet in a room, corridor, or similar space. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170J1",
+              "text": "Walk 50 feet with two turns: Once standing, the ability to walk at least 50 feet and make two turns. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170K1",
+              "text": "Walk 150 feet: Once standing, the ability to walk at least 150 feet in a corridor or similar space. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170R1",
+              "text": "Wheel 50 feet with two turns: Once seated in wheelchair/scooter, the ability to wheel at least 50 feet and make two turns. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170S1",
+              "text": "Wheel 150 feet: Once seated in wheelchair/scooter, the ability to wheel at least 150 feet in a corridor or similar space. - Admission Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170D3",
+              "text": "Sit to stand: The ability to come to a standing position from sitting in a chair, wheelchair, or on the side of the bed. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170E3",
+              "text": "Chair/bed-to-chair transfer: The ability to transfer to and from a bed to a chair (or wheelchair). - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170F3",
+              "text": "Toilet transfer: The ability to get on and off a toilet or commode. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170I3",
+              "text": "Walk 10 feet: Once standing, the ability to walk at least 10 feet in a room, corridor, or similar space. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170J3",
+              "text": "Walk 50 feet with two turns: Once standing, the ability to walk at least 50 feet and make two turns. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170K3",
+              "text": "Walk 150 feet: Once standing, the ability to walk at least 150 feet in a corridor or similar space. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170R3",
+              "text": "Wheel 50 feet with two turns: Once seated in wheelchair/scooter, the ability to wheel at least 50 feet and make two turns. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170S3",
+              "text": "Wheel 150 feet: Once seated in wheelchair/scooter, the ability to wheel at least 150 feet in a corridor or similar space. - Discharge Performance",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170D2",
+              "text": "Sit to stand: The ability to come to a standing position from sitting in a chair, wheelchair, or on the side of the bed. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170E2",
+              "text": "Chair/bed-to-chair transfer: The ability to transfer to and from a bed to a chair (or wheelchair). - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170F2",
+              "text": "Toilet transfer: The ability to get on and off a toilet or commode. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170I2",
+              "text": "Walk 10 feet: Once standing, the ability to walk at least 10 feet in a room, corridor, or similar space. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170J2",
+              "text": "Walk 50 feet with two turns: Once standing, the ability to walk at least 50 feet and make two turns. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170K2",
+              "text": "Walk 150 feet: Once standing, the ability to walk at least 150 feet in a corridor or similar space. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170R2",
+              "text": "Wheel 50 feet with two turns: Once seated in wheelchair/scooter, the ability to wheel at least 50 feet and make two turns. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170S2",
+              "text": "Wheel 150 feet: Once seated in wheelchair/scooter, the ability to wheel at least 150 feet in a corridor or similar space. - Discharge Goal",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "09",
+                    "display": "Not applicable - Not attempted and the {patient/resident} did not perform this activity prior to the current illness, exacerbation, or injury."
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170Q1",
+              "text": "Does the {patient/resident} use a wheelchair and/or scooter? - Admission",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170RR1",
+              "text": "Indicate the type of wheelchair or scooter used. - Admission",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "1",
+                    "display": "Manual"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170SS1",
+              "text": "Indicate the type of wheelchair or scooter used. - Admission",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "1",
+                    "display": "Manual"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170Q3",
+              "text": "Does the {patient/resident} use a wheelchair and/or scooter? - Discharge",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170RR3",
+              "text": "Indicate the type of wheelchair or scooter used. - Discharge",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "1",
+                    "display": "Manual"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-37/GG0170SS3",
+              "text": "Indicate the type of wheelchair or scooter used. - Discharge",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "1",
+                    "display": "Manual"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-37/GG0110",
+          "text": "Prior Device Use. Indicate devices and aids used by the {patient/resident} prior to the current illness, exacerbation, or injury: Check all that apply",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "Z",
+                "display": "None of the above"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

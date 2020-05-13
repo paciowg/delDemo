@@ -1,0 +1,185 @@
+{
+  "resourceType": "Patient",
+  "id": "patientBSJ1",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/us/eLTSS/StructureDefinition/Patient-eltss"
+    ],
+    "versionId": "4de232e2-7f92-45d9-aa44-f33f078e39b8",
+    "lastUpdated": "2020-05-12T17:24:35.636+00:00"
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Person Information</b></p><blockquote><p><b>Name:</b> Betsy Smith-Johnson</p><p><b>Identifier | Type:</b> 123456ABC | MRN</p><p><b>Phone:</b> (210) 222-1111</p><p><b>Date of Birth:</b> 1950-11-01</p><p><b>Address:</b> 111 Maple Ct, San Antonio, TX 78212</p><p><b>Emergency Contact Name:</b> Charles Johnson</p><p><b>Emergency Contact Relationship:</b> son</p><p><b>Emergency Contact Phone Number:</b> (210) 222-3333</p></blockquote></div>"
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "MR",
+            "display": "Medical record number"
+          }
+        ]
+      },
+      "system": "http://www.example.org/Codesystem",
+      "value": "123456ABC"
+    }
+  ],
+  "name": [
+    {
+      "text": "Betsy Smith-Johnson",
+      "family": "Smith-Johnson",
+      "given": [
+        "Betsy"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "(210)222-1111",
+      "use": "mobile"
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1950-11-01",
+  "address": [
+    {
+      "text": "111 Maple Ct, San Antonio, TX 78212",
+      "line": [
+        "111 Maple Ct"
+      ],
+      "city": "San Antonio",
+      "district": "Bexar",
+      "state": "TX",
+      "postalCode": "78212"
+    }
+  ],
+  "contact": [
+    {
+      "relationship": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/fhir/v2-0131",
+              "code": "C",
+              "display": "Emergency Contact"
+            }
+          ]
+        },
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/fhir/v3-RoleCode",
+              "code": "GUARD",
+              "display": "guardian"
+            }
+          ]
+        },
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/fhir/v3-RoleCode",
+              "code": "SONC",
+              "display": "son"
+            }
+          ]
+        }
+      ],
+      "name": {
+        "text": "Charles Johnson",
+        "family": "Johnson",
+        "given": [
+          "Charles"
+        ]
+      },
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "(210) 222-3333"
+        }
+      ],
+      "address": {
+        "text": "100 Montana St., San Antonio, TX 78203"
+      }
+    },
+    {
+      "relationship": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+              "code": "DAUC",
+              "display": "Daughter"
+            }
+          ]
+        }
+      ],
+      "name": {
+        "text": "Debra Johnson",
+        "family": "Johnson",
+        "given": [
+          "Debra"
+        ]
+      },
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "(410) 444-5555"
+        }
+      ],
+      "address": {
+        "text": "333 W. Camden St., Baltimore, MD 21201"
+      }
+    }
+  ],
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+        "code": "U",
+        "display": "Unmarried"
+      }
+    ],
+    "text": "Not Married"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+      "valueCoding": {
+        "code": "2106-3",
+        "display": "White"
+      }
+    },
+    {
+      "url": "http://terminology.hl7.org/ValueSet/v3-employmentStatusODH",
+      "valueCoding": {
+        "code": "NotInLaborForce",
+        "display": "Retired"
+      }
+    },
+    {
+      "url": "http://terminology.hl7.org/CodeSystem/v3-EducationLevel",
+      "valueCoding": {
+        "code": "HS",
+        "display": "High School or secondary school degree complete"
+      }
+    }
+  ],
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.840.1.113883.1.11.11526",
+            "code": "en",
+            "display": "English"
+          }
+        ]
+      },
+      "preferred": true
+    }
+  ]
+}

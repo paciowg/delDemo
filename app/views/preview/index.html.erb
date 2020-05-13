@@ -73,6 +73,11 @@
 
         <%= button_to "Submit", {action: "index", controller: "submission"}, method: :get, 
                 class: "btn btn-" + (isInactive ? "secondary" : "primary") + " submit-btn" %>
+
+<!-- MLT: adding extra button to Send to EHR. This will trigger a controller with logic to convert the general @assessment to the SDC equivalent @sdcAssessment which should contain the subject reference to Patient.
+-->        
+        <%= button_to "Send to EHR", {action: "index", controller: "ehrSend"}, method: :get, 
+        class: "btn btn-" + (isInactive ? "secondary" : "primary") + " submit-btn" %>
         <%# <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# submit-btn" %>
                 <%# name="page" value="submit">Submit</button> %>
     </div>

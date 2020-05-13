@@ -45,6 +45,15 @@
     margin-right: 3pt;
 }
 
+.patient-search-container {
+    display: block;
+    padding: 0 15% 40pt;
+}
+
+.patient-search-form {
+    display: flex;
+}
+
 .qop-container-blue, 
 .qop-container-green {
     padding-top: 8pt;
@@ -250,6 +259,18 @@ a.inactive-about:active {
 }
 
 .submission-error-option {
+    margin-top: 50pt;
+}
+
+.search-patient-error-option,
+.submit-btn {
+    width: 50%;
+    padding: 10pt;
+    margin-bottom: auto;
+    font-size: 20pt;
+}
+
+.search-patient-error-option {
     margin-top: 50pt;
 }
 

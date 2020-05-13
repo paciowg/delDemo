@@ -1,0 +1,33 @@
+// Place all the styles related to the ehrSend controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.send-ehr-container {
+    height: 10em;
+    position: relative;
+    font-size: 12px;
+    text-align: center}
+div.send-ehr-container p {
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+
+.container { 
+    height: 200px;
+    position: relative;
+    border: 3px solid green; 
+    }
+    
+.center {
+margin: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}

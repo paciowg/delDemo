@@ -1,0 +1,43 @@
+<section>
+    <h2 class='home-header mt-4'>Select an EHR Patient</h2>
+    <div class='patient-search-container'>
+        <form class='patient-search-form' action="/patient" accept-charset="UTF-8" method="get">
+            <div class="input-group">
+                <input type="text" name="inputPatientID" class="form-control" placeholder="EHR Patient ID" 
+                        aria-label="Enter Patient ID" aria-describedby="basic-addon2" value="<%= @inputPatientID -%>">
+                <div class="input-group-append">
+                    <button id="patient-search-submit" class="btn btn-primary" type="submit">
+                        <div class="patient-search-text collapse show">Search Patient ID</div>
+                        <%= image_tag "white_spinner.svg", alt: "loading", class: "white-spinner collapse"%>
+                    </button>
+                    <p></p>
+                </div>
+            </div>
+        </form>
+        <div class='ml-auto mr-auto mb-5'>
+            <% if @patientInstance %>
+                <p class='home-header mt-2'><b>Target EHR Server: </b> <%= @ehrUrL %> </p>
+                <p class='home-header mt-3'><b>Selected Patient:</b></p>
+                <div class='container col-3'>
+                    <table>
+                        <tr>
+                            <td>FHIR id: </td>
+                            <td><%= @patientInstance.id -%> </td>
+                        </tr>
+                        <tr>
+                            <td>Name: </td>
+                            <td><%= @patientName[0].given[0] %> <%= @patientName[0].family %> </td>
+                        <tr>
+                        <td>DOB: </td>
+                        <td><%= @patientInstance.birthDate %> </td>
+                        </tr>
+                    </table>
+                </div>
+	    </div>
+        	<% else  %>
+			<div>
+                <p class='home-header mt-2'>Please select a patient.</p>
+		    </div>
+		    <% end %>
+    </div>
+</section>

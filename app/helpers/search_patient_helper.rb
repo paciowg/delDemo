@@ -1,0 +1,2 @@
+module SearchPatientHelper
+end

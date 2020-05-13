@@ -4,7 +4,8 @@ class HomeController < ApplicationController
 
         # Satisfies requirements for search partial
         @assessmentID = nil
-
+        @ehrUrl = "https://api.logicahealth.org/mCODEv1/open" # changed to mCODE temp FHIR server for testing purposes.
+        
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
             serverInteraction = ConnectionTracker.get(session.id)

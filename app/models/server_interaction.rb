@@ -1,25 +1,30 @@
 require 'json'
 
+# Class name:   ServerInteraction
+# Description:  Interaction methods to the DEL FHIR server
 class ServerInteraction
 
     def initialize
         setConnection()
     end
 
+# Method name:  setConnection()
+# Description:  Establishes connection with the FHIR server
     def setConnection
         return nil if @client
-        # @url = "https://api.logicahealth.org/PACIO/open"
-        # @url = "https://impact-fhir.mitre.org/r4"
-        @url = "http://hapi.fhir.org/baseR4"
+        @url = "http://hapi.fhir.org/baseR4" # this is the current FHIR Pseudo-DEL location. This URL will update when the FHIR DEL API endpoint is available.
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
+        @del_q_profile = "https://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardForm" # specifies the DEL-specific profile name for filtering questionnaires. This URL will update when the FHIR DEL API endpoint is available.
     end
 
+# Method name:  getAllQuestionnaires
+# Description:  Retrieves all questionnaire resources matching a given FHIR profile
     def getAllQuestionnaires
         return @questionnaires if @questionnaires
         begin
             setConnection()
-            search = { search: { parameters: { _count: 50 } } }
+            search = { search: { parameters: { _profile: @del_q_profile }, } } # filter for only DEL questionnaire profiles
             @questionnaires = getAllResources(FHIR::Questionnaire, search)
         rescue
             @questionnaires = nil
@@ -55,11 +60,13 @@ class ServerInteraction
         replies.blank? ? nil : replies
     end
 
+# Method name:  getSummaries(klass)
+# Description:  Retrieves key summary information to display for each questionnaire retrieved from the DEL. Current content includes the Questionnaire id, name, version, status, and title.
     def getSummaries(klass)
         summaries = []
         begin
             setConnection()
-            params = { resource: klass, summary: "true", search: { parameters: { _count: 50 } } }
+            params = { resource: klass, summary: "true", search: { parameters: { _profile: @del_q_profile } } }
             replies = [].push(JSON.parse(@client.raw_read(params).response[:body]))
             while replies.last
                 nextLink = replies.last["link"].select{ |link| link["relation"].eql?("next") }
@@ -103,7 +110,9 @@ class ServerInteraction
         end
     end
 
-    # handles FHIR::Measure and FHIR::Questionnaire text searches
+# Method name:  search(klass, input, assessment)
+# Description:  handles FHIR::Measure and FHIR::Questionnaire text searches
+
     def search(klass, input = nil, assessment = nil)
         begin
             setConnection()
