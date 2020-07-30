@@ -41,7 +41,7 @@ module QuestionnaireHelper
     end
 
     # returns array of 2 element arrays, like [[display, code], [display, code]]
-    def getRawOptions(item, loinc = false)
+    def getRawOptions(item, loinc = true) # MLT: setting loinc = true (originally false)
         options = item.answerOption.select{ |i| i.valueCoding.system.eql?("http://loinc.org") == loinc }
         options.collect{ |i| [cleanText(i.valueCoding.display), i.valueCoding.code] }
     end
@@ -53,8 +53,8 @@ module QuestionnaireHelper
     end
 
     # returns pruned array of 2 element arrays, like [[display, code], [display, code]], first element is the default
-    def getOrderedOptions(item, loinc = false)
-        options = pruneOptions(getRawOptions(item, loinc))
+    def getOrderedOptions(item, loinc = true)  # MLT: setting loinc = true (originally false) 
+        options = pruneOptions(getRawOptions(item, loinc = true))  # MLT: added to loinc param "= true"
         prepop = getFromSession(item.linkId)
         return options if prepop.empty?
 

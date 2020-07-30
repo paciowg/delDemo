@@ -35,7 +35,7 @@
                 <% @item.answerOption.each do |ao| %>
                     <tr>
                         <td><%= ao.valueCoding.display %></td>
-                        <td><%= ao.valueCoding.code %></td>
+                        <td><%= ao..code %></td>
                         <% if ao.valueCoding.system.present? %>
                             <td>
                                 <a href='<%= ao.valueCoding.system %>' target='_blank'><%= ao.valueCoding.system %></a>

@@ -10,7 +10,7 @@
                 class: "button bg-success submission-download"%>
         <%= link_to 'Download as .xml', submission_download_path(fileExt: "xml"),  
                 class: "button bg-success submission-download ml-auto"%>
-        <%= link_to 'Export to EHR', submission_download_path(fileExt: "json"),  
+        <%= link_to 'Export to EHR', "/ehr_send",  
                 class: "button bg-success submission-download ml-auto"%>
     </div>
 </div>

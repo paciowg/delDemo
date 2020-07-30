@@ -25,6 +25,7 @@ module PreviewHelper
         assessment
     end
 
+# create the FHIR QuestionnaireResponse structure based on the selected answers
     def qrPopulateItem(item, sesh, qSect, page, index = 0)
         item.text = qSect[index].item.text
         item.linkId = qSect[index].item.linkId
@@ -33,7 +34,7 @@ module PreviewHelper
         if !itemSeshKeys.empty? && !qSect[index].item.type.end_with?("display", "group")
 
             answers = itemSeshKeys.collect{ |key| sesh[page][key] }
-            if itemSeshKeys.any?{ |k| k.end_with?("--m", "--d", "--y") }
+            if itemSeshKeys.any?{ |k| k.end_with?("--m", "--d", "--y") } 
                 metaDate = sesh[page][qSect[index].item.linkId]
                 if metaDate
                     answers = [metaDate.eql?("date") ? answers[1..-1].collect{ |a| (a.length == 1 ? "0" + a : a) }.join : metaDate]

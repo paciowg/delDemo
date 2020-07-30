@@ -1,7 +1,7 @@
 class SubmissionController < ApplicationController
 
     def index
-        @pageLocation = ["Questionnaire", "Preview", "Submission"]
+        @pageLocation = ["Questionnaire", "Preview", "Submission", "EhrSend"]
 
         @questionnaireStatus = "active"
     end
