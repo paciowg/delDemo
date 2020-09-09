@@ -3,7 +3,7 @@
     <div class='patient-search-container'>
         <form class='patient-search-form' action="/patient" accept-charset="UTF-8" method="get">
             <div class="input-group">
-                <input type="text" name="inputPatientID" class="form-control" placeholder="EHR Patient ID" 
+                <input type="text" name="inputPatientID" class="form-control" placeholder="Enter EHR Patient ID" 
                         aria-label="Enter Patient ID" aria-describedby="basic-addon2" value="<%= @inputPatientID -%>">
                 <div class="input-group-append">
                     <button id="patient-search-submit" class="btn btn-primary" type="submit">
@@ -15,15 +15,10 @@
             </div>
         </form>
         <div class='ml-auto mr-auto mb-5'>
-            <% if @patientInstance %>
-                <p class='home-header mt-2'><b>Target EHR Server: </b> <%= @ehrUrL %> </p>
-                <p class='home-header mt-3'><b>Selected Patient:</b></p>
+            <% if !@mypt.nil? %>
+                <p class='home-header mt-3'><b>Selected Patient:</b> <%= @mypt.id %></p>
                 <div class='container col-3'>
                     <table>
-                        <tr>
-                            <td>FHIR id: </td>
-                            <td><%= @patientInstance.id -%> </td>
-                        </tr>
                         <tr>
                             <td>Name: </td>
                             <td><%= @patientName[0].given[0] %> <%= @patientName[0].family %> </td>
@@ -33,11 +28,7 @@
                         </tr>
                     </table>
                 </div>
+            <% end %>
 	    </div>
-        	<% else  %>
-			<div>
-                <p class='home-header mt-2'>Please select a patient.</p>
-		    </div>
-		    <% end %>
     </div>
 </section>

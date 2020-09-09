@@ -1,11 +1,14 @@
 class HomeController < ApplicationController
     def index
-        SessionStack.create(session.id)
+        if SessionStack.nil?
+            puts ("DEBUG: SessionStack nil, creating a new one.") # MLT: debug line. remove when fixed.
+            SessionStack.create(session.id) # MLT: preserve the SessionStack if previously created.
 
-        # Satisfies requirements for search partial
-        @assessmentID = nil
-        @ehrUrl = "https://api.logicahealth.org/mCODEv1/open" # changed to mCODE temp FHIR server for testing purposes.
-        
+            # Satisfies requirements for search partial
+            @assessmentID = nil
+        else
+            puts ("DEBUG: SessionStack already created.")  # MLT: debug line. remove when fixed.
+        end
         qss = SessionStack.qSummariesRead(session.id)
         if qss[:active].nil? && qss[:inactive].nil?
             serverInteraction = ConnectionTracker.get(session.id)

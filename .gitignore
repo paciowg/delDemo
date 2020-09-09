@@ -75,3 +75,4 @@ yarn-debug.log*
 
 .vscode/*
 .DS_Store
+public/datafiles/hspExample01.json

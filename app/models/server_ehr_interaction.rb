@@ -17,48 +17,6 @@ class EhrServerInteraction
         FHIR::Model.client = @clientPatient
     end
 
-# Method name:  getAllPatients
-# Description:  Retrieves all patient resources matching a given FHIR profile
-    def getAllPatients
-        return @patients if @patients
-        begin
-            ehrSetConnection()
-            search = { search: { parameters: { _count: 50 }, } } # display 50 entries at a time
-            @patients = getPatientAllResources(FHIR::Patients, search)
-        rescue
-            @patients = nil
-        end
-        @patients
-    end
-
-    def getPatientAllResources(klasses = nil, search = nil)
-        replies = getPatientAllReplies(klasses, search)
-        return nil unless replies
-        resources = []
-        replies.each do |reply|
-            resources.push(reply.resource.entry.collect{ |singleEntry| singleEntry.resource })
-        end
-        resources.compact!
-        resources.flatten(1)
-    end
-
-    def getPatientAllReplies(klasses = nil, search = nil)
-        klasses = coerce_to_a(klasses)
-        replies = []
-        if klasses.present?
-            klasses.each do |klass|
-                replies.push(search.present? ? @clientPatient.search(klass, search) : @clientPatient.read_feed(klass))
-                while replies.last
-                    replies.push(@clientPatient.next_page(replies.last))
-                end
-            end
-        else
-            replies.push(@clientPatient.all_history)
-        end
-        replies.compact!
-        replies.blank? ? nil : replies
-    end
-
 # Method name:  getPatientSpecificResource
 # Description:  Retrieves a specific Patient resource
     def getPatientSpecificResource(klass, id)
@@ -82,7 +40,7 @@ class EhrServerInteraction
         end
     end
 
-    private
+#    private
 
     # search parameters for FHIR::Patient text searches
     def patientSearchParams(klass, inputPatientID = nil)

@@ -12,6 +12,8 @@ class SessionStack
             @sessionHash[id][:sr][1] = nil
             @sessionHash[id][:sr] = nil
             @sessionHash[id][:sr] = [nil, nil]
+            @sessionHash[id][:pt] = nil  # MLT: added patient to SessionStack
+            @sessionHash[id][:ehr] = nil  # MLT: added patient to SessionStack
         else 
             @sessionHash[id] = {q: [{"started" => Time.now, "loinc" => loinc}], qr: nil, sr: [nil, nil]}
             @sessionHash[id][:qSummaries] = { active: nil, inactive: nil }
@@ -35,6 +37,22 @@ class SessionStack
 
     def self.qrPush(id, qr)
         @sessionHash[id][:qr] = qr
+    end
+
+    def self.ptRead(id)
+        @sessionHash[id][:pt]
+    end
+
+    def self.ptPush(id, pt)
+        @sessionHash[id][:pt] = pt
+    end
+
+    def self.ehrRead(id)
+        @sessionHash[id][:ehr]
+    end
+
+    def self.ehrPush(id, ehr)
+        @sessionHash[id][:ehr] = ehr
     end
 
     def self.searchPush(id, searchResults)

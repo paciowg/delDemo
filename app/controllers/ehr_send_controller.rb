@@ -1,7 +1,7 @@
 class EhrSendController < ApplicationController
     def index
 
-        @pageLocation = ["Patient", "EhrSend"]
+        @pageLocation = ["Patient", "Preview", "Submission", "EhrSend"]
         # convert the questionnareResponse to SDC
  #       convert_qr_to_sdc
 
@@ -10,10 +10,17 @@ class EhrSendController < ApplicationController
         @ehrUrl = "https://api.logicahealth.org/mCODEv1/open" # changed to mCODE temp FHIR server for testing purposes.
 #        @ehrUrl = "https://hospital-pseudo-ehr.herokuapp.com/api/v1/questionnaire_responses" # pseudo-EHR
 
+        # MLT: test to pull the info off of the stack.
+#        @mypt = SessionStack.ptRead(session.id)
+#        puts "\nmypt value:\n #{@mypt.inspect}"  # MLT: test of passing patient stack variable. This assumes the patient ID was retrieved prior to the completion of the assessment.
+
         # initialize the FHIR model
         client = FHIR::Client.new(@ehrUrl)
         FHIR::Model.client = client
         
+#        @assessment = qrRead(session.id)
+#        puts "Assessment QR JSON: #{@assessment.to_json}"
+
         # Example: send a Patient resource to a Target FHIR server
         sdcFile = "#{Rails.root}/public/datafiles/sdcBSJ1.json"
         json = File.read(sdcFile)

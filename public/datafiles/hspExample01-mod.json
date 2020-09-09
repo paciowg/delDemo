@@ -1,0 +1,1318 @@
+{
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Questionnaire response from the DEL Demo Client.</div>"
+  },
+  "questionnaire": "http://hapi.fhir.org/baseR4/Questionnaire/HIS-HD-2.00.0",
+  "status": "completed",
+  "subject": {
+    "type": "Questionnaire"
+  },
+  "authored": "2020-05-14T11:52:32-04:00",
+  "item": [
+    {
+      "linkId": "Section-36",
+      "text": "Section A: Administrative Information",
+      "item": [
+        {
+          "linkId": "Section-36/A0700",
+          "text": "Medicaid Number - Enter \"+\" if pending, \"N\" if not a Medicaid recipient",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "N",
+                "display": "Enter \"N\" if not a Medicaid recipient"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0800",
+          "text": "Gender",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "2",
+                "display": "Female"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0900",
+          "text": "Birth Date",
+          "answer": [
+            {
+              "valueString": "11041948"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0050",
+          "text": "Type of Record",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "1",
+                "display": "Add new assessment/record"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0250",
+          "text": "Reason for Assessment",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "01",
+                "display": "Admission"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0220",
+          "text": "Admission Date",
+          "answer": [
+            {
+              "valueString": "05062020"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1802",
+          "text": "Admitted From. Immediately preceding this admission, where was the {patient/resident}?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "03",
+                "display": "Skilled Nursing Facility (SNF)"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0550",
+          "text": "{Patient/Resident} ZIP Code.",
+          "answer": [
+            {
+              "valueString": "12345"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0270",
+          "text": "Discharge Date",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "^",
+                "display": "Blank (skip pattern)"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0100",
+          "text": "Facility Provider Numbers",
+          "item": [
+            {
+              "linkId": "Section-36/A0100A",
+              "text": "National Provider Identifier (NPI)",
+              "answer": [
+                {
+                  "valueString": "12345"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0100B",
+              "text": "CMS Certification Number (CCN)",
+              "answer": [
+                {
+                  "valueString": "156343"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0500",
+          "text": "Legal Name of {Patient/Resident}",
+          "item": [
+            {
+              "linkId": "Section-36/A0500A",
+              "text": "First name",
+              "answer": [
+                {
+                  "valueString": "Betsy"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500B",
+              "text": "Middle initial",
+              "answer": [
+                {
+                  "valueString": "A"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500C",
+              "text": "Last name",
+              "answer": [
+                {
+                  "valueString": "Smith-Johnson"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0500D",
+              "text": "Suffix",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (not available or unknown)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0600",
+          "text": "Social Security and Medicare Numbers",
+          "item": [
+            {
+              "linkId": "Section-36/A0600A",
+              "text": "Social Security Number",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (not available or unknown)"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-36/A0600B",
+              "text": "Medicare number",
+              "answer": [
+                {
+                  "valueString": "454231"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1000",
+          "text": "Race/Ethnicity: Check all that apply",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "F",
+                "display": "White"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A1400",
+          "text": "Payer Information: Check all that apply",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "C",
+                "display": "Medicaid (traditional fee-for-service)"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0205",
+          "text": "Site of Service at Admission",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "01",
+                "display": "Hospice in {patient's/resident's} home/residence"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A0245",
+          "text": "Date Initial Nursing Assessment Initiated",
+          "answer": [
+            {
+              "valueString": "05072020"
+            }
+          ]
+        },
+        {
+          "linkId": "Section-36/A2115",
+          "text": "Reason for Discharge",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "01",
+                "display": "Expired"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-47",
+      "text": "Section F: Preferences",
+      "item": [
+        {
+          "linkId": "Section-47/F2000",
+          "text": "CPR Preference",
+          "item": [
+            {
+              "linkId": "Section-47/F2000A",
+              "text": "Was the {patient/resident}/responsible party asked about preference regarding the use of cardiopulmonary resuscitation (CPR)? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-47/F2000B",
+              "text": "Date the {patient/resident}/responsible party was first asked about preference regarding the use of CPR:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-47/F2100",
+          "text": "Other Life-Sustaining Treatment Preferences",
+          "item": [
+            {
+              "linkId": "Section-47/F2100A",
+              "text": "Was the {patient/resident}/responsible party asked about preferences regarding life-sustaining treatments other than CPR? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-47/F2100B",
+              "text": "Date the {patient/resident}/responsible party was first asked about preferences regarding life-sustaining treatments other than CPR:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-47/F2200",
+          "text": "Hospitalization Preference",
+          "item": [
+            {
+              "linkId": "Section-47/F2200A",
+              "text": "Was the {patient/resident}/responsible party asked about preference regarding hospitalization? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-47/F2200B",
+              "text": "Date the {patient/resident}/responsible party was first asked about preference regarding hospitalization:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-47/F3000",
+          "text": "Spiritual/Existential Concerns",
+          "item": [
+            {
+              "linkId": "Section-47/F3000A",
+              "text": "Was the {patient/resident} and/or caregiver asked about spiritual/existential concerns? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-47/F3000B",
+              "text": "Date the {patient/resident} and/or caregiver was first asked about spiritual/existential concerns:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-9",
+      "text": "Section I: Active Diagnoses",
+      "item": [
+        {
+          "linkId": "Section-9/I0010",
+          "text": "Principal Diagnosis",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "01",
+                "display": "Cancer"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-10",
+      "text": "Section J: Health Conditions",
+      "item": [
+        {
+          "linkId": "Section-10/J0900",
+          "text": "Pain Screening",
+          "item": [
+            {
+              "linkId": "Section-10/J0900A",
+              "text": "Was the {patient/resident} screened for pain?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J0900B",
+              "text": "Date of first screening for pain:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J0900C",
+              "text": "The {patient's/resident's} pain severity was:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "None"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J0900D",
+              "text": "Type of standardized pain tool used:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "-",
+                    "display": "Not assessed/no information"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-10/J0905",
+          "text": "Pain Active Problem. Is pain an active problem for the {patient/resident}?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-10/J0910",
+          "text": "Comprehensive Pain Assessment",
+          "item": [
+            {
+              "linkId": "Section-10/J0910A",
+              "text": "Was a comprehensive pain assessment done?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J0910B",
+              "text": "Date of comprehensive pain assessment:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J0910C",
+              "text": "Comprehensive pain assessment included: Check all that apply",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "9",
+                    "display": "None of the above"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-10/J2030",
+          "text": "Screening for Shortness of Breath",
+          "item": [
+            {
+              "linkId": "Section-10/J2030A",
+              "text": "Was the {patient/resident} screened for shortness of breath?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J2030B",
+              "text": "Date of first screening for shortness of breath:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J2030C",
+              "text": "Did the screening indicate the {patient/resident} had shortness of breath?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-10/J2040",
+          "text": "Treatment for Shortness of Breath",
+          "item": [
+            {
+              "linkId": "Section-10/J2040A",
+              "text": "Was treatment for shortness of breath initiated? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J2040B",
+              "text": "Date treatment for shortness of breath initiated:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-10/J2040C",
+              "text": "Type(s) of treatment for shortness of breath initiated: Check all that apply",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "-",
+                    "display": "Not assessed/no information"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-14",
+      "text": "Section N: Medications",
+      "item": [
+        {
+          "linkId": "Section-14/N0500",
+          "text": "Scheduled Opioid",
+          "item": [
+            {
+              "linkId": "Section-14/N0500A",
+              "text": "Was a scheduled opioid initiated or continued?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-14/N0500B",
+              "text": "Date scheduled opioid initiated or continued:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-14/N0510",
+          "text": "PRN Opioid",
+          "item": [
+            {
+              "linkId": "Section-14/N0510A",
+              "text": "Was a PRN opioid initiated or continued?",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-14/N0510B",
+              "text": "Date PRN opioid initiated or continued:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-14/N0520",
+          "text": "Bowel Regimen - Complete only if {scheduled opioid or PRN opioid = yes}",
+          "item": [
+            {
+              "linkId": "Section-14/N0520A",
+              "text": "Was a bowel regimen initiated or continued? - Select the most accurate response",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "0",
+                    "display": "No"
+                  }
+                }
+              ]
+            },
+            {
+              "linkId": "Section-14/N0520B",
+              "text": "Date bowel regimen initiated or continued:",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://del.cms.gov",
+                    "code": "^",
+                    "display": "Blank (skip pattern)"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-50",
+      "text": "Section O: Service Utilization",
+      "item": [
+        {
+          "linkId": "Section-50/O5000",
+          "text": "Level of care in final 3 days. Did the {patient/resident} receive Continuous Home Care, General Inpatient Care, or Respite Care during any of the final 3 days of life?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-50/O5010",
+          "text": "Number of hospice visits in final 3 days. Enter the number of visits provided by hospice staff from the indicated discipline, on each of the dates indicated.",
+          "item": [
+            {
+              "linkId": "Section-50/O5010A1",
+              "text": "Registered Nurse - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010A2",
+              "text": "Registered Nurse - Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010A3",
+              "text": "Registered Nurse - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010B1",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010B2",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010B3",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010C1",
+              "text": "Medical Social Worker - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010C2",
+              "text": "Medical Social Worker - Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010C3",
+              "text": "Medical Social Worker - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010D1",
+              "text": "Chaplain or Spiritual Counselor - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010D2",
+              "text": "Chaplain or Spiritual Counselor -Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010D3",
+              "text": "Chaplain or Spiritual Counselor - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010E1",
+              "text": "Licensed Professional Nurse - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010E2",
+              "text": "Licensed Professional Nurse - Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010E3",
+              "text": "Licensed Professional Nurse - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010F1",
+              "text": "Aide - Visits on day of death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010F2",
+              "text": "Aide - Visits one day prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5010F3",
+              "text": "Aide - Visits two days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-50/O5020",
+          "text": "Level of care in final 7 days. Did the {patient/resident} receive Continuous Home Care, General Inpatient Care, or Respite Care during any of the final 7 days of life?",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://del.cms.gov",
+                "code": "0",
+                "display": "No"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "Section-50/O5030",
+          "text": "Number of hospice visits in 3 to 6 days prior to death. Enter the number of visits provided by hospice staff from the indicated discipline, on each of the dates indicated.",
+          "item": [
+            {
+              "linkId": "Section-50/O5030A1",
+              "text": "Registered Nurse - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030A2",
+              "text": "Registered Nurse - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030A3",
+              "text": "Registered Nurse - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030A4",
+              "text": "Registered Nurse - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030B1",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030B2",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030B3",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030B4",
+              "text": "Physician (or Nurse Practitioner or Physician Assistant) - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030C1",
+              "text": "Medical Social Worker - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030C2",
+              "text": "Medical Social Worker - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030C3",
+              "text": "Medical Social Worker - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030C4",
+              "text": "Medical Social Worker - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030D1",
+              "text": "Chaplain or Spiritual Counselor - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030D2",
+              "text": "Chaplain or Spiritual Counselor - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030D3",
+              "text": "Chaplain or Spiritual Counselor - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030D4",
+              "text": "Chaplain or Spiritual Counselor - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030E1",
+              "text": "Licensed Professional Nurse - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030E2",
+              "text": "Licensed Professional Nurse - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030E3",
+              "text": "Licensed Professional Nurse - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030E4",
+              "text": "Licensed Professional Nurse - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030F1",
+              "text": "Aide - Visits three days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030F2",
+              "text": "Aide - Visits four days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030F3",
+              "text": "Aide - Visits five days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-50/O5030F4",
+              "text": "Aide - Visits six days prior to death",
+              "answer": [
+                {
+                  "valueString": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "Section-48",
+      "text": "Section Z: Record Administration",
+      "item": [
+        {
+          "linkId": "Section-48/Z0400",
+          "text": "Signature of Persons Completing the Assessment",
+          "item": [
+            {
+              "linkId": "Section-48/Z0400A",
+              "text": "Signature, Title, Sections, Date Section Completed A",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400B",
+              "text": "Signature, Title, Sections, Date Section Completed B",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400C",
+              "text": "Signature, Title, Sections, Date Section Completed C",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400D",
+              "text": "Signature, Title, Sections, Date Section Completed D",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400E",
+              "text": "Signature, Title, Sections, Date Section Completed E",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400F",
+              "text": "Signature, Title, Sections, Date Section Completed F",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400G",
+              "text": "Signature, Title, Sections, Date Section Completed G",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400H",
+              "text": "Signature, Title, Sections, Date Section Completed H",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400I",
+              "text": "Signature, Title, Sections, Date Section Completed I",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400J",
+              "text": "Signature, Title, Sections, Date Section Completed J",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400K",
+              "text": "Signature, Title, Sections, Date Section Completed K",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0400L",
+              "text": "Signature, Title, Sections, Date Section Completed L",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Section-48/Z0500",
+          "text": "Signature of RN Coordinator Verifying Assessment Completion",
+          "item": [
+            {
+              "linkId": "Section-48/Z0500B",
+              "text": "Date RN Assessment Coordinator signed assessment as complete",
+              "answer": [
+                {
+                  "valueString": "05122020"
+                }
+              ]
+            },
+            {
+              "linkId": "Section-48/Z0500A",
+              "text": "Signature",
+              "answer": [
+                {
+                  "valueString": "Nancy Nurse"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resourceType": "QuestionnaireResponse"
+}
