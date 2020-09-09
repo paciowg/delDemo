@@ -7,8 +7,8 @@ class EhrSendController < ApplicationController
 
         # enter FHIRClient POST send to the EHR.
 
-        @ehrUrl = "https://api.logicahealth.org/mCODEv1/open" # changed to mCODE temp FHIR server for testing purposes.
-#        @ehrUrl = "https://hospital-pseudo-ehr.herokuapp.com/api/v1/questionnaire_responses" # pseudo-EHR
+      # @ehrUrl = "https://api.logicahealth.org/mCODEv1/open"
+@ehrUrl = "http://hospital-pseudo-ehr.herokuapp.com/api/v1/questionnaire_responses" # pseudo-EHR
 
         # MLT: test to pull the info off of the stack.
 #        @mypt = SessionStack.ptRead(session.id)
