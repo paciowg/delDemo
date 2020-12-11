@@ -1,0 +1,213 @@
+<% status = @questionnaireStatus %>
+<% isInactive = !status.eql?("active")%>
+
+<%= render 'partials/banner_with_modal' %>
+
+<% pageArr = getPage(@questionnaire, @currentSection) %>
+<% qSect = pageArr[0] %>
+<% totalPages = pageArr[1] %>
+
+<div class="<%= (isInactive ? "inactive" : "active") -%>-section">
+    <div class="description">
+        <p><%= @questionnaire.description %></p>
+        <p class="mt-2" style="text-align: center">
+            Currently using 
+            <strong class="current-code-<%= @loinc ? "loinc" : "cms" %>">
+                <%= @loinc ? "LOINC" : "CMS" %>
+            </strong>
+            codes
+        </p>
+    </div>
+    <h4 style="text-align: center">
+        <strong><%= isInactive ? 'INACTIVE ' : '' %></strong>
+        Form Progress
+    </h4>
+    <% currentProgress = (params[:page] ? params[:page].to_f : (params[:back] ? params[:back].to_f : 1.0)) %>
+    <% currentProgress *= 100.0 / totalPages.to_f %>
+    <% overallProgress = (@filledSections.to_f * 100.0 / totalPages.to_f) - currentProgress %>
+    <% overallProgress = 0 if overallProgress < 0 %>
+    <div class="progress qprogress">
+        <div class="progress-bar" role="progressbar" style="width: <%= currentProgress.to_i -%>%" 
+                aria-valuenow="<%= currentProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
+            <%= (currentProgress % 1 == 0 ? currentProgress.to_i : currentProgress.round(1)) -%>% Done
+        </div>
+        <% unless overallProgress == 0 %>
+            <% overallDisplay = overallProgress + currentProgress %>
+            <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= overallProgress.to_i -%>%" 
+                    aria-valuenow="<%= overallProgress.to_i -%>" aria-valuemin="0" aria-valuemax="100">
+                <%= (overallDisplay % 1 == 0 ? overallDisplay.to_i : overallDisplay.round(1)) -%>% Saved
+            </div>
+        <% end %>
+    </div>
+    <% if !@questionnaire.item || @questionnaire.item.empty? %>
+        <h3 class="no-questions">
+            <%= @questionnaire.name %> (v.<%= @questionnaire.version %>)
+            currently has no questions.
+        </h3>
+
+    <% else %>
+        <%= form_tag '/questionnaire', method: :get, id: "form" %>
+            <%= hidden_field_tag "version", params[:version] %>
+            <% qSect.each do |qItem| %>
+                <% leftMargin = "margin-left: " + (qItem.level * 4 + 2).to_s + "%" %>
+                <% fontSize = "font-size: " + (qItem.level == 0 ? 22 : 14).to_s + "pt" %>
+                <% width = "width: " + (100 - (qItem.level * 4 + 2)).to_s + "%" %>
+                <% dynamicStyle = leftMargin + "; " + width + "; " + fontSize %>
+                <% item = qItem.item %>
+                <% type = item.type %>
+                <% text = cleanText(item.text) %>
+                <% id = item.linkId %>
+                <% prefix = item.prefix %>
+
+                <% if type.eql?("group") %>
+                    <% if qItem.level == 0 %>
+                        <hr style="background-color: black">
+                    <% end %>
+                    <h4 class="mt-4" style="<%= dynamicStyle %>"><%= text %></h4>
+
+                <% elsif type.eql?("display") %>
+                    <p style="<%= dynamicStyle %>"><%= text %></p>
+
+                <% else %>
+                    <div class="form-group m-3 mb-4">    
+                        <label style="<%= dynamicStyle %>"><%= text %></label>
+                        <% maxLength = item.maxLength ? item.maxLength : "" %>
+
+                        <% if type.eql?("text") %>
+                            <% val = getValidation(item) %>
+                            <%= text_field_tag id, getFromSession(id), class: "form-control",
+                                    style: dynamicStyle, placeholder: "Enter a custom answer", required: true, 
+                                    pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+
+                        <% elsif type.eql?("integer") %>
+                            <input type="number" step="1" name="<%= id %>" value="<%= getFromSession(id) -%>"
+                                    class="form-control" style="<%= dynamicStyle %>" maxlength="<%= maxLength %>">
+
+                        <% else %>
+                            <% options = getOrderedOptions(item, @loinc) %>
+
+                            <% if type.eql?("open-choice") || type.eql?("date") %>
+                                <% val = getValidation(item, @loinc) %>
+
+                                <% if val.has_key?(:yr) # All open-choice dates will have year regex %>
+                                    <% options.each do |option| %>
+                                        <div style="display: flex">
+                                            <%= radio_button_tag id, option[1], getFromSession(id).eql?(option[1]),
+                                                    style: leftMargin + "; " + fontSize, required: true, 
+                                                    data: {toggle: "collapse",
+                                                    target: ".date-" + prefix + ".date-collapse.show"} %>
+                                            <div class="radio-label" style="<%= fontSize %>"><%= option[0] %></div>
+                                        </div>
+                                    <% end %>
+
+                                    <% unless options.empty? %>
+                                        <div style="display: flex">
+                                            <%= radio_button_tag id, "date", getFromSession(id).eql?("date"), 
+                                                    style: leftMargin + "; " + fontSize, required: true, 
+                                                    data: {toggle: "collapse", 
+                                                    target: ".date-" + prefix + ".date-collapse:not(.show)"} %>
+                                            <div class="radio-label" style="<%= fontSize %>">Input Date</div>
+                                        </div>
+                                    <% end %>
+
+                                    <div class="form-group collapse date-collapse
+                                            <%= "date-" + prefix %>
+                                            <%= options.empty? || getFromSession(id).eql?("date") ? " show" : "" %>"
+                                            style="<%= dynamicStyle %>">
+                                        <div class="row" style="padding-left: <%= options.empty? ? "12" : "24" -%>pt">
+                                            <div class="date-input">
+                                                <label for="<%= id -%>--m">Month</label>
+                                                <%= text_field_tag id + "--m", getFromSession(id + "--m"), title: val[:mm],
+                                                        class: "month", disabled: val[:mr].empty?, pattern: val[:mr],
+                                                        required: true, placeholder: "MM", maxlength: 2 %>
+                                            </div>
+                                            <div class="date-input">
+                                                <label for="<%= id -%>--d">Day</label>
+                                                <%= text_field_tag id + "--d", getFromSession(id + "--d"), title: val[:dm],
+                                                        class: "day", disabled: val[:dr].empty?, pattern: val[:dr], 
+                                                        required: true, placeholder: "DD", maxlength: 2 %>
+                                            </div>
+                                            <div class="date-input">
+                                                <label for="<%= id -%>--y">Year</label>
+                                                <%= text_field_tag id + "--y", getFromSession(id + "--y"), title: val[:ym],
+                                                        class: "year", disabled: val[:yr].empty?, pattern: val[:yr], 
+                                                        required: true, placeholder: "YYYY", maxlength: 4 %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <% else %>
+                                    <% ph = options.empty? ? "E" : "Select a preset answer from the dropdown or e" %>
+                                    <% ph += "nter a custom answer" %>
+                                    <%= text_field_tag id, getFromSession(id), list: (options.empty? ? nil : id+"-list"), 
+                                            style: dynamicStyle, class: "form-control", placeholder: ph, required: true,
+                                            pattern: val[:regex], title: val[:message], maxlength: maxLength %>
+                                    <% unless options.empty? %>
+                                        <datalist id="<%= id %>-list">
+                                            <% options.each do |option| %>
+                                                <option value="<%= option[1] %>"><%= option[0] %></option>
+                                            <% end %>
+                                        </datalist>
+                                    <% end %>
+                                <% end %>
+
+                            <% elsif type.eql?("choice") %>
+                                
+                                <% if item.repeats %>
+                                    <% options.each do |option| %>
+                                        <div class="form-check" style="<%= dynamicStyle %>">
+                                            <%= check_box_tag(id + "-" + option[1], option[1],
+                                                    !getFromSession(id + "-" + option[1]).empty?(),
+                                                    class: "form-check-input") %>
+                                            <label class="form-check-label" for="<%= id + "-" + option[1] %>">
+                                                <%= option[0] %>
+                                            </label>
+                                        </div>
+                                    <% end %>
+                                
+                                <% else %>
+                                    <%= select_tag id, options_for_select(options), class: "form-control",
+                                            style: dynamicStyle %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <small class="form-text" style="<%= leftMargin %>">
+                            <%= prefix.present? ? prefix : id %>
+                        </small>
+                    </div>
+                <% end %>
+            <% end %>
+
+            <hr style="background-color: black"> 
+            <% if @currentSection == totalPages %>
+                <% if isInactive %>
+                    <p style="text-align: center">
+                        WARNING: You are about to preview 
+                        <%= status.eql?("retired") ? "a retired" : "an inactive" %>
+                        form! 
+                    </p>
+                <% else %>
+                    <p style="text-align: center"> All done? Go ahead and preview your submission! </p>
+                <% end %>
+
+                <div class="<%= @currentSection == 1 ? "submit-btn" : "page-change" %>-container">
+                    <% if @currentSection != 1 %>
+                        <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option" 
+                                name="back" value="<%= @currentSection - 1 %>">Back</button>
+                    <% end %>
+                    <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> submit-btn"
+                            name="page" value="<%= @currentSection + 1 %>-preview">Preview</button>
+                </div>
+
+            <% else %>
+                <div class="page-change-container">
+                    <%= button_tag "Back", name: "back", value: @currentSection - 1, disabled: @currentSection == 1,
+                            class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
+
+                    <button type="submit" class="btn btn-<%=(isInactive ? "secondary" : "primary")%> page-change-option"
+                            name="page" value="<%= @currentSection + 1 %>">Next</button>
+                </div>
+            <% end %>
+        </form>
+    <% end %>
+</div>

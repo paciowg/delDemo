@@ -1,0 +1,11 @@
+<section>
+    <div class='page-location-container'>
+        <%= image_tag "home.svg", alt: "home", class: "home-icon"%>
+        Home
+        <% if @pageLocation %>
+            <% @pageLocation.each do |page| %>
+                > <%= page %>
+            <% end %>
+        <% end %>
+    </div>
+</section>

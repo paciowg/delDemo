@@ -1,0 +1,45 @@
+<%= render 'partials/banner' %>
+<%= render 'partials/searchEhr' %>
+<%= render 'partials/searchPatient' %>
+<%= render 'partials/search' %>
+
+
+<div class='qop-container-blue'>
+    <div class="home-cards-container">
+        <div class="cards-title-grid">
+            <div class="toggle-width"></div>
+            <h2 class="home-header mb-1">Select a PAC assessment form</h2>
+            <div class='toggle-width'>
+                <input type="checkbox" checked class="code-toggle" data-toggle="toggle" 
+                        data-on="CMS" data-off="LOINC" data-onstyle="primary" data-offstyle="success">
+            </div>
+        </div>
+        <div class="search-cards-grid">
+            <div></div>
+            <div class="search-result-width"></div>
+            <input class="form-control card-search" placeholder="Search assessments">
+            <div class="search-result-width">
+                <p class="search-result-counter collapse">Search Results: <strong>0</strong></p>
+            </div>
+            <div></div>
+        </div>
+        <div class="home-browse-cards collapse show">
+            <% @summaryHash.each do |asmt, categoryHash| %>
+                <h3 class="home-browse-section-header"><%= asmt.to_s %></h3>
+                <% categoryHash.each do |category, formArray| %>
+                    <h4><%= category.to_s %></h4>
+                    <div class="home-browse-cards-section">
+                        <% formArray.each do |form| %>
+                            <%= render 'partials/form_card', qv: form %>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+        <div class="home-search-cards collapse">
+            <% (@qssActive + @qssInactive).each do |qv| %>
+                <%= render 'partials/form_card', qv: qv %>
+            <% end %>
+        </div>
+    </div>
+</div>

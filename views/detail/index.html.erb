@@ -1,0 +1,49 @@
+<%= render 'partials/banner' %>
+
+<%= render 'partials/search'%>
+
+<div class='search-table-container'>
+    <table class='search-table'>
+        <tbody>
+            <tr>
+                <th class='search-table-col-assessment'>Assessment</th>
+                <th class='search-table-col-id'>ID</th>
+                <th>Text</th>
+                <th>Answer Type</th>
+            </tr>
+            <tr>
+                <td class='search-table-col-assessment'><%= @assessmentName -%></td>
+                <td class='search-table-col-id'><%= @item.prefix -%></td>
+                <td><%= @item.text -%></td>
+                <td><%= @item.type -%></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<% if @item.type.include?("choice") %>
+    <div class='search-table-container'>
+        <table class='search-table'>
+            <tbody>
+                <tr>
+                    <th>Answer Option</th>
+                    <th>Code</th>
+                    <% if @item.answerOption && @item.answerOption.any?{ |ao| ao.valueCoding && ao.valueCoding.system.present? } %>
+                        <th>Code System</th>
+                    <% end %>
+                </tr>
+                <% @item.answerOption.each do |ao| %>
+                    <tr>
+                        <td><%= ao.valueCoding.display %></td>
+                        <td><%= ao..code %></td>
+                        <% if ao.valueCoding.system.present? %>
+                            <td>
+                                <a href='<%= ao.valueCoding.system %>' target='_blank'><%= ao.valueCoding.system %></a>
+                            </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+<% end %>

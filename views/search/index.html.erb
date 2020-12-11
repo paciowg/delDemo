@@ -1,0 +1,48 @@
+<%= render 'partials/banner' %>
+
+<%= render 'partials/search'%>
+
+<% if @qs.present? %>
+
+    <%= render 'partials/search_table_nav' %>
+
+    <div class='search-table-container'>
+        <table class='search-table'>
+            <tr>
+                <th class='search-table-col-assessment'>Assessment</th>
+                <th class='search-table-col-id'>ID</th>
+                <th class='search-table-col-title'>Title</th>
+            </tr>
+            <% @qs.each_pair do |form, items| %>
+                <% items.each do |item| %>
+                    <% asmtid = (@qssActive + @qssInactive).select{ |qs| qs[:name].eql?(form) }.first[:id] %>
+                    <tr>
+                        <td class='search-table-col-form'><%= form -%></td>
+                        <td class='search-table-col-id'>
+                            <a href='/detail?assessment=<%= asmtid + '&id=' + item.linkId + '&input=' + @input -%>'>
+                                <%= item.prefix -%>
+                            </a>
+                        </td>
+                        <td class='search-table-col-title'><%= item.text -%></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </table>
+    </div>
+
+    <%= render 'partials/search_table_nav' if @qsTotalSize > 9 %>
+
+<% else %>
+    <h4 class='no-search-results'>
+        <% if @input.blank? && @assessmentID.blank? %>
+            Cannot search all forms without a search term
+        <% else %>
+            No Data Elements
+            <% if @assessmentID.present? %>
+                in
+                <%= (@qssActive + @qssInactive).select{ |qs| qs[:id].eql?(@assessmentID) }.first[:name] %>
+            <% end %>
+            match the search term "<%= @input -%>"
+        <% end %>
+    </h4>
+<% end %>

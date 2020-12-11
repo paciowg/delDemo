@@ -1,0 +1,28 @@
+<%= render 'partials/banner' %>
+
+<h2 class='home-header mt-5'>Whoops! Questionnaire not found.</h2>
+
+<% if params[:attempt].nil? || params[:attempt].to_i < 5 %>
+        <small>Automatically trying again (retry attempts thus far: <%= params[:attempt].nil? ? "0" : params[:attempt]%>)</small>
+        <div class="questionnaire-error-container">
+            <%= link_to "Try Again", {controller: "questionnaire", 
+                params: request.query_parameters.merge({attempt: (params[:attempt].nil? ? 1 : params[:attempt].to_i + 1)})},
+                {class: "btn btn-primary questionnaire-error-option",  id: "try-again"} %>
+            <a class="btn btn-primary questionnaire-error-option" href='/'>Home</a>
+        </div>
+    <% else %>
+        <div class="no-questions">
+            <small>Sorry, this questionnaire is not available.</small>
+            <br>
+            <a class="btn btn-primary questionnaire-error-option" href="/">Home</a>
+        </div>
+    <% end %>
+</div>
+
+<script>
+    jQuery(function(){
+        setTimeout(function(){
+            document.getElementById("try-again").click();
+        }, 500);
+    });
+</script>

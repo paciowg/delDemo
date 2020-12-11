@@ -6,10 +6,10 @@
   "questionnaire": "http://hapi.fhir.org/baseR4/Questionnaire/FASI-FA-1.1",
   "status": "completed",
   "subject": {
-    "reference": "Patient/17032",
+    "reference": "Patient/17404",
 		"display": "Betsy Smith-Johnson"
   },
-  "authored": "2020-09-09T16:09:53-04:00",
+  "authored": "2020-09-10T15:36:49-04:00",
   "item": [
     {
       "linkId": "Section-6",
@@ -2190,37 +2190,6 @@
                   }
                 }
               ]
-            },
-            {
-              "linkId": "Section-37/GG0125Z",
-              "text": "Assistive device - Other",
-              "answer": [
-                {
-                  "valueCoding": {
-                    "system": "http://loinc.org",
-                    "code": "LA30918-9",
-                    "display": "Assistive device needed and available - Person needs this device to complete daily activities and has the device in the home."
-                  }
-                }
-              ]
-            },
-            {
-              "linkId": "Section-37/GG0125Z_specify",
-              "text": "Assistive Device - Other (specify)",
-              "answer": [
-                {
-                  "valueString": "None"
-                }
-              ]
-            },
-            {
-              "linkId": "Section-37/GG0125ZZ",
-              "text": "Assistive device - I have indicated all the devices needed.",
-              "answer": [
-                {
-                  "valueString": "Y"
-                }
-              ]
             }
           ]
         }
@@ -2228,6 +2197,7 @@
     }
   ],
   "resourceType": "QuestionnaireResponse",
+  "id": "sdc-questionnaireresponse-BetsyMitre",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaireresponse"

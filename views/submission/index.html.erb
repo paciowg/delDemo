@@ -1,0 +1,16 @@
+<%= render 'partials/banner_with_modal' %>
+
+<h1 class="submission-confirmation">Assessment Completed</h1>
+
+<h2 class="submission-message">Want a copy?</h2>
+
+<div class="submission-download-row">
+    <div class="submission-download-container">
+        <%= link_to 'Download as .json', submission_download_path(fileExt: "json"), 
+                class: "button bg-success submission-download"%>
+        <%= link_to 'Download as .xml', submission_download_path(fileExt: "xml"),  
+                class: "button bg-success submission-download ml-auto"%>
+        <%= link_to 'Export to EHR', "/ehr_send",  
+                class: "button bg-success submission-download ml-auto"%>
+    </div>
+</div>

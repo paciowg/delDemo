@@ -1,0 +1,44 @@
+<section>
+    <% status = @questionnaireStatus %>
+    <% isInactive = !status.eql?("active")%>
+    <div class="banner <%= (isInactive ? 'inactive-banner' : '') %>" id="banner">
+        <div class="banner-content" data-toggle="modal" data-target="#p-modal-warning">
+            <%#= image_tag "logo_placeholder.png", class: "logo" %>
+            PAC Assessment Client (Hospital)
+        </div>
+        
+        <!--
+        <a href="/about" class="about" data-toggle="modal" data-target="#p-modal-warning">
+            <div class="banner-about">
+                About
+            </div>
+        </a>
+        -->
+    </div>
+
+    <div class="modal fade" id="p-modal-warning" tabindex="-1" role="dialog" 
+            aria-labelledby="p-modal-warning-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="p-modal-warning-label">Information will be lost!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    If you leave this page, you can not come back to it. 
+                    All information on this page is temporary and will be lost. 
+                    Are you sure you want that?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal" >Return (keep work)</button>
+                    <a class="btn btn-primary" href="/">Leave (lose work)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%= render 'partials/page_location' %>
+
+</section>

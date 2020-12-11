@@ -1,0 +1,22 @@
+<section>
+    <h2 class='home-header mt-4'>Specify an EHR FHIR Server</h2>
+    <div class='ehr-search-container'>
+        <form class='ehr-search-form' action="/ehr" accept-charset="UTF-8" method="get">
+            <div class="input-group">
+                <input type="text" name="inputEhrID" class="form-control" placeholder="Enter EHR FHIR endpoint" 
+                        aria-label="Enter EHR FHIR endpoint" aria-describedby="basic-addon2" value="<%= @inputEhrID -%>">
+                <div class="input-group-append">
+                    <button id="ehr-search-submit" class="btn btn-primary" type="submit">
+                        <div class="ehr-search-text collapse show">Connect</div>
+                        <%= image_tag "white_spinner.svg", alt: "loading", class: "white-spinner collapse"%>
+                    </button>
+                    <p></p>
+                </div>
+            </div>
+        </form>
+    <div class='ml-auto mr-auto mb-5'>
+        <% if !@ehr.nil? %>
+            <p class='home-header mt-2'><b>Target EHR Server: </b> <%= @ehr %> </p>
+        <% end %>
+    </div>
+</section>

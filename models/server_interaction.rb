@@ -12,11 +12,11 @@ class ServerInteraction
 # Description:  Establishes connection with the FHIR server
     def setConnection
         return nil if @client
+        # @url = "http://impact-fhir.mitre.org/r4"
         @url = "http://hapi.fhir.org/baseR4" # this is the current FHIR Pseudo-DEL location. This URL will update when the FHIR DEL API endpoint is available.
-#        @url = "https://impact-fhir.mitre.org/r4"
         @client = FHIR::Client.new(@url)
         FHIR::Model.client = @client
-        @del_q_profile = "http://hapi.fhir.org/StructureDefinition/del-StandardForm" # specifies the CMS-assigned DEL-specific profile name for filtering questionnaires. This URL will update when the FHIR DEL API endpoint is available.
+        @del_q_profile = "http://impact-fhir.mitre.org/r4/StructureDefinition/del-StandardForm" # specifies the DEL-specific profile name for filtering questionnaires. This URL will update when the FHIR DEL API endpoint is available.
     end
 
 # Method name:  getAllQuestionnaires

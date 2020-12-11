@@ -1,0 +1,31 @@
+<section>
+    <% if @pageUpperBound == 1 %>
+        <p style="text-align: center; margin: 0 auto 10pt;">Displaying all results (<%= @qsTotalSize -%>)</p>
+    <% else %>
+        <div class='search-table-nav-container'>
+            <div class='search-table-nav-back-container'>
+                <form class='search-form' action="/search" accept-charset="UTF-8" method="get">
+                    <input type="hidden" name="assessment" value="<%= @assessmentID.to_s -%>" />
+                    <input type="hidden" name="input" value="<%= @input.to_s -%>" />
+                    <%= button_tag "Back", name: "page", value: @page - 1, disabled: @page == 1,
+                            class: "btn btn-primary submit-btn search-table-nav-button" %>
+                </form>
+            </div>
+            <div class='search-table-count-container'>
+                <p style="margin: 0;">
+                    Displaying
+                    <%= ((@page - 1) * 100 + 1).to_s + "-" + [@page * 100, @qsTotalSize].min.to_s -%>
+                    of <%= @qsTotalSize -%> total results
+                </p>
+            </div>
+            <div class='search-table-nav-next-container'>
+                <form class='search-form' action="/search" accept-charset="UTF-8" method="get">
+                    <input type="hidden" name="assessment" value="<%= @assessmentID.to_s -%>" />
+                    <input type="hidden" name="input" value="<%= @input.to_s -%>" />
+                    <%= button_tag "Next", name: "page", value: @page + 1, disabled: @page == @pageUpperBound,
+                            class: "btn btn-primary submit-btn search-table-nav-button" %>
+                </form>
+            </div>
+        </div>
+    <% end %>
+</section>

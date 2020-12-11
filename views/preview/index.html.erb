@@ -1,0 +1,77 @@
+<% status = @questionnaireStatus %>
+<% isInactive = !status.eql?("active")%>
+
+<%= render 'partials/banner_with_modal' %>
+
+<div class="<%= (isInactive ? "inactive" : "active") %>-section">
+    <div class="description">
+        <p><%= @questionnaire.description %></p>
+    </div>
+
+    <hr style="background-color: black">
+
+    <table id="qr">
+        <tr>
+            <th>Structure</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>ID</th>
+        </tr>
+        <% qrDisplay = qrDisplay(@assessment) %>
+        <% qrDisplay.each do |qrSect| %>
+            <% qrSect.each_with_index do |qrItem, i| %>
+                <% treeText = "|---" * qrItem.level %>
+                <% treeText += (qrSect[i + 1] && qrSect[i + 1].level == qrItem.level + 1) ? "* " : "> " %>
+                <tr>
+                    <td><%= treeText %></td>
+                    <td><%= (qrItem.item.text ? qrItem.item.text : "") %></td>
+                    <td>
+                        <% qrItem.item.answer.each_with_index do |answer, index| %>
+                            <% unless index == 0 %>
+                                <br>
+                            <% end %>
+                            <% ivs = answer.instance_variables %>
+                            <% choseniv = ivs.find do |iv| %> 
+                                <% valiv = answer.instance_variable_get(iv) %>
+                                <% shouldSelect = valiv && iv.to_s.include?("value") %>
+                                <% if valiv.is_a?(FHIR::Coding)%>
+                                    <% shouldSelect = shouldSelect && valiv.display && !valiv.display.empty? %>
+                                <% else %>
+                                    <% shouldSelect = shouldSelect && !valiv.empty? %>
+                                <% end %>
+                                <% shouldSelect %>
+                            <% end %>
+                            <% value = answer.instance_variable_get(choseniv) %>
+                            <%= (value && value.is_a?(FHIR::Coding) ? value.display : value.to_s) %>
+                        <% end %>
+                    </td>
+                    <td><%= qrItem.item.linkId %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+
+    <hr style="background-color: black">
+
+    <% if isInactive %>
+        <p style="text-align: center">
+            WARNING: You are about to submit 
+            <%= status.eql?("retired") ? "a retired" : "an inactive" %>
+            form! 
+        </p>
+    <% else %>
+        <p style="text-align: center"> Looks right? Go ahead and submit! Otherwise, go back to editing </p>
+    <% end %>
+
+    <div class="page-change-container">
+        <%= button_to "Continue Editing", {action: "index", controller: "questionnaire"}, 
+                params: {version: @questionnaire.id, page: "1", edit_post_preview: "true"}, 
+                method: :get, class: "btn btn-" + (isInactive ? "secondary" : "primary") + " page-change-option" %>
+        <%# <button class="btn btn-<%=(isInactive ? "secondary" : "primary")%><%# page-change-option"  %>
+                <%# name="page" value="1">Back</button> %>
+
+
+        <%= button_to "Submit", {action: "index", controller: "submission"}, method: :get, 
+                class: "btn btn-" + (isInactive ? "secondary" : "primary") + " submit-btn" %>
+    </div>
+</div>
