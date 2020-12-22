@@ -235,6 +235,11 @@ the following commands will create it directly in the home directory:
     bundle install
     ```
 
+    **Note**: modify the gemfile with your installed version of ruby if it is a different version than the default in these instructions. For example, the following line in gemfile specifies ruby version 2.7.2 :
+    ```
+    ruby '2.7.2'
+    ```
+
 16. Check if you have __PostgreSQL__ installed by inputting:
 
     ```
@@ -247,7 +252,7 @@ the following commands will create it directly in the home directory:
         ```
         postgres (PostgreSQL) 11.4
         ```
-         
+
         Jump to [step 18](#step-18) if this is the case.
     
     * If __Terminal__ responded with anything that might indicate it did not 
@@ -266,6 +271,16 @@ the following commands will create it directly in the home directory:
     ```
 
 18. <a name="step-18"></a>Create and migrate the (largely unused) DEL Demo dev db
+
+
+    * ensure that the `database.yml` file has the following configured in the postgres instance:
+    
+        * port number
+        * username
+        * password
+        * role permissions that allow for the CRUD of databases
+
+    * run the following commands in your terminal
 
     ```
     rake db:create:all
@@ -289,7 +304,10 @@ inputting the following will get you there:
     If that is not where your delDemo directory is, instead input 
     `cd <path>` where `<path>` is the path to your delDemo directory.
 
-3. Start up the __PostgreSQL__ server by inputting:
+3. Start up the __PostgreSQL__ server:
+    * if you previously have a postgresql instance created, ensure that the server is running.
+
+    * if you created your postgresql instance using `brew install postgres` with defaults, then run the following in the terminal:
 
     ```
     pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
@@ -301,7 +319,7 @@ inputting the following will get you there:
     rails server
     ```
 
-5. The DEL Demo should be running! Open a browser (I suggest __Chrome__) 
+5. The DEL Demo should be running! Open a browser (preferably __Chrome__) 
 and type the following into the address bar:
 
     ```
@@ -318,7 +336,9 @@ running. To do this gracefully, you need to do two things:
         control-C
         ```
 
-    * Then, stop the __PostgreSQL__ server by inputting:
+    * Then, stop the __PostgreSQL__ server:
+
+        * if started in the command terminal with `pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`, then input the following to stop the service:
 
         ```
         pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop
@@ -327,4 +347,4 @@ running. To do this gracefully, you need to do two things:
 
 ## Copyright
 
-Copyright 2019 The MITRE Corporation
+Copyright 2020 The MITRE Corporation
